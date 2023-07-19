@@ -29,13 +29,11 @@ class LecturerController extends Controller
     }
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'full_name' => 'required',
             'identity' => 'required',
             'title_end' => 'required',
             'id_major' => 'required',
-
         ]);
 
         $lecturer = new Lecturer();

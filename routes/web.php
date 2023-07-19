@@ -27,6 +27,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::delete('/lecturer/destroy/{id}', [App\Http\Controllers\LecturerController::class, 'destroy'])->name('lecturer.destroy');
     // student 
     Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student');
+    Route::post('/student/store', [App\Http\Controllers\StudentController::class, 'store'])->name('student.store');
+    Route::get('/student/show/{id}', [App\Http\Controllers\StudentController::class, 'show'])->name('student.show');
+    Route::put('/student/update/{id}', [App\Http\Controllers\StudentController::class, 'update'])->name('student.update');
+    Route::delete('/student/destroy/{id}', [App\Http\Controllers\StudentController::class, 'destroy'])->name('student.destroy');
     // major 
     Route::get('/major', [App\Http\Controllers\MajorController::class, 'index'])->name('major');
 });

@@ -25,11 +25,12 @@
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/fonts/boxicons.css" />
-
+    <link rel="stylesheet" href="assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="assets/vendor/libs/sweetalert2/sweetalert2.css" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/core.css"
         class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/theme-default.css"
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/rtl/theme-semi-dark.css"
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/css/demo.css" />
     @stack('css')
@@ -114,6 +115,7 @@
     <script src="{{ asset('backend_theme/') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="{{ asset('backend_theme/') }}/assets/vendor/js/menu.js"></script>
+    <script src="{{ asset('backend_theme/') }}/js/bootstrap-notify.min.js"></script>
     <!-- endbuild -->
     @stack('js')
     <!-- Vendors JS -->
@@ -126,10 +128,34 @@
 
     <!-- Page JS -->
     <script src="{{ asset('backend_theme/') }}/assets/js/dashboards-analytics.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
+        $(".delete-button").on('click', function(e) {
+            e.preventDefault();
+            let form = $(this).parents('form');
+
+            swal.fire({
+                title: 'Apakah Anda yakin ingin menghapus data ini?',
+                text: 'Data yang dihapus tidak bisa dikembalikan',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batalkan'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+
+                    swal.fire(
+                        'Dikonfirmasi!',
+                        'Data akan dihapus.',
+                        'success'
+                    )
+                }
+            })
+        })
         $(document).ready(function() {
             $('#datatable').DataTable({
                 responsive: true,
@@ -151,6 +177,35 @@
     <script>
         flatpickr("input[type=date]");
     </script>
+    @if (Session::has('danger'))
+        <script>
+            Swal.fire({
+                title: 'Error!',
+                text: ' {{ Session::get('danger') }}',
+                type: 'error',
+                icon: 'error',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+        </script>
+    @endif
+
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                title: 'Good job!',
+                text: '{{ Session::get('success') }}',
+                type: 'success',
+                icon: 'success',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+        </script>
+    @endif
 </body>
 
 </html>

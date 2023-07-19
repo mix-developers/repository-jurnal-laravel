@@ -82,7 +82,7 @@
                                                 class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn b delete-button"><i
+                                                <button type="submit" class="btn delete-button"><i
                                                         class="bx bx-trash me-1 text-danger"></i>
                                                 </button>
                                             </form>

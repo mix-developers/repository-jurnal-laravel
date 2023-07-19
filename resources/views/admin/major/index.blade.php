@@ -72,7 +72,8 @@
                                                             class="bx bx-show me-1"></i> Detail</a>
                                                 </div>
                                             </div>
-                                            <a class="btn" href=""><i class="bx bx-trash me-1 text-danger"></i>
+                                            <a class="btn elete-button" href=""><i
+                                                    class="bx bx-trash me-1 text-danger"></i>
                                             </a>
                                         </div>
                                     </td>
