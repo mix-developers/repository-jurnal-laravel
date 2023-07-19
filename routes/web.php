@@ -21,6 +21,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     // lecturer 
     Route::get('/lecturer', [App\Http\Controllers\LecturerController::class, 'index'])->name('lecturer');
+    Route::post('/lecturer/store', [App\Http\Controllers\LecturerController::class, 'store'])->name('lecturer.store');
+    Route::get('/lecturer/show/{id}', [App\Http\Controllers\LecturerController::class, 'show'])->name('lecturer.show');
+    Route::put('/lecturer/update/{id}', [App\Http\Controllers\LecturerController::class, 'update'])->name('lecturer.update');
+    Route::delete('/lecturer/destroy/{id}', [App\Http\Controllers\LecturerController::class, 'destroy'])->name('lecturer.destroy');
     // student 
     Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student');
     // major 

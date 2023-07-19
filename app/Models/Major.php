@@ -13,8 +13,5 @@ class Major extends Model
     {
         return $this->belongsTo(Lecturer::class, 'id_lecturer_leader', 'id');
     }
-    // public static getCountStudents($id_major)
-    // {
-    //     return self::where()
-    // }
+    
 }

@@ -4,6 +4,17 @@
 
 @section('content')
     <div class="row justify-content-center">
+        <div class="col-12 my-2">
+            @if ($errors->any())
+                @foreach ($errors->all() as $item)
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ $item }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header flex-column flex-md-row">
@@ -62,12 +73,19 @@
                                                     <a class="dropdown-item" type="button" data-bs-toggle="modal"
                                                         data-bs-target="#edit-{{ $item->id }}" href=""><i
                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('/admin/lecturer/show', encrypt($item->id)) }}"><i
                                                             class="bx bx-show me-1"></i> Detail</a>
                                                 </div>
                                             </div>
-                                            <a class="btn" href=""><i class="bx bx-trash me-1 text-danger"></i>
-                                            </a>
+                                            <form method="POST" action="{{ url('admin/lecturer/destroy', $item->id) }}"
+                                                class="d-inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn b delete-button"><i
+                                                        class="bx bx-trash me-1 text-danger"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

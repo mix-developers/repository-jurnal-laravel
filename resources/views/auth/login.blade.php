@@ -68,8 +68,8 @@
                         <input type="text" class="form-control" id="email" name="email"
                             placeholder="Enter your email or username" autofocus />
                         @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <span class="text-danger" role="alert">
+                                <small>{{ $message }}</small>
                             </span>
                         @enderror
                     </div>
@@ -86,8 +86,8 @@
                                 aria-describedby="password" />
                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                <span class="text-danger" role="alert">
+                                    <small>{{ $message }}</small>
                                 </span>
                             @enderror
                         </div>
