@@ -21,8 +21,6 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
-
-
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -42,9 +40,10 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        @if (Auth::user()->avatar == null || Auth::user()->name == '')
+                                        @if (Auth::user()->name == null || Auth::user()->name == '')
                                             <span
-                                                class="avatar-initial rounded-circle bg-label-primary">{{ substr(Auth::user()->name, 0, 2) }}</span>
+                                                class="avatar-initial rounded-circle bg-label-primary">{{ substr(Auth::user()->name, 0, 2) }}
+                                            </span>
                                         @else
                                             <img src="{{ asset('backend_theme/') }}/assets/img/avatars/1.png" alt
                                                 class="w-px-40 h-auto rounded-circle" />
@@ -62,7 +61,8 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item"
+                            href="{{ Auth::user()->role == 'admin' ? url('/admin/profile') : url('/mahasiswa/profile') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>

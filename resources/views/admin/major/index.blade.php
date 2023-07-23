@@ -3,6 +3,17 @@
 @extends('layouts.backend.admin')
 @section('content')
     <div class="row justify-content-center">
+        <div class="col-12 my-2">
+            @if ($errors->any())
+                @foreach ($errors->all() as $item)
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ $item }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header flex-column flex-md-row">
@@ -12,7 +23,7 @@
                     <div class="dt-action-buttons text-end pt-3 pt-md-0">
                         <div class="dt-buttons btn-group flex-wrap">
                             <button class="btn btn-secondary create-new btn-primary" type="button" class="btn btn-primary"
-                                data-bs-toggle="modal" data-bs-target="#create" disabled>
+                                data-bs-toggle="modal" data-bs-target="#create">
                                 <span>
                                     <i class="bx bx-plus me-sm-1"> </i>
                                     <span class="d-none d-sm-inline-block">Tambah Data</span>
@@ -30,9 +41,9 @@
                                 <th>#</th>
                                 <th>Nama Jurusan</th>
                                 <th>Ketua Jurusan </th>
-                                <th>Jenjang </th>
                                 <th>Jumlah Mahasiswa</th>
                                 <th>Jurnal Publish</th>
+                                <th>Jurnal Uploaded</th>
                                 <th>Aksi </th>
                             </tr>
                         </thead>
@@ -40,19 +51,24 @@
                             @foreach ($major as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>
+                                        <strong>{{ $item->name }} </strong>
+                                        <br>Jenjang : <span class="badge bg-label-primary">{{ $item->type }}</span>
+                                    </td>
                                     <td>{{ $item->lecturer->title_first }}
                                         {{ $item->lecturer->full_name }},{{ $item->lecturer->title_end }}<br>
                                         <small class="badge bg-label-dark">NIP/NIDN :
                                             {{ $item->lecturer->identity }}</small>
                                     </td>
-                                    <td><span class="badge bg-label-primary">{{ $item->type }}</span></td>
                                     <td>
                                         @if (App\Models\Student::getCountStudents($item->id) != 0)
                                             <strong>{{ App\Models\Student::getCountStudents($item->id) }}</strong> Mahasiswa
                                         @else
                                             <span class="badge bg-label-danger">Belum ada mahasiswa</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-label-danger">Belum ada jurnal</span>
                                     </td>
                                     <td>
                                         <span class="badge bg-label-danger">Belum ada jurnal</span>
@@ -72,9 +88,14 @@
                                                             class="bx bx-show me-1"></i> Detail</a>
                                                 </div>
                                             </div>
-                                            <a class="btn elete-button" href=""><i
-                                                    class="bx bx-trash me-1 text-danger"></i>
-                                            </a>
+                                            <form method="POST" action="{{ url('admin/major/destroy', $item->id) }}"
+                                                class="d-inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn delete-button"><i
+                                                        class="bx bx-trash me-1 text-danger"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -86,9 +107,9 @@
                                 <th>#</th>
                                 <th>Nama Jurusan</th>
                                 <th>Ketua Jurusan </th>
-                                <th>Jenjang </th>
                                 <th>Jumlah Mahasiswa</th>
                                 <th>Jurnal Publish</th>
+                                <th>Jurnal Uploaded</th>
                                 <th>Aksi </th>
                             </tr>
                         </tfoot>

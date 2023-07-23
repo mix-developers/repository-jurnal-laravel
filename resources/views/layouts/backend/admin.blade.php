@@ -86,6 +86,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        @include('layouts.backend.breadcrumbs')
                         @yield('content')
                     </div>
                     <!-- / Content -->
@@ -158,6 +159,23 @@
         })
         $(document).ready(function() {
             $('#datatable').DataTable({
+                responsive: true,
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ ",
+                    "zeroRecords": "Maaf belum ada data",
+                    "info": "Tampilkan data _PAGE_ dari _PAGES_",
+                    "infoEmpty": "belum ada data",
+                    "infoFiltered": "(saring from _MAX_ total data)",
+                    "search": "Cari : ",
+                    "paginate": {
+                        "previous": "Sebelumnya ",
+                        "next": "Selanjutnya"
+                    }
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#datatable2').DataTable({
                 responsive: true,
                 "language": {
                     "lengthMenu": "Tampilkan _MENU_ ",

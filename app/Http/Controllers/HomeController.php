@@ -28,4 +28,11 @@ class HomeController extends Controller
         ];
         return view('admin.dashboard', $data);
     }
+    public function mahasiswa()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+        return view('mahasiswa.dashboard', $data);
+    }
 }
