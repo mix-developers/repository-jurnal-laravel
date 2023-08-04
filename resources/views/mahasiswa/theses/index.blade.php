@@ -13,20 +13,20 @@
                     </button>
                 </div>
             @endif
-            @include('mahasiswa.theses._error')
+            @include('mahasiswa.theses.component._error')
             <div class="card">
                 <div class="card-header"> <strong>Skripsi {{ Auth::user()->name }}</strong></div>
                 <div class="card-body">
                     @if ($theses == null)
-                        @include('mahasiswa.theses._form')
+                        @include('mahasiswa.theses.component._form')
                     @else
-                        @include('mahasiswa.theses._show')
+                        @include('mahasiswa.theses.component._show')
                     @endif
                 </div>
             </div>
         </div>
     </div>
-    @include('mahasiswa.theses._update')
+    @include('mahasiswa.theses.component._update')
 @endsection
 @push('js')
     <script type="text/javascript">

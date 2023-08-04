@@ -6,27 +6,27 @@
                     document.write(new Date().getFullYear());
                 </script>
             </span>
-            <a href="https://themeselection.com" target="_blank"
-                class="fw-medium text-white footer-link">ThemeSelection,</a>
-            <span class="footer-text"> Made with ❤️ for a better web.</span>
+            <a href="{{ url('/') }}" target="_blank" class="fw-medium text-white footer-link">Repository jurnal dan
+                skripsi Universitas Musamus Merauke ,</a>
+            <span class="footer-text"> Made with ❤️ .</span>
         </div>
         <div>
-            <a href="https://github.com/themeselection" class="footer-link me-3" target="_blank">
+            <a href="#!" class="footer-link me-3" target="_blank">
                 <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/front-pages/icons/github-light.png"
                     alt="github icon" data-app-light-img="front-pages/icons/github-light.png"
                     data-app-dark-img="front-pages/icons/github-dark.png" />
             </a>
-            <a href="https://www.facebook.com/ThemeSelections/" class="footer-link me-3" target="_blank">
+            <a href="#!" class="footer-link me-3" target="_blank">
                 <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/front-pages/icons/facebook-light.png"
                     alt="facebook icon" data-app-light-img="front-pages/icons/facebook-light.png"
                     data-app-dark-img="front-pages/icons/facebook-dark.png" />
             </a>
-            <a href="https://twitter.com/Theme_Selection" class="footer-link me-3" target="_blank">
+            <a href="#!" class="footer-link me-3" target="_blank">
                 <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/front-pages/icons/twitter-light.png"
                     alt="twitter icon" data-app-light-img="front-pages/icons/twitter-light.png"
                     data-app-dark-img="front-pages/icons/twitter-dark.png" />
             </a>
-            <a href="https://www.instagram.com/themeselection/" class="footer-link" target="_blank">
+            <a href="#!" class="footer-link" target="_blank">
                 <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/front-pages/icons/instagram-light.png"
                     alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png"
                     data-app-dark-img="front-pages/icons/instagram-dark.png" />

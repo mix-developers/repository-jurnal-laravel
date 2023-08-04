@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->students->identity }}</td>
-                                    <td>{{ $item->students->full_name }}</td>
+                                    <td>{{ $item->students->name }}</td>
                                     <td>{{ Str::limit($item->title, 50) }}</td>
                                     <td>{{ $item->keywoards }}</td>
                                     <td>

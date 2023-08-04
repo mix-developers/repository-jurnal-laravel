@@ -49,13 +49,29 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'identity' => 'required|string|min:12|max:12|exists:students,identity',
-            'role' => 'required',
-        ]);
+        if ($data['role'] == 'dosen') {
+            return Validator::make(
+                $data,
+                [
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'string', 'min:8', 'confirmed'],
+                    'identity' => 'required|string|min:2|max:8|exists:lecturers,identity|unique:users',
+                    'role' => 'required',
+                ],
+                [
+                    'identity.exists' => 'NIDN/NIP Tidak terdaftar, harap coba kembali..'
+                ]
+            );
+        } else {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'identity' => 'required|string|min:12|max:12|unique:users',
+                'role' => 'required',
+            ]);
+        }
     }
 
     /**

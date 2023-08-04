@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('theses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_student');
+            $table->foreignId('id_user');
             $table->foreignId('id_major');
             $table->string('title');
             $table->string('year');
             $table->string('file');
             $table->timestamps();
 
-            $table->foreign('id_student')->references('id')->on('students');
+
             $table->foreign('id_major')->references('id')->on('majors');
         });
     }

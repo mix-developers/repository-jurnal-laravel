@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('mentors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_student');
+            $table->foreignId('id_user');
             $table->foreignId('id_lecturer');
             $table->string('type');
             $table->timestamps();
 
-            $table->foreign('id_student')->references('id')->on('students');
+            // $table->foreign('id_student')->references('id')->on('students');
             $table->foreign('id_lecturer')->references('id')->on('lecturers');
         });
     }

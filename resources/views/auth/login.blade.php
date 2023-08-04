@@ -64,10 +64,10 @@
 
                 <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email or Username</label>
-                        <input type="text" class="form-control" id="email" name="email"
-                            placeholder="Enter your email or username" autofocus />
-                        @error('email')
+                        <label for="identity" class="form-label">NIP/NIDN/NIM</label>
+                        <input type="text" class="form-control" id="identity" name="identity"
+                            placeholder="Enter your NIP/NIDN/NIM" autofocus />
+                        @error('identity')
                             <span class="text-danger" role="alert">
                                 <small>{{ $message }}</small>
                             </span>

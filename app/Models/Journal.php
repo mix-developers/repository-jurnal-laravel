@@ -11,7 +11,15 @@ class Journal extends Model
     use HasFactory;
     public function students(): BelongsTo
     {
-        return $this->belongsTo(Student::class, 'id_student', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+    public function major(): BelongsTo
+    {
+        return $this->belongsTo(Major::class, 'id_major', 'id');
+    }
+    public function journal_files()
+    {
+        return $this->hasMany(JournalFile::class, 'id_journal');
     }
 
     public static function getFront()
@@ -20,10 +28,24 @@ class Journal extends Model
     }
     public static function getAll()
     {
-        return self::with(['students'])->get();
+        return self::with(['students', 'major'])->get();
     }
     public static function getJournalStudent($id_student)
     {
-        return self::with(['students'])->where('id_student', $id_student)->get();
+        return self::with(['students', 'major'])->where('id_student', $id_student)->get();
+    }
+    public static function getJournalPublished()
+    {
+        return self::with(['students', 'major'])->where('is_published', 1)->get();
+    }
+    public static function getJournalPublishedMajor($id_major)
+    {
+        return self::with(['students', 'major'])->where('id_major', $id_major)->where('is_published', 1)->get();
+    }
+    public static function getSearch($keywoard)
+    {
+        return self::with(['students', 'major'])->where('title', 'LIKE', '%' . $keywoard . '%')
+            ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%')
+            ->get();
     }
 }

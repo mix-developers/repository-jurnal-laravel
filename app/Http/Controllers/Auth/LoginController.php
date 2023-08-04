@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -31,7 +32,7 @@ class LoginController extends Controller
     {
         if (auth()->user()->role == 'admin' || auth()->user()->role == 'super_admin') {
             return '/admin';
-        } elseif (auth()->user()->role == 'mahasiswa') {
+        } elseif (auth()->user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1) {
             return '/mahasiswa';
         }
         return '/';
@@ -44,5 +45,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function username()
+    {
+        return 'identity';
+    }
+    protected function credentials(Request $request)
+    {
+        return array_merge($request->only($this->username(), 'password'), ['is_verified' => 1]);
     }
 }

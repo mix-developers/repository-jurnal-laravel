@@ -19,8 +19,7 @@
                         <thead>
                             <tr class="bg-light">
                                 <th>#</th>
-                                <th>NIM</th>
-                                <th>Nama Lengkap </th>
+                                <th>Mahasiswa</th>
                                 <th>Jurusan</th>
                                 <th>Judul</th>
                                 <th>Pembimbing</th>
@@ -32,8 +31,9 @@
                             @foreach ($theses as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->students->identity }}</td>
-                                    <td>{{ $item->students->full_name }}</td>
+                                    <td><strong>{{ $item->students->name }}</strong><br>
+                                        <small>{{ $item->students->identity }}</small>
+                                    </td>
                                     <td>{{ $item->major->name }}</td>
                                     <td>
                                         <b>{{ Str::limit($item->title, 50) }}</b><br>
@@ -46,20 +46,9 @@
                                         <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('/admin/theses/show', encrypt($item->id)) }}"><i
-                                                            class="bx bx-show me-1"></i> Detail</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                        <a class="btn btn-primary btn-sm"
+                                            href="{{ url('/admin/theses/show', encrypt($item->id)) }}"><i
+                                                class="bx bx-show"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,8 +56,7 @@
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>NIM</th>
-                                <th>Nama Lengkap </th>
+                                <th>Mahasiswa</th>
                                 <th>Jurusan</th>
                                 <th>Judul</th>
                                 <th>Pembimbing</th>

@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login | Jurnal</title>
+    <title>Authentication | Jurnal</title>
 
     <meta name="description" content="" />
 
@@ -82,6 +82,43 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#role').on('change', function() {
+                if (this.value == 'dosen') {
+                    $("#nidn").show();
+                    $("#nim").hide();
+                    $("#with-title").show();
+                    $("#no-title").hide();
+                    document.getElementById("name").disabled = false;
+                    document.getElementById("identity").disabled = false;
+                    document.getElementById("phone").disabled = false;
+                    document.getElementById("email").disabled = false;
+                    document.getElementById("password").disabled = false;
+                    document.getElementById("password-confirm").disabled = false;
+                } else if (this.value == 'mahasiswa') {
+                    $("#nidn").hide();
+                    $("#nim").show();
+                    $("#with-title").hide();
+                    $("#no-title").show();
+                    document.getElementById("name").disabled = false;
+                    document.getElementById("identity").disabled = false;
+                    document.getElementById("phone").disabled = false;
+                    document.getElementById("email").disabled = false;
+                    document.getElementById("password").disabled = false;
+                    document.getElementById("password-confirm").disabled = false;
+                } else {
+                    document.getElementById("name").disabled = true;
+                    document.getElementById("identity").disabled = true;
+                    document.getElementById("phone").disabled = true;
+                    document.getElementById("email").disabled = true;
+                    document.getElementById("password").disabled = true;
+                    document.getElementById("password-confirm").disabled = true;
+                }
+
+            });
+        });
+    </script>
 </body>
 
 </html>

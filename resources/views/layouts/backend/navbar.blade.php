@@ -29,8 +29,8 @@
                             <span
                                 class="avatar-initial rounded-circle bg-label-primary">{{ substr(Auth::user()->name, 0, 2) }}</span>
                         @else
-                            <img src="{{ asset('backend_theme/') }}/assets/img/avatars/1.png" alt
-                                class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ Auth::user()->avatar != null || Auth::user()->avatar != '' ? url(Storage::url(Auth::user()->avatar)) : asset('/img/user.png') }}"
+                                alt class="w-px-40 h-40 rounded-circle" style="object-fit: cover;" />
                         @endif
                     </div>
                 </a>
@@ -45,8 +45,8 @@
                                                 class="avatar-initial rounded-circle bg-label-primary">{{ substr(Auth::user()->name, 0, 2) }}
                                             </span>
                                         @else
-                                            <img src="{{ asset('backend_theme/') }}/assets/img/avatars/1.png" alt
-                                                class="w-px-40 h-auto rounded-circle" />
+                                            <img src="{{ Auth::user()->avatar != null || Auth::user()->avatar != '' ? url(Storage::url(Auth::user()->avatar)) : asset('/img/user.png') }}"
+                                                alt class="w-px-40 h-40 rounded-circle" style="object-fit: cover;" />
                                         @endif
                                     </div>
                                 </div>

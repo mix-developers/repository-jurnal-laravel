@@ -20,6 +20,7 @@ class ThesesController extends Controller
         ];
         return view('admin.theses.index', $data);
     }
+
     public function show($id)
     {
         $ID = decrypt($id);

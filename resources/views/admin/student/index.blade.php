@@ -19,19 +19,9 @@
             <div class="card">
                 <div class="card-header flex-column flex-md-row">
                     <div class="head-label ">
-                        <h5 class="card-title mb-0">Data Mahasiswa</h5>
+                        <h5 class="card-title mb-0">{{ $title }}</h5>
                     </div>
-                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
-                        <div class="dt-buttons btn-group flex-wrap">
-                            <button class="btn btn-secondary create-new btn-primary" type="button" class="btn btn-primary"
-                                data-bs-toggle="modal" data-bs-target="#create">
-                                <span>
-                                    <i class="bx bx-plus me-sm-1"> </i>
-                                    <span class="d-none d-sm-inline-block">Tambah Data</span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="card-datatable table-responsive">
@@ -39,21 +29,23 @@
                         <thead>
                             <tr class="bg-light">
                                 <th>#</th>
-                                <th>NIM</th>
                                 <th>Nama Lengkap </th>
                                 <th>Jurusan</th>
                                 <th>No HP</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
+                                <th>Calon Wisuda</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $item)
+                            @foreach ($users as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->identity }}</td>
-                                    <td>{{ $item->full_name }}</td>
+                                    <td>
+                                        <strong> {{ $item->name }}</strong><br>
+                                        <small>{{ $item->identity }}</small>
+                                    </td>
                                     <td>{{ $item->major->name }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>
@@ -63,44 +55,36 @@
                                         <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="dropdown">
-                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#edit-{{ $item->id }}" href=""><i
-                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('/admin/student/show', encrypt($item->id)) }}"><i
-                                                            class="bx bx-show me-1"></i> Detail</a>
-                                                </div>
-                                            </div>
-                                            <form method="POST" action="{{ url('admin/student/destroy', $item->id) }}"
-                                                class="d-inline-block">
+                                        @if ($item->is_graduate == 0)
+                                            <form action="{{ url('/admin/users/graduated', $item->id) }}" method="POST">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn delete-button"><i
-                                                        class="bx bx-trash me-1 text-danger"></i>
-                                                </button>
+                                                @method('PUT')
+                                                <input type="hidden" value="1" name="is_graduate">
+                                                <button type="submit" class="btn btn-sm btn-primary"><i
+                                                        class="bx bx-check"></i> Varifikasi</button>
                                             </form>
-                                        </div>
+                                        @else
+                                            <i class="bx bx-check text-primary"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('/admin/student/show', $item->id) }}"
+                                            class="btn btn-sm text-primary">
+                                            <i class="bx bx-show"></i>
+                                        </a>
                                     </td>
                                 </tr>
-                                @include('admin.student.modal_edit')
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>NIM</th>
                                 <th>Nama Lengkap </th>
                                 <th>Jurusan</th>
                                 <th>No HP</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
+                                <th>Calon Wisuda</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -109,7 +93,6 @@
             </div>
         </div>
     </div>
-    @include('admin.student.modal_create')
 @endsection
 @push('js')
     <script type="text/javascript">

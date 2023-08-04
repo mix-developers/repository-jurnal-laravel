@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Major;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -12,17 +13,17 @@ class StudentController extends Controller
     {
         $data = [
             'title' => 'Data Mahasiswa',
-            'students' => Student::all(),
+            'users' => User::getStudents(),
             'major' => Major::all(),
         ];
         return view('admin.student.index', $data);
     }
     public function show($id)
     {
-        $ID = decrypt($id);
-        $student = Student::find($ID);
+        // $ID = decrypt($id);
+        $student = User::find($id);
         $data = [
-            'title' => 'Detail Mahasiswa ' . $student->full_name,
+            'title' => 'Detail Mahasiswa ' . $student->name,
             'student' => $student,
         ];
         return view('admin.student.show', $data);

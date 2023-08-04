@@ -44,6 +44,7 @@
                                 <th>Jumlah Mahasiswa</th>
                                 <th>Jurnal Publish</th>
                                 <th>Jurnal Uploaded</th>
+                                <th>Skripsi Uploaded</th>
                                 <th>Aksi </th>
                             </tr>
                         </thead>
@@ -68,10 +69,37 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum ada jurnal</span>
+                                        @php
+                                            $is_published = App\Models\Journal::getJournalPublishedMajor($item->id);
+                                            // dd($is_published->count());
+                                        @endphp
+                                        @if ($is_published->count() <= 0)
+                                            <span class="badge bg-label-danger">Belum ada jurnal</span>
+                                        @else
+                                            <strong>{{ $is_published->count() }}</strong> Jurnal Publish
+                                        @endif
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum ada jurnal</span>
+                                        @php
+                                            $is_uploaded_journal = App\Models\Journal::getAll();
+                                            // dd($is_published->count());
+                                        @endphp
+                                        @if ($is_uploaded_journal->count() <= 0)
+                                            <span class="badge bg-label-danger">Belum ada jurnal</span>
+                                        @else
+                                            <strong>{{ $is_uploaded_journal->count() }}</strong> Jurnal
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                            $is_uploaded_theses = App\Models\Theses::getThesesMajor($item->id)->count();
+                                            // dd($is_published->count());
+                                        @endphp
+                                        @if ($is_uploaded_theses <= 0)
+                                            <span class="badge bg-label-danger">Belum ada Skripsi</span>
+                                        @else
+                                            <strong>{{ $is_uploaded_theses }}</strong> Skripsi
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">

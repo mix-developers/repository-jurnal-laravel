@@ -63,11 +63,26 @@
                 <p class="mb-4">Repository Sistem Informasi Universitas Musamus</p>
 
                 <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
-                    <input type="hidden" name="role" value="mahasiswa">
+                    {{-- <input type="hidden" name="role" value="mahasiswa"> --}}
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap</label>
+                        <label for="role" class="form-label">Jenis Akun</label>
+                        <select id="role" class="form-select" name="role">
+                            <option selected>--pilih--</option>
+                            <option value="dosen">Dosen</option>
+                            <option value="mahasiswa">Mahasiswa</option>
+                        </select>
+                        @error('role')
+                            <span class="text-danger" role="alert">
+                                <small>{{ $message }}</small>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label" id="no-title">Nama Lengkap</label>
+                        <label for="name" class="form-label" id="with-title" style='display:none;'>Nama Lengkap beserta
+                            title</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nama Lengkap"
-                            autofocus />
+                            autofocus disabled />
                         @error('name')
                             <span class="text-danger" role="alert">
                                 <small>{{ $message }}</small>
@@ -75,9 +90,10 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="identity" class="form-label">NIM</label>
+                        <label for="identity" class="form-label" id="nim">NIM/NPM</label>
+                        <label for="identity" class="form-label" id="nidn" style='display:none;'>NIDN/NIP</label>
                         <input type="text" class="form-control" id="identity" name="identity"
-                            placeholder="Nomor Induk Mahasiswa" autofocus />
+                            placeholder="Nomor Induk Mahasiswa" autofocus disabled />
                         @error('identity')
                             <span class="text-danger" role="alert">
                                 <small>{{ $message }}</small>
@@ -87,7 +103,7 @@
                     <div class="mb-3">
                         <label for="phone" class="form-label">Nomor HP Aktif</label>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Nomor HP"
-                            autofocus />
+                            autofocus disabled />
                         @error('phone')
                             <span class="text-danger" role="alert">
                                 <small>{{ $message }}</small>
@@ -97,7 +113,7 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="Alamat Email" autofocus />
+                            placeholder="Alamat Email" autofocus disabled />
                         @error('email')
                             <span class="text-danger" role="alert">
                                 <small>{{ $message }}</small>
@@ -111,7 +127,7 @@
                         <div class="input-group input-group-merge">
                             <input type="password" id="password" class="form-control" name="password"
                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
+                                aria-describedby="password" disabled />
                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 
                         </div>
@@ -131,7 +147,7 @@
                             <input type="password" id="password-confirm" class="form-control"
                                 name="password_confirmation" required autocomplete="new-password"
                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
+                                aria-describedby="password" disabled />
                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 
                         </div>

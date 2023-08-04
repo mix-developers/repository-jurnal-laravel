@@ -11,7 +11,7 @@
                        <i class="tf-icons bx bx-menu bx-sm align-middle"></i>
                    </button>
                    <!-- Mobile menu toggle: End-->
-                   <a href="landing-page.html" class="app-brand-link">
+                   <a href="{{ url('/') }}" class="app-brand-link">
                        <span class="app-brand-logo demo">
 
                            <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -70,12 +70,16 @@
                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        <i class="tf-icons bx bx-x bx-sm"></i>
                    </button>
-                   <div class="input-group input-group-merge">
-                       <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                       <input type="text" class="form-control" placeholder="Cari jurnal dan skripsi di sini...."
-                           aria-label="Cari jurnal dan skripsi di sini...." aria-describedby="basic-addon-search31">
-                       <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
-                   </div>
+                   <form action="{{ url('/search') }}" method="GET" class="input-group input-group-merge">
+                       {{-- @csrf --}}
+                       <div class="input-group input-group-merge">
+                           <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                           <input type="text" class="form-control" placeholder="Cari jurnal dan skripsi di sini...."
+                               aria-label="Cari jurnal dan skripsi di sini...." aria-describedby="basic-addon-search31"
+                               name="keywoard" value="{{ old('keywoard') }}">
+                           <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
+                       </div>
+                   </form>
                    {{-- <ul class="navbar-nav me-auto">
                        <li class="nav-item">
                            <a class="nav-link fw-medium" aria-current="page"
@@ -355,14 +359,30 @@
                                        class="tf-icons bx bx-user me-md-1"></span><span
                                        class="d-none d-md-block">Dashboard</span></a>
                            </li>
-                       @elseif(Auth::user()->role == 'mahasiswa')
+                       @elseif(Auth::user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1)
                            <li>
                                <a href="{{ url('/mahasiswa') }}" class="btn btn-primary"><span
                                        class="tf-icons bx bx-user me-md-1"></span><span
                                        class="d-none d-md-block">Home</span></a>
                            </li>
+                       @elseif(auth()->user()->is_graduate == 0)
+                           <li>
+                               <a href="{{ url('/') }}" class="btn btn-primary"><span
+                                       class="tf-icons bx bx-user me-md-1"></span><span
+                                       class="d-none d-md-block">Akun</span></a>
+                           </li>
                        @endif
-
+                       <li>
+                           <a class="btn btn-danger mx-1" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                               <i class="bx bx-power-off me-2"></i>
+                               <span class="d-none d-md-block">Log Out</span>
+                           </a>
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                               @csrf
+                           </form>
+                       </li>
                    @endguest
                    <!-- navbar button: End -->
                </ul>

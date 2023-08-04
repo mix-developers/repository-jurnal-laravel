@@ -1,4 +1,5 @@
 @include('layouts.frontend.header')
 @include('layouts.frontend.navbar')
 @yield('content')
-@include('layouts.frontend.footer')
+<footer class="landing-footer bg-body footer-text">
+    @include('layouts.frontend.footer')

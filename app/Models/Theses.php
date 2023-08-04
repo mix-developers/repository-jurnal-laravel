@@ -13,7 +13,7 @@ class Theses extends Model
 
     public function students(): BelongsTo
     {
-        return $this->belongsTo(Student::class, 'id_student', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
     public function major(): BelongsTo
     {
@@ -34,5 +34,11 @@ class Theses extends Model
     public static function getThesesMajor($id_major)
     {
         return self::with(['students', 'major'])->where('id_major', $id_major)->get();
+    }
+    public static function getSearch($keywoard)
+    {
+        return self::with(['students'])->where('title', 'LIKE', '%' . $keywoard . '%')
+            ->orWhere('year', 'LIKE', '%' . $keywoard . '%')
+            ->get();
     }
 }

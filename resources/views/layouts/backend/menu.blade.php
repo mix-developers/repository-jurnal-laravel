@@ -81,6 +81,12 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Master Data</span>
             </li>
+            <li class="menu-item " id="file_categories">
+                <a href="{{ url('/admin/file_categories') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Analytics">Jenis File</div>
+                </a>
+            </li>
             <li class="menu-item " id="lecturer">
                 <a href="{{ url('/admin/lecturer') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-box"></i>
@@ -116,6 +122,34 @@
             </li>
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pengguna</span>
+            </li>
+
+            <li class="menu-item " id="users_lecturers">
+                <a href="{{ url('/admin/users/lecturers') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Analytics">Akun Dosen</div>
+                </a>
+            </li>
+            <li class="menu-item " id="users_students">
+                <a href="{{ url('/admin/users/students') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Analytics">Akun Mahasiswa</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Verifikasi Pengguna</span>
+            </li>
+            <li class="menu-item " id="users_lecturers_pending">
+                <a href="{{ url('/admin/users/lecturers_pending') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-check"></i>
+                    <div data-i18n="Analytics">Verifikasi Dosen</div>
+                </a>
+            </li>
+            <li class="menu-item " id="users_students_pending">
+                <a href="{{ url('/admin/users/students_pending') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-check"></i>
+                    <div data-i18n="Analytics">Verifikasi Mahasiswa</div>
+                </a>
             </li>
         @elseif(Auth::user()->role == 'mahasiswa')
             <li class="menu-header small text-uppercase">
