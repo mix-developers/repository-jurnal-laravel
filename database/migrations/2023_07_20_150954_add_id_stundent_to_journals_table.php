@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('journals', function (Blueprint $table) {
-            $table->foreignId('id_user')->after('abstract');
+            $table->foreignId('id_user')->nullable()->after('abstract');
 
-            // $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

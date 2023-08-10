@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('journal_contributors', function (Blueprint $table) {
-            // $table->dropForeign('journal_contributors_id_student_foreign');
-            // $table->dropColumn('id_student');
+        Schema::create('statuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('status');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('journal_contributors', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('statuses');
     }
 };

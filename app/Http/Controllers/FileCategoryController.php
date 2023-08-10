@@ -24,11 +24,8 @@ class FileCategoryController extends Controller
 
         $file_categories = new FileCategory();
         $file_categories->category = $request->category;
-        if ($request->is_required != '')
-            $file_categories->is_required = $request->is_required;
-        else {
-            $file_categories->is_required = 0;
-        }
+        $file_categories->is_required = $request->is_required;
+
         $file_categories->save();
 
         return redirect()->back()->with(
@@ -48,6 +45,7 @@ class FileCategoryController extends Controller
         $file_categories = FileCategory::find($id);
         $file_categories->category = $request->category;
         $file_categories->is_required = $request->is_required;
+
 
         $file_categories->save();
 

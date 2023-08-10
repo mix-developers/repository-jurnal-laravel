@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Journal;
 use App\Models\JournalFile;
+use App\Models\JournalStatus;
+use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,26 +19,44 @@ class JournalController extends Controller
         $data = [
             'title' => 'Data Jurnal',
             'journal' => Journal::all(),
+
         ];
         return view('admin.journal.index', $data);
     }
     public function show($id)
     {
-        $ID = decrypt($id);
-        $journal = Journal::find($ID);
+        // $ID = decrypt($id);
+        $journal = Journal::find($id);
+        if ($journal != null) {
+            $files = JournalFile::where('id_journal', $journal->id)->latest()->first();
+            $journal_status = JournalStatus::where('id_journal', $journal->id)->get();
+        } else {
+            $files = null;
+            $journal_status = null;
+        }
         $data = [
             'title' => 'Detail Journal ' . $journal->students->full_name,
             'journal' => $journal,
+            'files' => $files,
+            'journal_statuses' => $journal_status,
         ];
         return view('admin.journal.show', $data);
     }
     public function mahasiswa()
     {
         $journal = Journal::where('id_user', Auth::user()->id)->first();
+        if ($journal != null) {
+            $files = JournalFile::where('id_journal', $journal->id)->latest()->first();
+            $journal_status = JournalStatus::where('id_journal', $journal->id)->get();
+        } else {
+            $files = null;
+            $journal_status = null;
+        }
         $data = [
             'title' => 'Journal Anda',
             'journal' => $journal,
-            'files' => JournalFile::where('id_journal', $journal->id)->get(),
+            'files' => $files,
+            'journal_statuses' => $journal_status,
         ];
         return view('mahasiswa.journal.index', $data);
     }
@@ -57,7 +77,6 @@ class JournalController extends Controller
             'abstract' => ['required', 'string'],
         ]);
 
-
         if ($request->hasFile('file')) {
             $filename = Str::random(32) . '.' . $request->file('file')->getClientOriginalExtension();
             $file_path = $request->file('file')->storeAs('public/files', $filename);
@@ -75,6 +94,17 @@ class JournalController extends Controller
         $journal->id_major  = Auth::user()->id_major;
         $journal->save();
 
+
+
+        $status = new JournalStatus();
+        $status->journals()->associate($journal);
+        $status->date  = date('d-m-Y');
+        $status->id_user  = Auth::user()->id;
+        $status->message  = Auth::user()->name . ' Mengajukan Journal';
+        $status->id_status  = 1;
+        $status->save();
+
+
         $files = new JournalFile();
         $files->journals()->associate($journal);
         $files->file = isset($file_path) ? $file_path : '';
@@ -83,6 +113,95 @@ class JournalController extends Controller
             return redirect()->back()->with('success', 'Berhasil menambahkan data');
         } else {
             return redirect()->back()->with('danger', 'Gagal menambahkan data');
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => ['required', 'string'],
+            'keywoards' => ['required', 'string'],
+            'abstract' => ['required', 'string'],
+        ]);
+        $journal = Journal::find($id);
+        $journal->title  = $request->title;
+        $journal->keywoards  = $request->keywoards;
+        $journal->abstract  = $request->abstract;
+        $journal->save();
+        return redirect()->back()->with('success', 'Berhasil mengubah data');
+    }
+    public function check(Request $request)
+    {
+        $status = new JournalStatus();
+        $status->id_journal  = $request->id_journal;
+        $status->date  = date('d-m-Y');
+        $status->id_user  = Auth::user()->id;
+        $status->message  = Auth::user()->role . '(' . Auth::user()->name . ')' . ' melakukan pemeriksaan jurnal';
+        $status->id_status  = 2;
+        $status->save();
+        return redirect()->to('admin/journal/show/' . $request->id_journal);
+    }
+    public function accept(Request $request)
+    {
+        $status = new JournalStatus();
+        $status->id_journal  = $request->id_journal;
+        $status->date  = date('d-m-Y');
+        $status->id_user  = Auth::user()->id;
+        if ($request->message == null) {
+            $status->message  = 'Jurnal terverifikasi..';
+        } else {
+            $status->message  = 'Jurnal terverifikasi, catatan : ' . $request->message;
+        }
+        $status->id_status  = 4;
+        $status->save();
+        return redirect()->back()->with('success', 'Berhasil berifikasi jurnal');
+    }
+    public function reject(Request $request)
+    {
+        $status = new JournalStatus();
+        $status->id_journal  = $request->id_journal;
+        $status->date  = date('d-m-Y');
+        $status->id_user  = Auth::user()->id;
+        if ($request->message == null) {
+            $status->message  = 'Silahkan revisi jurnal anda';
+        } else {
+            $status->message  = 'Silahkan revisi jurnal anda, catatan : ' . $request->message;
+        }
+        $status->id_status  = 3;
+        // dd($request);
+        $status->save();
+        return redirect()->back()->with('success', 'Berhasil berifikasi jurnal');
+    }
+    public function revisi(Request $request, $id)
+    {
+        $request->validate([
+            'file' => ['required', 'file', 'mimes:pdf'],
+            'file2' => ['required', 'file', 'mimes:pdf'],
+        ]);
+
+        if ($request->hasFile('file')) {
+            $filename = Str::random(32) . '.' . $request->file('file')->getClientOriginalExtension();
+            $file_path = $request->file('file')->storeAs('public/files', $filename);
+        }
+        if ($request->hasFile('file2')) {
+            $filename2 = Str::random(32) . '.' . $request->file('file2')->getClientOriginalExtension();
+            $file_path2 = $request->file('file2')->storeAs('public/files', $filename2);
+        }
+
+        $status = new JournalStatus();
+        $status->date  = date('d-m-Y');
+        $status->id_journal  = $request->id_journal;
+        $status->id_user  = Auth::user()->id;
+        $status->message  = Auth::user()->name . ' Mengajukan Revisi Journal';
+        $status->id_status  = 1;
+        $status->save();
+
+        $files =  JournalFile::find($id);
+        $files->file = isset($file_path) ? $file_path : $files->file;
+        $files->file2 = isset($file_path2) ? $file_path2 : $files->file2;
+        if ($files->save()) {
+            return redirect()->back()->with('success', 'Berhasil mengirimkan pengajuan revisi');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal mengirimkan pengajuan revisi');
         }
     }
 }

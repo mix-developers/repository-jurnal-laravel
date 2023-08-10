@@ -9,7 +9,7 @@
                     <strong> Nama Mahasiswa</strong>
                 </td>
                 <td>
-                    {{ Auth::user()->name }}
+                    {{ $journal->students->name }}
                 </td>
             </tr>
             <tr>
@@ -17,8 +17,8 @@
                     <strong>NPM Mahasiswa</strong>
                 </td>
                 <td>
-                    <strong>{{ Auth::user()->identity }}</strong><br>
-                    <span class="text-muted">{{ Auth::user()->major->name }}</span>
+                    <strong>{{ $journal->students->identity }}</strong><br>
+                    <span class="text-muted">{{ $journal->students->major->name }}</span>
 
                 </td>
             </tr>

@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdditionalFile;
+use App\Models\FileCategory;
+use App\Models\Journal;
+use App\Models\JournalFile;
+use App\Models\JournalStatus;
 use App\Models\Major;
+use App\Models\Mentor;
 use App\Models\Student;
+use App\Models\Theses;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,73 +29,26 @@ class StudentController extends Controller
     {
         // $ID = decrypt($id);
         $student = User::find($id);
+        $journal = Journal::where('id_user', $student->id)->first();
+        if ($journal != null) {
+            $files = JournalFile::where('id_journal', $journal->id)->latest()->first();
+            $journal_status = JournalStatus::where('id_journal', $journal->id)->get();
+        } else {
+            $files = null;
+            $journal_status = null;
+        }
         $data = [
             'title' => 'Detail Mahasiswa ' . $student->name,
             'student' => $student,
+            'mentor' => Mentor::getMentor($student->id),
+            'mentor_test' => Mentor::getMentorTest($student->id),
+            'journal' => Journal::where('id_user', $student->id)->first(),
+            'theses' => Theses::where('id_user', $student->id)->first(),
+            'additional_file' => AdditionalFile::where('id_user', $student->id)->get(),
+            'file_category' => FileCategory::all(),
+            'files' => $files,
+            'journal_statuses' => $journal_status,
         ];
         return view('admin.student.show', $data);
-    }
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'full_name' => 'required',
-            'identity' => 'required',
-            'id_major' => 'required',
-        ]);
-
-        $student = new Student();
-        $student->identity = $request->identity;
-        $student->id_major = $request->id_major;
-        $student->full_name = $request->full_name;
-        $student->phone = $request->phone;
-        $student->address = $request->address;
-        $student->place_birth = $request->place_birth;
-        $student->date_birth = $request->date_birth;
-
-        $student->save();
-
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil menambahkan data',
-            ],
-        );
-    }
-
-    public function update(Request $request, $id)
-    {
-
-        $this->validate($request, [
-            'full_name' => 'required',
-            'identity' => 'required',
-            'id_major' => 'required',
-        ]);
-
-        $student = Student::find($id);
-        $student->identity = $request->identity;
-        $student->id_major = $request->id_major;
-        $student->full_name = $request->full_name;
-        $student->phone = $request->phone;
-        $student->address = $request->address;
-        $student->place_birth = $request->place_birth;
-        $student->date_birth = $request->date_birth;
-        $student->save();
-
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil memperbaharui data',
-            ],
-        );
-    }
-
-    public function destroy($id)
-    {
-        $student = Student::find($id);
-        $student->delete();
-
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil menghapus data',
-            ]
-        );
     }
 }

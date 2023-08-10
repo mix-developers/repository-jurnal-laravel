@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Journal extends Model
 {
@@ -20,6 +21,10 @@ class Journal extends Model
     public function journal_files()
     {
         return $this->hasMany(JournalFile::class, 'id_journal');
+    }
+    public function journal_statuses()
+    {
+        return $this->hasMany(JournalStatus::class, 'id_journal');
     }
 
     public static function getFront()
@@ -47,5 +52,10 @@ class Journal extends Model
         return self::with(['students', 'major'])->where('title', 'LIKE', '%' . $keywoard . '%')
             ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%')
             ->get();
+    }
+
+    public static function checkJournal()
+    {
+        return self::where('id_user', Auth::user()->id)->count();
     }
 }

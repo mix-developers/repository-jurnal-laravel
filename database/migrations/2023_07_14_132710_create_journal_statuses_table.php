@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('message');
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users');
+            // $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

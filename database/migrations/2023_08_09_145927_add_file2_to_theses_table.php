@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('journal_contributors', function (Blueprint $table) {
-            // $table->dropForeign('journal_contributors_id_student_foreign');
-            // $table->dropColumn('id_student');
+        Schema::table('theses', function (Blueprint $table) {
+            $table->string('file2')->after('file');
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('journal_contributors', function (Blueprint $table) {
+        Schema::table('theses', function (Blueprint $table) {
             //
         });
     }

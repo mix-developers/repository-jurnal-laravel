@@ -50,6 +50,10 @@
                         </thead>
                         <tbody>
                             @foreach ($lecturer as $item)
+                                @php
+                                    $mentor = App\Models\Mentor::getMentorLecturer($item->id);
+                                    $mentor_test = App\Models\Mentor::getMentorLecturerTest($item->id);
+                                @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->identity }}</td>
@@ -57,10 +61,18 @@
                                     <td>{{ $item->major->name }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum ada bimbingan</span>
+                                        @if ($mentor->count() != 0)
+                                            {{ $mentor->count() }} Mahasiswa
+                                        @else
+                                            <span class="badge bg-label-danger">Belum ada bimbingan</span>
+                                        @endif
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum menguji</span>
+                                        @if ($mentor_test->count() != 0)
+                                            {{ $mentor_test->count() }} Mahasiswa
+                                        @else
+                                            <span class="badge bg-label-danger">Belum menguji</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -74,7 +86,7 @@
                                                         data-bs-target="#edit-{{ $item->id }}" href=""><i
                                                             class="bx bx-edit-alt me-1"></i> Edit</a>
                                                     <a class="dropdown-item"
-                                                        href="{{ url('/admin/lecturer/show', encrypt($item->id)) }}"><i
+                                                        href="{{ url('/admin/lecturer/show', $item->id) }}"><i
                                                             class="bx bx-show me-1"></i> Detail</a>
                                                 </div>
                                             </div>

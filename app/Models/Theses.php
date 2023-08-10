@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Theses extends Model
 {
@@ -40,5 +41,9 @@ class Theses extends Model
         return self::with(['students'])->where('title', 'LIKE', '%' . $keywoard . '%')
             ->orWhere('year', 'LIKE', '%' . $keywoard . '%')
             ->get();
+    }
+    public static function checkTheses()
+    {
+        return self::where('id_user', Auth::user()->id)->count();
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\MajorController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MentorController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/theses', [FrontController::class, 'theses'])->name('theses');
@@ -24,17 +25,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         // lecturer
-        Route::resource('lecturer', LecturerController::class)->except('show');
+        Route::get('/lecturer', [LecturerController::class, 'index'])->name('lecturer');
+        Route::post('/lecturer/store', [LecturerController::class, 'store'])->name('lecturer.store');
+        Route::get('/lecturer/show/{id}', [LecturerController::class, 'show'])->name('lecturer.show');
+        Route::put('/lecturer/update/{id}', [LecturerController::class, 'update'])->name('lecturer.update');
+        Route::delete('/lecturer/destroy/{id}', [LecturerController::class, 'destroy'])->name('lecturer.destroy');
         // file categories
-        Route::resource('file_categories', FileCategoryController::class)->except('show');
+        Route::get('/file_categories', [FileCategoryController::class, 'index'])->name('file_categories');
+        Route::post('/file_categories/store', [FileCategoryController::class, 'store'])->name('file_categories.store');
+        Route::put('/file_categories/update/{id}', [FileCategoryController::class, 'update'])->name('file_categories.update');
+        Route::delete('/file_categories/destroy/{id}', [FileCategoryController::class, 'destroy'])->name('file_categories.destroy');
         // student
-        Route::resource('student', StudentController::class)->except('show');
+        Route::get('/student', [StudentController::class, 'index'])->name('student');
+        Route::get('/student/show/{id}', [StudentController::class, 'show'])->name('student.show');
         // major
         Route::resource('major', MajorController::class)->except('show');
         // theses
         Route::resource('theses', ThesesController::class)->only(['index', 'show']);
         // journal
-        Route::resource('journal', JournalController::class)->only(['index', 'show']);
+        Route::get('journal', [JournalController::class, 'index'])->name('journal');
+        Route::get('journal/show/{id}', [JournalController::class, 'show'])->name('journal.show');
+        Route::post('/journal/check', [JournalController::class, 'check'])->name('journal.check');
+        Route::post('/journal/accept', [JournalController::class, 'accept'])->name('journal.accept');
+        Route::post('/journal/reject', [JournalController::class, 'reject'])->name('journal.reject');
         // users
         Route::get('/users/lecturers', [UserController::class, 'lecturers'])->name('users.lecturers');
         Route::get('/users/students', [UserController::class, 'students'])->name('users.students');
@@ -51,9 +64,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [HomeController::class, 'mahasiswa'])->name('dashboard');
         // theses
         Route::get('/theses', [ThesesController::class, 'mahasiswa'])->name('theses');
+        Route::post('/theses/store', [ThesesController::class, 'store'])->name('theses.store');
+        Route::put('/theses/update/{id}', [ThesesController::class, 'update'])->name('theses.update');
+        Route::put('/theses/updateAdditional/{id}', [ThesesController::class, 'updateAdditional'])->name('theses.updateAdditional');
         // journal
         Route::get('/journal', [JournalController::class, 'mahasiswa'])->name('journal');
         Route::post('/journal/store', [JournalController::class, 'store'])->name('journal.store');
+        Route::put('/journal/update/{id}', [JournalController::class, 'update'])->name('journal.update');
+        Route::put('/journal/revisi/{id}', [JournalController::class, 'revisi'])->name('journal.revisi');
+        // mentors
+        Route::get('/mentor/create', [MentorController::class, 'create'])->name('mentor.create');
+        Route::post('/mentor/store', [MentorController::class, 'store'])->name('mentor.store');
+        Route::put('/mentor/update/{id}', [MentorController::class, 'update'])->name('mentor.update');
+        Route::delete('/mentor/destroy/{id}', [MentorController::class, 'destroy'])->name('mentor.destroy');
         // akun
         Route::get('/profile', [UserController::class, 'profile'])->name('profile');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');

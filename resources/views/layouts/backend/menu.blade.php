@@ -152,30 +152,60 @@
                 </a>
             </li>
         @elseif(Auth::user()->role == 'mahasiswa')
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Jurnal & Skripsi</span>
-            </li>
-            <li class="menu-item " id="journal">
-                <a href="{{ url('/mahasiswa/journal') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-file-find"></i>
-                    <div data-i18n="Analytics">Ajukan Jurnal</div>
-                </a>
-            </li>
-            <li class="menu-item " id="theses">
-                <a href="{{ url('/mahasiswa/theses') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-file-find"></i>
-                    <div data-i18n="Analytics">Skripsi</div>
-                </a>
-            </li>
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Akun</span>
-            </li>
-            <li class="menu-item " id="profile">
-                <a href="{{ url('/mahasiswa/profile') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-file-find"></i>
-                    <div data-i18n="Analytics">My Profile</div>
-                </a>
-            </li>
+            @if (App\Models\Mentor::checkMentorTest() >= 1 && App\Models\Mentor::checkMentorGuide() >= 1)
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Pembimbing dan Penguji</span>
+                </li>
+                <li class="menu-item " id="mentor">
+                    <a href="{{ url('/mahasiswa/mentor/create') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">Pembimbing dan Penguji</div>
+                    </a>
+                </li>
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Jurnal & Skripsi</span>
+                </li>
+                <li class="menu-item " id="journal">
+                    <a href="{{ url('/mahasiswa/journal') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">Jurnal</div>
+                    </a>
+                </li>
+                <li class="menu-item " id="theses">
+                    <a href="{{ url('/mahasiswa/theses') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">Skripsi</div>
+                    </a>
+                </li>
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Akun</span>
+                </li>
+                <li class="menu-item " id="profile">
+                    <a href="{{ url('/mahasiswa/profile') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">My Profile</div>
+                    </a>
+                </li>
+            @else
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Pembimbing dan Penguji</span>
+                </li>
+                <li class="menu-item " id="mentor">
+                    <a href="{{ url('/mahasiswa/mentor/create') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">Pembimbing dan Penguji</div>
+                    </a>
+                </li>
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Akun</span>
+                </li>
+                <li class="menu-item " id="profile">
+                    <a href="{{ url('/mahasiswa/profile') }}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-file-find"></i>
+                        <div data-i18n="Analytics">My Profile</div>
+                    </a>
+                </li>
+            @endif
         @endif
     </ul>
 </aside>

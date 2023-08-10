@@ -14,19 +14,18 @@
                 </div>
             @endif
             @include('mahasiswa.theses.component._error')
-            <div class="card">
-                <div class="card-header"> <strong>Skripsi {{ Auth::user()->name }}</strong></div>
-                <div class="card-body">
-                    @if ($theses == null)
-                        @include('mahasiswa.theses.component._form')
-                    @else
-                        @include('mahasiswa.theses.component._show')
-                    @endif
-                </div>
-            </div>
+
+            @if ($theses == null)
+                @include('mahasiswa.theses.component._form')
+            @else
+                @include('mahasiswa.theses.component._show')
+            @endif
+
         </div>
     </div>
-    @include('mahasiswa.theses.component._update')
+    @if ($theses != null)
+        @include('mahasiswa.theses.component._update')
+    @endif
 @endsection
 @push('js')
     <script type="text/javascript">

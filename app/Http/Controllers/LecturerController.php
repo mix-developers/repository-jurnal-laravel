@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecturer;
 use App\Models\Major;
+use App\Models\Mentor;
 use Illuminate\Http\Request;
 
 class LecturerController extends Controller
@@ -19,10 +20,11 @@ class LecturerController extends Controller
     }
     public function show($id)
     {
-        $ID = decrypt($id);
-        $lecturer = Lecturer::find($ID);
+        $lecturer = Lecturer::find($id);
         $data = [
             'title' => 'Detail Dosen ' . $lecturer->title_first . $lecturer->full_name . ' ' . $lecturer->title_end,
+            'mentor' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'pembimbing')->get(),
+            'mentor_test' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'penguji')->get(),
             'lecturer' => $lecturer,
         ];
         return view('admin.lecturer.show', $data);

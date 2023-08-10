@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdditionalFile;
+use App\Models\FileCategory;
 use App\Models\Student;
 use App\Models\Theses;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +36,12 @@ class ThesesController extends Controller
     }
     public function mahasiswa()
     {
-        $student = Student::where('identity', Auth::user()->identity)->first();
         $data = [
             'title' => 'Skripsi',
-            'student' => $student,
-            'theses' => Theses::where('id_student', $student->id)->first(),
+            'student' => User::find(Auth::user()->id),
+            'theses' => Theses::where('id_user', Auth::user()->id)->first(),
+            'file_category' => FileCategory::all(),
+            'additional_file' => AdditionalFile::where('id_user', Auth::user()->id)->get(),
         ];
         return view('mahasiswa.theses.index', $data);
     }
@@ -45,24 +49,42 @@ class ThesesController extends Controller
     {
         $request->validate([
             'file' => ['required', 'file', 'mimes:pdf'],
+            'file2' => ['required', 'file', 'mimes:pdf'],
             'title' => ['required', 'string'],
             'year' => ['required', 'string'],
-            'id_student' => ['required'],
+            'id_user' => ['required'],
             'id_major' => ['required'],
         ]);
-
 
         if ($request->hasFile('file')) {
             $filename = Str::random(32) . '.' . $request->file('file')->getClientOriginalExtension();
             $file_path = $request->file('file')->storeAs('public/files', $filename);
         }
+        if ($request->hasFile('file2')) {
+            $filename2 = Str::random(32) . '.' . $request->file('file2')->getClientOriginalExtension();
+            $file_path2 = $request->file('file2')->storeAs('public/files', $filename2);
+        }
 
         $files = new Theses();
         $files->title  = $request->title;
         $files->year  = $request->year;
-        $files->id_student  = $request->id_student;
+        $files->id_user  = $request->id_user;
         $files->id_major  = $request->id_major;
         $files->file = isset($file_path) ? $file_path : '';
+        $files->file2 = isset($file_path2) ? $file_path2 : '';
+
+        foreach (FileCategory::all() as $item) {
+            $additional_file = new AdditionalFile();
+
+            if ($request->hasFile('file' . $item->id)) {
+                $filename = 'File-' . Str::slug($item->category) . '-' . Str::random(32) . '.' . $request->file('file' . $item->id)->getClientOriginalExtension();
+                $file_path  = $request->file('file')->storeAs('public/files', $filename);
+            }
+            $additional_file->id_user = Auth::user()->id;
+            $additional_file->id_file_category = $item->id;
+            $additional_file->file = isset($file_path) ? $file_path : '';
+            $additional_file->save();
+        }
         if ($files->save()) {
             return redirect()->back()->with('success', 'Berhasil menambahkan data');
         } else {
@@ -72,7 +94,8 @@ class ThesesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['nullable', 'file', 'mimes:pdf'],
+            'file2' => ['nullable', 'file', 'mimes:pdf'],
             'title' => ['required', 'string'],
             'year' => ['required', 'string'],
         ]);
@@ -88,15 +111,50 @@ class ThesesController extends Controller
         } else {
             $file_path = $files->file;
         }
+        if ($request->hasFile('file2')) {
+            if ($files->file2 != '') {
+                Storage::delete($files->file2);
+            }
+
+            $filename2 = Str::random(32) . '.' . $request->file('file2')->getClientOriginalExtension();
+            $file_path2 = $request->file('file2')->storeAs('public/files', $filename2);
+        } else {
+            $file_path2 = $files->file2;
+        }
 
 
         $files->title  = $request->title;
         $files->year  = $request->year;
-        $files->file = isset($file_path) ? $file_path : $file_path;
+        $files->file = isset($file_path) ? $file_path : $files->file;
+        $files->file2 = isset($file_path2) ? $file_path2 : $files->file2;
         if ($files->save()) {
             return redirect()->back()->with('success', 'Berhasil mengubah data');
         } else {
             return redirect()->back()->with('danger', 'Gagal mengubah data');
+        }
+    }
+    public function updateAdditional(Request $request, $id)
+    {
+        $request->validate([
+            'file' => ['nullable', 'file', 'mimes:pdf'],
+        ]);
+
+        $additional_file = AdditionalFile::findOrFail($id);
+        if ($request->hasFile('file')) {
+            if ($additional_file->file != '') {
+                Storage::delete($additional_file->file);
+            }
+
+            $filename = 'File-' . Str::slug($request->category) . '-' . Str::random(32) . '.' . $request->file('file')->getClientOriginalExtension();
+            $file_path = $request->file('file')->storeAs('public/files', $filename);
+        } else {
+            $file_path = $additional_file->file;
+        }
+        $additional_file->file = isset($file_path) ? $file_path : $additional_file->file;
+        if ($additional_file->save()) {
+            return redirect()->back()->with('success', 'Berhasil mengubah file');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal mengubah file');
         }
     }
     public function download($id)

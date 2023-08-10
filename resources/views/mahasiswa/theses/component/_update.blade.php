@@ -18,8 +18,13 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="file">File Skripsi</label>
+                            <label for="file">File (Sampai BAB 1)</label>
                             <input type="file" class="form-control" name="file">
+                            <small>File harus berbentuk PDF</small>
+                        </div>
+                        <div class="col">
+                            <label for="file">File (keseluruhan)</label>
+                            <input type="file" class="form-control" name="file2">
                             <small>File harus berbentuk PDF</small>
                         </div>
                         <div class="col-3">
@@ -44,3 +49,32 @@
         </div>
     </div>
 </div>
+@foreach ($file_category as $cat)
+    <div class="modal fade" id="additional-{{ $cat->id }}" tabindex="-1" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">File {{ $cat->category }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form
+                    action="{{ url('/mahasiswa/theses/updateAdditional', App\Models\AdditionalFile::getAdditionalFile($cat->id)->id) }}"
+                    method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <input type="hidden" name="category" value="{{ $cat->category }}">
+                        <input type="file" class="form-control" name="file"
+                            {{ $cat->is_required == 1 ? 'required' : '' }}>
+                        <small>File harus berbentuk PDF
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach

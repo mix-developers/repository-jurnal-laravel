@@ -20,7 +20,7 @@
                             <tr class="bg-light">
                                 <th>#</th>
                                 <th>Mahasiswa</th>
-                                <th>Jurusan</th>
+                                {{-- <th>Jurusan</th> --}}
                                 <th>Judul</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
@@ -34,16 +34,30 @@
                                     <td><strong>{{ $item->students->name }}</strong><br>
                                         <small>{{ $item->students->identity }}</small>
                                     </td>
-                                    <td>{{ $item->major->name }}</td>
+                                    {{-- <td>{{ $item->major->name }}</td> --}}
                                     <td>
                                         <b>{{ Str::limit($item->title, 50) }}</b><br>
                                         <span class="badge bg-label-secondary">{{ $item->year }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum Memiliki Pembimbing</span>
+                                        <ol>
+                                            @forelse (App\Models\Mentor::getMentor($item->id_user) as $list)
+                                                <li>{{ $list->lecturer->title_first }}
+                                                    {{ $list->lecturer->full_name }} {{ $list->lecturer->title_end }}</li>
+                                            @empty
+                                                <span class="badge bg-label-danger">Belum Memiliki Pembimbing</span>
+                                            @endforelse
+                                        </ol>
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
+                                        <ol>
+                                            @forelse (App\Models\Mentor::getMentorTest($item->id_user) as $list)
+                                                <li>{{ $list->lecturer->title_first }}
+                                                    {{ $list->lecturer->full_name }} {{ $list->lecturer->title_end }}</li>
+                                            @empty
+                                                <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
+                                            @endforelse
+                                        </ol>
                                     </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm"
@@ -57,7 +71,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Mahasiswa</th>
-                                <th>Jurusan</th>
+                                {{-- <th>Jurusan</th> --}}
                                 <th>Judul</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>

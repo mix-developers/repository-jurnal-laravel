@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('journal_contributors', function (Blueprint $table) {
-            $table->foreignId('id_journal')->after('id_student');
+            $table->foreignId('id_journal')->after('id');
 
             $table->foreign('id_journal')->references('id')->on('journals');
         });

@@ -31,7 +31,6 @@
                                 <th>#</th>
                                 <th>Nama Lengkap </th>
                                 <th>Jurusan</th>
-                                <th>No HP</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
                                 <th>Calon Wisuda</th>
@@ -47,13 +46,27 @@
                                         <small>{{ $item->identity }}</small>
                                     </td>
                                     <td>{{ $item->major->name }}</td>
-                                    <td>{{ $item->phone }}</td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum Memiliki Pembimbing</span>
+                                        <ol>
+                                            @forelse (App\Models\Mentor::getMentor($item->id) as $list)
+                                                <li>{{ $list->lecturer->title_first }}
+                                                    {{ $list->lecturer->full_name }} {{ $list->lecturer->title_end }}</li>
+                                            @empty
+                                                <span class="badge bg-label-danger">Belum Memiliki Pembimbing</span>
+                                            @endforelse
+                                        </ol>
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
+                                        <ol>
+                                            @forelse (App\Models\Mentor::getMentorTest($item->id) as $list)
+                                                <li>{{ $list->lecturer->title_first }}
+                                                    {{ $list->lecturer->full_name }} {{ $list->lecturer->title_end }}</li>
+                                            @empty
+                                                <span class="badge bg-label-danger">Belum Memiliki Penguji</span>
+                                            @endforelse
+                                        </ol>
                                     </td>
+
                                     <td>
                                         @if ($item->is_graduate == 0)
                                             <form action="{{ url('/admin/users/graduated', $item->id) }}" method="POST">
@@ -64,7 +77,7 @@
                                                         class="bx bx-check"></i> Varifikasi</button>
                                             </form>
                                         @else
-                                            <i class="bx bx-check text-primary"></i>
+                                            <i class="bx bx-check text-primary bx-lg"></i>
                                         @endif
                                     </td>
                                     <td>
@@ -81,7 +94,6 @@
                                 <th>#</th>
                                 <th>Nama Lengkap </th>
                                 <th>Jurusan</th>
-                                <th>No HP</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
                                 <th>Calon Wisuda</th>

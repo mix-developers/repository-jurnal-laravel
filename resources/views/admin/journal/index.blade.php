@@ -19,26 +19,56 @@
                         <thead>
                             <tr class="bg-light">
                                 <th>#</th>
-                                <th>NIM</th>
                                 <th>Nama Lengkap </th>
                                 <th>Judul</th>
-                                <th>Kata Kunci</th>
-                                <th>kontributor</th>
-                                <th>Aksi</th>
+                                <th>Dosen Pembimbing</th>
+                                <th>Status</th>
+                                <th>Lihat</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($journal as $item)
+                                @php
+                                    $status_journal = App\Models\JournalStatus::where('id_journal', $item->id)
+                                        ->latest()
+                                        ->first();
+                                @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->students->identity }}</td>
-                                    <td>{{ $item->students->name }}</td>
-                                    <td>{{ Str::limit($item->title, 50) }}</td>
-                                    <td>{{ $item->keywoards }}</td>
+                                    <td><strong>{{ $item->students->name }}</strong><br>{{ $item->students->identity }}</td>
                                     <td>
-                                        <span class="badge bg-label-danger">Belum ada kontributor</span>
+                                        <strong>{{ Str::limit($item->title, 50) }}</strong><br>
+                                        <small>Kata Kunci : {{ Str::limit($item->keywoards, 100) }}</small>
                                     </td>
                                     <td>
+                                        <ol>
+                                            @forelse (App\Models\Mentor::getMentor($item->id_user) as $list)
+                                                <li>{{ $list->lecturer->title_first }}
+                                                    {{ $list->lecturer->full_name }} {{ $list->lecturer->title_end }}</li>
+                                            @empty
+                                                <span class="badge bg-label-danger">Belum ada kontributor</span>
+                                            @endforelse
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="badge @if ($status_journal->id_status <= 2) bg-label-warning @elseif($status_journal->id_status == 3) bg-label-danger @else bg-label-primary @endif">{{ $status_journal->statuses->status }}</span>
+                                    </td>
+                                    <td>
+                                        @if (App\Models\JournalStatus::checkJournal($item->id) <= 0)
+                                            <form action="{{ url('/admin/journal/check') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" value="{{ $item->id }}" name="id_journal">
+                                                <button type="submit" class="btn btn-primary"><i
+                                                        class="bx bx-show me-1"></i>Lihat</button>
+                                            </form>
+                                        @else
+                                            <a href="{{ url('/admin/journal/show', $item->id) }}"
+                                                class="btn btn-primary"><i class="bx bx-show me-1"></i>Lihat</a>
+                                        @endif
+                                    </td>
+                                    {{-- <td>
                                         <div class="d-flex align-items-center">
                                             <div class="dropdown">
                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -53,19 +83,18 @@
                                             </div>
 
                                         </div>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>NIM</th>
                                 <th>Nama Lengkap </th>
                                 <th>Judul</th>
-                                <th>Kata Kunci</th>
                                 <th>kontributor</th>
-                                <th>Aksi</th>
+                                <th>Status</th>
+                                <th>Lihat</th>
                             </tr>
                         </tfoot>
                     </table>

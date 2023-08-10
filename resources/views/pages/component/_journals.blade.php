@@ -7,15 +7,13 @@
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
             @forelse ($journal->take(4) as $item)
                 <div class="col-lg-3 col-md-6">
-                    <div class="card bg-light"
-                        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
-                        <div class="card-header">
-                            <p><mark>{{ $item->title }}</mark></p>
-                            <small>Kata kunci : {{ $item->keywords }}</small>
+                    <div class="card bg-light border border-primary">
+                        <div class="card-header text-center">
+                            <h4 class="text-primary m-0">{{ $item->title }}</h4>
                         </div>
                         <div class="card-body text-center">
-                            <img src="{{ asset('/img/skripsi.jpg') }}" width="100%" class="card-img">
-
+                            <small class="text-muted ">Jurnal | {{ $item->created_at->year }}</small><br>
+                            <p><b>Kata Kunci :</b><br><em>{{ Str::limit($item->keywoards, 100) }}</em></p>
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
                                 data-bs-target="#journal-{{ $item->id }}">
                                 Buka

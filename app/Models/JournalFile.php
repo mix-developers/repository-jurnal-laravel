@@ -14,4 +14,8 @@ class JournalFile extends Model
     {
         return $this->belongsTo(Journal::class, 'id_journal', 'id');
     }
+    public static function getJournal($id_journal)
+    {
+        return self::where('id_journal', $id_journal)->first();
+    }
 }

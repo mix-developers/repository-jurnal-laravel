@@ -62,8 +62,8 @@
                                             {{ $item->lecturer->identity }}</small>
                                     </td>
                                     <td>
-                                        @if (App\Models\Student::getCountStudents($item->id) != 0)
-                                            <strong>{{ App\Models\Student::getCountStudents($item->id) }}</strong> Mahasiswa
+                                        @if (App\Models\User::getCountStudents($item->id) != 0)
+                                            <strong>{{ App\Models\User::getCountStudents($item->id) }}</strong> Mahasiswa
                                         @else
                                             <span class="badge bg-label-danger">Belum ada mahasiswa</span>
                                         @endif
