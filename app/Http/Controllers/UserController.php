@@ -119,6 +119,9 @@ class UserController extends Controller
         if (isset($request->identity)) {
             $user->identity = $request->identity;
         }
+        if (isset($request->password)) {
+            $user->password = $request->password;
+        }
 
         if (isset($request->name)) {
             $user->name = $request->name;
@@ -161,6 +164,9 @@ class UserController extends Controller
         if (isset($request->identity)) {
             $user->identity = $request->identity;
         }
+        if (isset($request->password)) {
+            $user->password = $request->password;
+        }
 
         if (isset($request->name)) {
             $user->name = $request->name;
@@ -179,5 +185,28 @@ class UserController extends Controller
                 'success' => 'Berhasil memperbaharui profile',
             ],
         );
+    }
+    public function updatePassword(Request $request, $id)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $user = User::findOrFail($id);
+        if (isset($request->password)) {
+            $user->password = $request->password;
+        }
+        if ($user->save()) {
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil memperbaharui password',
+                ],
+            );
+        } else {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Gagal memperbaharui password',
+                ],
+            );
+        }
     }
 }

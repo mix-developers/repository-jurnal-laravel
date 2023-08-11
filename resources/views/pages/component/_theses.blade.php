@@ -7,11 +7,15 @@
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
             @forelse ($theses->take(4) as $item)
                 <div class="col-lg-3 col-md-6">
-                    <div class="card bg-light"
-                        style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
+                    <div class="card bg-light border border-primary">
 
                         <div class="card-body text-center">
-                            <h3>{{ $item->title }}</h3>
+                            <h3>{{ Str::limit($item->title, 50) }}</h3>
+                            <span class="text-muted">Skripsi | {{ $item->created_at->year }}</span>
+                            <br>
+                            <span class="text-primary">{{ $item->students->name }}</span>
+                            <br>
+                            <span class="text-muted">{{ $item->students->identity }}</span><br>
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
                                 data-bs-target="#theses-{{ $item->id }}">
                                 Buka

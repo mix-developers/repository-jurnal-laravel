@@ -15,9 +15,8 @@
 
     <!-- / Sections:End -->
 
-
     @include('pages.component._modals_theses')
-    @include('pages.component._footer')
+    {{-- @include('pages.component._footer') --}}
 @endsection
 @push('js')
     <script>

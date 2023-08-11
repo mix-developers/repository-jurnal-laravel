@@ -85,5 +85,6 @@ Route::group(['middleware' => ['auth']], function () {
         // akun
         Route::get('/profile', [UserController::class, 'profile'])->name('profile');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
+        Route::put('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('updatePassword');
     });
 });

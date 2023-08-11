@@ -15,5 +15,5 @@
 
     <!-- / Sections:End -->
     @include('pages.component._modals_journal')
-    @include('pages.component._footer')
+    {{-- @include('pages.component._footer') --}}
 @endsection
