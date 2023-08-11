@@ -39,8 +39,7 @@ class Theses extends Model
     public static function getSearch($keywoard)
     {
         return self::with(['students'])->where('title', 'LIKE', '%' . $keywoard . '%')
-            ->orWhere('year', 'LIKE', '%' . $keywoard . '%')
-            ->get();
+            ->orWhere('year', 'LIKE', '%' . $keywoard . '%');
     }
     public static function checkTheses()
     {

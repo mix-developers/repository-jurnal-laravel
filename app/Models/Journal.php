@@ -50,8 +50,7 @@ class Journal extends Model
     public static function getSearch($keywoard)
     {
         return self::with(['students', 'major'])->where('title', 'LIKE', '%' . $keywoard . '%')
-            ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%')
-            ->get();
+            ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%');
     }
 
     public static function checkJournal()

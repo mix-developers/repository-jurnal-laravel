@@ -68,7 +68,13 @@
     </script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/js/front-config.js"></script>
-
+    <style>
+        @media screen and (max-width: 768px) {
+            .hilang {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>

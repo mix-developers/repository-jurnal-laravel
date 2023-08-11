@@ -8,9 +8,7 @@
 
         <!-- Useful features: Start -->
         @include('pages.component._theses')
-        <div class="text-center">
-            <a href="{{ url('/theses') }}" class="btn btn-primary">Lihat lainnya...</a>
-        </div>
+
 
 
     </div>

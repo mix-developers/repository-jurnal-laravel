@@ -17,11 +17,13 @@ Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/theses', [FrontController::class, 'theses'])->name('theses');
 Route::get('/journal', [FrontController::class, 'journal'])->name('journal');
 Route::get('/search', [FrontController::class, 'search'])->name('search');
-Route::get('/download_theses/{id}', [ThesesController::class, 'download'])->name('download_theses');
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/download_theses/{id}', [ThesesController::class, 'download'])->name('download_theses');
+    Route::get('/akun', [FrontController::class, 'akun'])->name('akun');
+
     Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         // lecturer
@@ -39,7 +41,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/student', [StudentController::class, 'index'])->name('student');
         Route::get('/student/show/{id}', [StudentController::class, 'show'])->name('student.show');
         // major
-        Route::resource('major', MajorController::class)->except('show');
+        Route::get('/major', [MajorController::class, 'index'])->name('major');
+        Route::post('/major/store', [MajorController::class, 'store'])->name('major.store');
+        Route::put('/major/update/{id}', [MajorController::class, 'update'])->name('major.update');
+        Route::delete('/major/destroy/{id}', [MajorController::class, 'destroy'])->name('major.destroy');
         // theses
         Route::resource('theses', ThesesController::class)->only(['index', 'show']);
         // journal
