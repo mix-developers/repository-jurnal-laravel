@@ -34,6 +34,12 @@
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/css/demo.css" />
     @stack('css')
+    <style>
+        .btn-group,
+        .btn-group-vertical {
+            display: block;
+        }
+    </style>
     <!-- Vendors CSS -->
     <link rel="stylesheet"
         href="{{ asset('backend_theme/') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -126,6 +132,9 @@
 
     <!-- Main JS -->
     <script src="{{ asset('backend_theme/') }}/assets/js/main.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('backend_theme/') }}/assets/js/dashboards-analytics.js"></script>
@@ -133,6 +142,7 @@
     </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
     <script>
         $(".delete-button").on('click', function(e) {
             e.preventDefault();
@@ -172,6 +182,7 @@
                         "next": "Selanjutnya"
                     }
                 }
+
             });
         });
         $(document).ready(function() {
@@ -189,6 +200,14 @@
                         "next": "Selanjutnya"
                     }
                 }
+            });
+        });
+        $(document).ready(function() {
+            $('#datatable-export').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf'
+                ]
             });
         });
     </script>

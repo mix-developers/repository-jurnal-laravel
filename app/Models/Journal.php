@@ -57,4 +57,8 @@ class Journal extends Model
     {
         return self::where('id_user', Auth::user()->id)->count();
     }
+    public static function checkJournalExist($id)
+    {
+        return self::where('id_user', $id)->count();
+    }
 }

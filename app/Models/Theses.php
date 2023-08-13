@@ -45,4 +45,8 @@ class Theses extends Model
     {
         return self::where('id_user', Auth::user()->id)->count();
     }
+    public static function checkThesesExist($id)
+    {
+        return self::where('id_user', $id)->count();
+    }
 }

@@ -35,4 +35,11 @@ class HomeController extends Controller
         ];
         return view('mahasiswa.dashboard', $data);
     }
+    public function jurusan()
+    {
+        $data = [
+            'title' => 'Dashboard'
+        ];
+        return view('jurusan.dashboard', $data);
+    }
 }

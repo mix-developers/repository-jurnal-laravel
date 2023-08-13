@@ -34,6 +34,10 @@ class AdditionalFile extends Model
     {
         return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', $id_student)->count();
     }
+    public static function cekAdditionalFileJurusan($id_student)
+    {
+        return self::with(['user', 'file_category'])->where('id_user', $id_student)->get();
+    }
     public static function cekAdditionalFileUser()
     {
         return self::with(['user', 'file_category'])->where('id_user', Auth::user()->id)->count();

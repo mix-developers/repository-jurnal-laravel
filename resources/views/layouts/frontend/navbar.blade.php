@@ -141,6 +141,12 @@
                                        class="tf-icons bx bx-user me-md-1"></span><span
                                        class="d-none d-md-block">Home</span></a>
                            </li>
+                       @elseif(Auth::user()->role == 'jurusan')
+                           <li>
+                               <a href="{{ url('/jurusan') }}" class="btn btn-primary"><span
+                                       class="tf-icons bx bx-user me-md-1"></span><span
+                                       class="d-none d-md-block">Dashboard</span></a>
+                           </li>
                        @elseif(auth()->user()->is_graduate == 0)
                            <li>
                                <a href="{{ url('/akun') }}" class="btn btn-primary"><span

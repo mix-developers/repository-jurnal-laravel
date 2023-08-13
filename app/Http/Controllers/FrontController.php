@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal;
+use App\Models\Lecturer;
 use App\Models\Theses;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class FrontController extends Controller
         } else if ($type == 'lecturer') {
             $journal = null;
             $theses = null;
-            $results = 0;
+            $results = Lecturer::getSearch($keywoard)->count();
         }
         // dd($search);
         $data = [

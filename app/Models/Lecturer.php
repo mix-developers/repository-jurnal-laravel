@@ -14,4 +14,8 @@ class Lecturer extends Model
     {
         return $this->belongsTo(Major::class, 'id_major');
     }
+    public static function getSearch($keywoard)
+    {
+        return self::with(['major'])->where('full_name', 'LIKE', '%' . $keywoard . '%');
+    }
 }

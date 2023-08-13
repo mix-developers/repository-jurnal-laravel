@@ -12,6 +12,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/theses', [FrontController::class, 'theses'])->name('theses');
@@ -86,5 +87,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/profile', [UserController::class, 'profile'])->name('profile');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
         Route::put('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('updatePassword');
+    });
+    Route::group(['prefix' => 'jurusan', 'as' => 'jurusan', 'middleware' => ['jurusan']], function () {
+        Route::get('/', [HomeController::class, 'jurusan'])->name('dashboard');
+        Route::get('/report/mahasiswa', [ReportController::class, 'mahasiswa'])->name('report.mahasiswa');
+        Route::get('/report/exportMahasiswa', [ReportController::class, 'exportMahasiswa'])->name('report.exportMahasiswa');
+        Route::get('/report/journal', [ReportController::class, 'journal'])->name('report.journal');
+        Route::get('/report/exportJournal', [ReportController::class, 'exportJournal'])->name('report.exportJournal');
+        Route::get('/report/theses', [ReportController::class, 'theses'])->name('report.theses');
+        Route::get('/report/exportTheses', [ReportController::class, 'exportTheses'])->name('report.exportTheses');
+        Route::get('/report/dosen', [ReportController::class, 'dosen'])->name('report.dosen');
+        Route::get('/report/exportDosen', [ReportController::class, 'exportDosen'])->name('report.exportDosen');
     });
 });

@@ -69,6 +69,13 @@
                     <div data-i18n="Analytics">Dashboard</div>
                 </a>
             </li>
+        @elseif(Auth::user()->role == 'jurusan')
+            <li class="menu-item " id="dashboard">
+                <a href="{{ url('/jurusan') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
         @elseif(Auth::user()->role == 'mahasiswa')
             <li class="menu-item " id="dashboard">
                 <a href="{{ url('/mahasiswa') }}" class="menu-link">
@@ -196,16 +203,45 @@
                         <div data-i18n="Analytics">Pembimbing dan Penguji</div>
                     </a>
                 </li>
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Akun</span>
-                </li>
-                <li class="menu-item " id="profile">
-                    <a href="{{ url('/mahasiswa/profile') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-file-find"></i>
-                        <div data-i18n="Analytics">My Profile</div>
-                    </a>
-                </li>
             @endif
+        @endif
+        @if (Auth::user()->role == 'jurusan')
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Laporan</span>
+            </li>
+            <li class="menu-item " id="report_mahasiswa">
+                <a href="{{ url('/jurusan/report/mahasiswa') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Mahasiswa</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_journal">
+                <a href="{{ url('/jurusan/report/journal') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Jurnal</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_theses">
+                <a href="{{ url('/jurusan/report/theses') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Skripsi</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_dosen">
+                <a href="{{ url('/jurusan/report/dosen') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Dosen</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Akun</span>
+            </li>
+            <li class="menu-item " id="profile">
+                <a href="{{ url('/jurusan/profile') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">My Profile</div>
+                </a>
+            </li>
         @endif
     </ul>
 </aside>
