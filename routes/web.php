@@ -98,5 +98,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/report/exportTheses', [ReportController::class, 'exportTheses'])->name('report.exportTheses');
         Route::get('/report/dosen', [ReportController::class, 'dosen'])->name('report.dosen');
         Route::get('/report/exportDosen', [ReportController::class, 'exportDosen'])->name('report.exportDosen');
+        // akun
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+        Route::put('/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
+        Route::put('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('updatePassword');
     });
 });
