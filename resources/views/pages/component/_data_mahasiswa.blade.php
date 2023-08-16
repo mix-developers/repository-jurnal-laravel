@@ -45,15 +45,7 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>NIM</th>
-                    <th>Email</th>
-                    <th>No HP</th>
-                </tr>
-            </tfoot>
+
         </table>
         <div class="my-2">
             {{ $student->links('vendor.pagination.bootstrap-4') }}
