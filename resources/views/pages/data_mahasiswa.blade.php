@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Sections:Start -->
-
     <div data-bs-spy="scroll" class="scrollspy-example">
         @include('pages.component._title')
         <div class="text-center mt-4 container">
@@ -44,7 +43,7 @@
                     @include('pages.component._menu_akun')
                 </div>
                 <div class="col-md-10">
-                    @include('pages.component._akun')
+                    @include('pages.component._data_mahasiswa')
                 </div>
             </div>
 
@@ -53,6 +52,6 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $("#akun").addClass("active");
+        $("#data_mahasiswa").addClass("active");
     </script>
 @endpush

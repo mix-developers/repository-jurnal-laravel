@@ -74,4 +74,16 @@ class FrontController extends Controller
         ];
         return view('pages.akun', $data);
     }
+    public function data_mahasiswa()
+    {
+        $student = User::where('is_graduate', 1)
+            ->where('role', 'mahasiswa')->where('id_major', Auth::user()->id_major)->paginate(20);
+        $user = User::find(Auth::user()->id);
+        $data = [
+            'title' => 'Data Mahasiswa',
+            'user' => $user,
+            'student' => $student,
+        ];
+        return view('pages.data_mahasiswa', $data);
+    }
 }

@@ -24,6 +24,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/download_theses/{id}', [ThesesController::class, 'download'])->name('download_theses');
     Route::get('/akun', [FrontController::class, 'akun'])->name('akun');
+    Route::get('/data_mahasiswa', [FrontController::class, 'data_mahasiswa'])->name('data_mahasiswa');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
