@@ -26,12 +26,16 @@ class ThesesController extends Controller
 
     public function show($id)
     {
-        $ID = decrypt($id);
-        $theses = Theses::find($ID);
+        $theses = Theses::find($id);
+        $user = User::find($theses->id_user);
         $data = [
-            'title' => 'Detail Skripsi ' . $theses->students->full_name,
+            'title' => 'Data Skripsi',
+            'student' => $user,
             'theses' => $theses,
+            'file_category' => FileCategory::all(),
+            'additional_file' => AdditionalFile::where('id_user', $theses->id_user)->get(),
         ];
+        // dd(AdditionalFile::where('id_user', $theses->id_user)->get());
         return view('admin.theses.show', $data);
     }
     public function mahasiswa()
@@ -132,6 +136,27 @@ class ThesesController extends Controller
         } else {
             return redirect()->back()->with('danger', 'Gagal mengubah data');
         }
+    }
+    public function storeAdditional(Request $request)
+    {
+        $request->validate([
+            'file' => ['nullable', 'file', 'mimes:pdf'],
+            'id_category' => ['required'],
+        ]);
+        $file_category = FileCategory::find($request->id_category);
+
+        $additional_file = new AdditionalFile();
+
+        if ($request->hasFile('file' . $file_category->id)) {
+            $filename = 'File-' . Str::slug($file_category->category) . '-' . Str::random(32) . '.' . $request->file('file' . $file_category->id)->getClientOriginalExtension();
+            $file_path  = $request->file('file' . $file_category->id)->storeAs('public/files', $filename);
+        }
+        $additional_file->id_user = Auth::user()->id;
+        $additional_file->id_file_category = $file_category->id;
+        $additional_file->file = isset($file_path) ? $file_path : '';
+        $additional_file->save();
+
+        return redirect()->back()->with('success', 'Berhasil menambah file');
     }
     public function updateAdditional(Request $request, $id)
     {

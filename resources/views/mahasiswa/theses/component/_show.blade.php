@@ -44,7 +44,7 @@
             </div>
             <div class="card-body">
                 <table class="table table-borderles">
-                    @foreach ($file_category as $file)
+                    @forelse ($file_category as $file)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -66,11 +66,18 @@
                                         Update
                                     </button>
                                 @else
-                                    <a href="" class="btn btn-primary">Upload</a>
+                                    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal"
+                                        data-bs-target="#additional-add-{{ $file->id }}">
+                                        Upload
+                                    </button>
                                 @endif
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td class="text-center">Belum ada data</td>
+                        </tr>
+                    @endforelse
                 </table>
             </div>
         </div>

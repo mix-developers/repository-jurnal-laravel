@@ -33,8 +33,7 @@
 
                                     <td>
                                         <a class="btn btn-primary btn-sm"
-                                            href="{{ url('/admin/theses/show', encrypt($item->id)) }}"><i
-                                                class="bx bx-show"></i></a>
+                                            href="{{ url('/admin/users/show', $item->id) }}"><i class="bx bx-show"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

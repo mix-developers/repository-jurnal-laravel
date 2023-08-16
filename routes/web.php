@@ -47,20 +47,24 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/major/update/{id}', [MajorController::class, 'update'])->name('major.update');
         Route::delete('/major/destroy/{id}', [MajorController::class, 'destroy'])->name('major.destroy');
         // theses
-        Route::resource('theses', ThesesController::class)->only(['index', 'show']);
+        Route::get('/theses', [ThesesController::class, 'index'])->name('theses');
+        Route::get('/theses/show/{id}', [ThesesController::class, 'show'])->name('theses.show');
         // journal
         Route::get('journal', [JournalController::class, 'index'])->name('journal');
         Route::get('journal/show/{id}', [JournalController::class, 'show'])->name('journal.show');
         Route::post('/journal/check', [JournalController::class, 'check'])->name('journal.check');
+        Route::put('/journal/publish/{id}', [JournalController::class, 'publish'])->name('journal.publish');
         Route::post('/journal/accept', [JournalController::class, 'accept'])->name('journal.accept');
         Route::post('/journal/reject', [JournalController::class, 'reject'])->name('journal.reject');
         // users
         Route::get('/users/lecturers', [UserController::class, 'lecturers'])->name('users.lecturers');
+        Route::get('/users/admin', [UserController::class, 'admin'])->name('users.admin');
         Route::get('/users/students', [UserController::class, 'students'])->name('users.students');
         Route::get('/users/lecturers_pending', [UserController::class, 'lecturers_pending'])->name('users.lecturers_pending');
         Route::get('/users/students_pending', [UserController::class, 'students_pending'])->name('users.students_pending');
         Route::put('/users/verifications/{id}', [UserController::class, 'verifications'])->name('users.verifications');
         Route::put('/users/graduated/{id}', [UserController::class, 'graduated'])->name('users.graduated');
+        Route::get('/users/show/{id}', [UserController::class, 'show'])->name('users.show');
         // profile
         Route::get('/profile', [UserController::class, 'profileAdmin'])->name('profileAdmin');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfileAdmin'])->name('updateProfileAdmin');
@@ -71,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
         // theses
         Route::get('/theses', [ThesesController::class, 'mahasiswa'])->name('theses');
         Route::post('/theses/store', [ThesesController::class, 'store'])->name('theses.store');
+        Route::post('/theses/storeAdditional', [ThesesController::class, 'storeAdditional'])->name('theses.storeAdditional');
         Route::put('/theses/update/{id}', [ThesesController::class, 'update'])->name('theses.update');
         Route::put('/theses/updateAdditional/{id}', [ThesesController::class, 'updateAdditional'])->name('theses.updateAdditional');
         // journal

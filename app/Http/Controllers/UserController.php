@@ -22,6 +22,15 @@ class UserController extends Controller
         ];
         return view('mahasiswa.user.profile', $data);
     }
+    public function show($id)
+    {
+        $users = User::find($id);
+        $data = [
+            'title' => 'Detail',
+            'users' => $users,
+        ];
+        return view('admin.users.show', $data);
+    }
     public function profileAdmin()
     {
         $identity = Auth::user()->identity;
@@ -39,6 +48,14 @@ class UserController extends Controller
             'users' => User::getLecturers(),
         ];
         return view('admin.users.lecturers', $data);
+    }
+    public function admin()
+    {
+        $data = [
+            'title' => 'Akun Dosen',
+            'users' => User::where('role', 'admin')->get(),
+        ];
+        return view('admin.users.admin', $data);
     }
     public function students()
     {

@@ -140,6 +140,13 @@ class JournalController extends Controller
         $status->save();
         return redirect()->to('admin/journal/show/' . $request->id_journal);
     }
+    public function publish($id)
+    {
+        $journal = Journal::find($id);
+        $journal->is_published  = 1;
+        $journal->save();
+        return redirect()->back()->with('success', 'Journal berhasil di publish');
+    }
     public function accept(Request $request)
     {
         $status = new JournalStatus();

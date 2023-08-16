@@ -24,6 +24,7 @@
                                 <th>Judul</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
+                                <th>Upload</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -60,8 +61,13 @@
                                         </ol>
                                     </td>
                                     <td>
+                                        {!! App\Models\Theses::checkThesesExist($item->id_user) == 0
+                                            ? '<span class="text-danger">Belum</span>'
+                                            : '<span class="text-primary">Sudah</span>' !!}
+                                    </td>
+                                    <td>
                                         <a class="btn btn-primary btn-sm"
-                                            href="{{ url('/admin/theses/show', encrypt($item->id)) }}"><i
+                                            href="{{ url('/admin/theses/show', $item->id) }}"><i
                                                 class="bx bx-show"></i></a>
                                     </td>
                                 </tr>

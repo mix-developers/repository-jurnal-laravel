@@ -131,6 +131,12 @@
                 <span class="menu-header-text">Pengguna</span>
             </li>
 
+            <li class="menu-item " id="users_admin">
+                <a href="{{ url('/admin/users/admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Analytics">Akun Admin</div>
+                </a>
+            </li>
             <li class="menu-item " id="users_lecturers">
                 <a href="{{ url('/admin/users/lecturers') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user"></i>

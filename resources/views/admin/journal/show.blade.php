@@ -16,6 +16,25 @@
                     </button>
 
                 </div>
+            @else
+                @if ($journal->is_published == 0)
+                    <div class="d-flex justify-content-end mx-2 mb-4">
+                        <form action="{{ url('/admin/journal/publish', $journal->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-primary"><i class="bx bx-check me-1"></i>Publish</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="my-3">
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            Joural ini telah publish
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    </div>
+                @endif
             @endif
 
             <div class="row">

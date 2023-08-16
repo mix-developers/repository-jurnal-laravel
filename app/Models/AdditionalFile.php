@@ -30,6 +30,7 @@ class AdditionalFile extends Model
     {
         return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', Auth::user()->id)->count();
     }
+
     public static function cekAdditionalFileAdmin($id_file_category, $id_student)
     {
         return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', $id_student)->count();

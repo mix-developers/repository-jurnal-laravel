@@ -16,7 +16,7 @@
                             <tr class="bg-light">
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>NIM</th>
+                                <th>NIP/NIDN</th>
                                 <th>Email</th>
                                 <th>No HP</th>
                                 <th>Aksi</th>
@@ -42,7 +42,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>NIM</th>
+                                <th>NIP/NIDN</th>
                                 <th>Email</th>
                                 <th>No HP</th>
                                 <th>Aksi</th>
@@ -56,6 +56,6 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $("#users_students").addClass("active");
+        $("#users_admin").addClass("active");
     </script>
 @endpush
