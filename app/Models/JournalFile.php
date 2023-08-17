@@ -16,6 +16,7 @@ class JournalFile extends Model
     }
     public static function getJournal($id_journal)
     {
-        return self::where('id_journal', $id_journal)->first();
+        return self::where('id_journal', $id_journal)
+            ->first();
     }
 }

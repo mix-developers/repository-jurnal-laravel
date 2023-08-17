@@ -16,6 +16,7 @@ class Lecturer extends Model
     }
     public static function getSearch($keywoard)
     {
-        return self::with(['major'])->where('full_name', 'LIKE', '%' . $keywoard . '%');
+        return self::with(['major'])
+            ->where('full_name', 'LIKE', '%' . $keywoard . '%');
     }
 }

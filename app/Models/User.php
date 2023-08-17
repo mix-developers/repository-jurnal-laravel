@@ -50,23 +50,33 @@ class User extends Authenticatable
 
     public static function getLecturers()
     {
-        return self::where('role', 'dosen')->where('is_verified', 1)->get();
+        return self::where('role', 'dosen')
+            ->where('is_verified', 1)
+            ->get();
     }
     public static function getLecturersPending()
     {
-        return self::where('role', 'dosen')->where('is_verified', 0)->get();
+        return self::where('role', 'dosen')
+            ->where('is_verified', 0)
+            ->get();
     }
     public static function getStudents()
     {
-        return self::where('role', 'mahasiswa')->where('is_verified', 1)->get();
+        return self::where('role', 'mahasiswa')
+            ->where('is_verified', 1)
+            ->get();
     }
     public static function getStudentsPending()
     {
-        return self::where('role', 'mahasiswa')->where('is_verified', 0)->get();
+        return self::where('role', 'mahasiswa')
+            ->where('is_verified', 0)
+            ->get();
     }
     public static function getCountStudents($id_major)
     {
-        return self::where('id_major', $id_major)->where('role', 'mahasiswa')->count();
+        return self::where('id_major', $id_major)
+            ->where('role', 'mahasiswa')
+            ->count();
     }
     public function major(): BelongsTo
     {

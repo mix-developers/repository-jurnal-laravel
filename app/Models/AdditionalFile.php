@@ -20,27 +20,43 @@ class AdditionalFile extends Model
     }
     public static function getAdditionalFile($id_file_category)
     {
-        return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', Auth::user()->id)->first();
+        return self::with(['user', 'file_category'])
+            ->where('id_file_category', $id_file_category)
+            ->where('id_user', Auth::user()->id)
+            ->first();
     }
     public static function getAdditionalFileAdmin($id_file_category, $id_student)
     {
-        return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', $id_student)->first();
+        return self::with(['user', 'file_category'])
+            ->where('id_file_category', $id_file_category)
+            ->where('id_user', $id_student)
+            ->first();
     }
     public static function cekAdditionalFile($id_file_category)
     {
-        return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', Auth::user()->id)->count();
+        return self::with(['user', 'file_category'])
+            ->where('id_file_category', $id_file_category)
+            ->where('id_user', Auth::user()->id)
+            ->count();
     }
 
     public static function cekAdditionalFileAdmin($id_file_category, $id_student)
     {
-        return self::with(['user', 'file_category'])->where('id_file_category', $id_file_category)->where('id_user', $id_student)->count();
+        return self::with(['user', 'file_category'])
+            ->where('id_file_category', $id_file_category)
+            ->where('id_user', $id_student)
+            ->count();
     }
     public static function cekAdditionalFileJurusan($id_student)
     {
-        return self::with(['user', 'file_category'])->where('id_user', $id_student)->get();
+        return self::with(['user', 'file_category'])
+            ->where('id_user', $id_student)
+            ->get();
     }
     public static function cekAdditionalFileUser()
     {
-        return self::with(['user', 'file_category'])->where('id_user', Auth::user()->id)->count();
+        return self::with(['user', 'file_category'])
+            ->where('id_user', Auth::user()->id)
+            ->count();
     }
 }

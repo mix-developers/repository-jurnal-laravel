@@ -25,18 +25,28 @@ class JournalStatus extends Model
     }
     public static function notifikasi()
     {
-        $journal = Journal::where('id_user', Auth::user()->id)->latest()->first();
-        $status = self::where('id_journal', $journal->id)->latest()->first();
+        $journal = Journal::where('id_user', Auth::user()->id)
+            ->latest()
+            ->first();
+        $status = self::where('id_journal', $journal->id)
+            ->latest()
+            ->first();
         return $status;
     }
     public static function notifikasiAdmin($id_user)
     {
-        $journal = Journal::where('id_user', $id_user)->latest()->first();
-        $status = self::where('id_journal', $journal->id)->latest()->first();
+        $journal = Journal::where('id_user', $id_user)
+            ->latest()
+            ->first();
+        $status = self::where('id_journal', $journal->id)
+            ->latest()
+            ->first();
         return $status;
     }
     public static function checkJournal($id_journal)
     {
-        return self::where('id_status', 2)->where('id_journal', $id_journal)->count();
+        return self::where('id_status', 2)
+            ->where('id_journal', $id_journal)
+            ->count();
     }
 }

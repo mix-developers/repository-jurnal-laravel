@@ -22,31 +22,42 @@ class Theses extends Model
     }
     public static function getFront()
     {
-        return self::with(['students', 'major'])->latest()->take(4)->get();
+        return self::with(['students', 'major'])
+            ->latest()
+            ->take(4)
+            ->get();
     }
     public static function getAll()
     {
-        return self::with(['students', 'major'])->get();
+        return self::with(['students', 'major'])
+            ->get();
     }
     public static function getThesesStudent($id_student)
     {
-        return self::with(['students', 'major'])->where('id_student', $id_student)->get();
+        return self::with(['students', 'major'])
+            ->where('id_student', $id_student)
+            ->get();
     }
     public static function getThesesMajor($id_major)
     {
-        return self::with(['students', 'major'])->where('id_major', $id_major)->get();
+        return self::with(['students', 'major'])
+            ->where('id_major', $id_major)
+            ->get();
     }
     public static function getSearch($keywoard)
     {
-        return self::with(['students'])->where('title', 'LIKE', '%' . $keywoard . '%')
+        return self::with(['students'])
+            ->where('title', 'LIKE', '%' . $keywoard . '%')
             ->orWhere('year', 'LIKE', '%' . $keywoard . '%');
     }
     public static function checkTheses()
     {
-        return self::where('id_user', Auth::user()->id)->count();
+        return self::where('id_user', Auth::user()->id)
+            ->count();
     }
     public static function checkThesesExist($id)
     {
-        return self::where('id_user', $id)->count();
+        return self::where('id_user', $id)
+            ->count();
     }
 }
