@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Journal;
+use App\Models\Theses;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'mahasiswa' => User::where('role', 'mahasiswa')->count(),
+            'dosen' =>  User::where('role', 'dosen')->count(),
+            'jurnal' =>  Journal::count(),
+            'skripsi' =>  Theses::count(),
         ];
         return view('admin.dashboard', $data);
     }
@@ -38,7 +45,11 @@ class HomeController extends Controller
     public function jurusan()
     {
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'mahasiswa' => User::where('role', 'mahasiswa')->count(),
+            'dosen' =>  User::where('role', 'dosen')->count(),
+            'jurnal' =>  Journal::count(),
+            'skripsi' =>  Theses::count(),
         ];
         return view('jurusan.dashboard', $data);
     }

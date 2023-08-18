@@ -116,14 +116,14 @@
                                                             class="bx bx-show me-1"></i> Detail</a>
                                                 </div>
                                             </div>
-                                            <form method="POST" action="{{ url('admin/major/destroy', $item->id) }}"
+                                            {{-- <form method="POST" action="{{ url('admin/major/destroy', $item->id) }}"
                                                 class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn delete-button"><i
                                                         class="bx bx-trash me-1 text-danger"></i>
                                                 </button>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                     </td>
                                 </tr>

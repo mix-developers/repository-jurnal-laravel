@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lecturer;
 use App\Models\Major;
 use App\Models\Mentor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LecturerController extends Controller
@@ -90,12 +91,26 @@ class LecturerController extends Controller
     public function destroy($id)
     {
         $lecturer = Lecturer::find($id);
-        $lecturer->delete();
-
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil menghapus data',
-            ]
-        );
+        $mentor = Mentor::where('id_lecturer', $id)->get();
+        foreach ($mentor as $item) {
+            $item->delete();
+        }
+        $user = User::where('identity', $lecturer->identity)->first();
+        if ($user != null) {
+            $user->delete();
+        }
+        if ($lecturer->delete()) {
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil menghapus data',
+                ]
+            );
+        } else {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Gagal menghapus data',
+                ]
+            );
+        }
     }
 }
