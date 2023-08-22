@@ -64,15 +64,40 @@
             @endforelse
         @endif
     </table>
+    <table class="table table-borderless table-hover">
+        @if (is_array($lecturer) || is_object($lecturer))
+            @forelse ($lecturer as $l)
+                <tr>
+                    <td>
+                        <a href="#" class="text-link" data-bs-toggle="tooltip" data-bs-offset="0,4"
+                            data-bs-placement="top" data-bs-custom-class="tooltip-dark"
+                            title="{{ $l->title_first . $l->full_name . ' ' . $l->title_end }}"><strong>{{ Str::limit($l->title_first . $l->full_name . ' ' . $l->title_end, 100) }}</strong></a>
+                        <br>
+                        <small class="text-muted">Bimbingan :
+                            {{ App\Models\Mentor::getMentorLecturer($l->id)->count() }}</small><br>
+                        <small class="text-primary"><em>Dosen</em></small>
+                    </td>
+                    <td style="width: 200px;">
+                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
+                            data-bs-target="#lecturer-{{ $l->id }}">
+                            Lihat Detail
+                        </button>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="2">-</td>
+                </tr>
+            @endforelse
+        @endif
+    </table>
 </div>
 <div class="text-center mt-3">
-
     @if ($journal == null && $theses == null)
+        {{ $lecturer->links() }}
+    @elseif ($journal == null)
+        {{ $theses->links() }}
     @else
-        @if ($journal == null)
-            {{ $theses->links() }}
-        @else
-            {{ $journal->links() }}
-        @endif
+        {{ $journal->links() }}
     @endif
 </div>

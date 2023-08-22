@@ -43,14 +43,17 @@ class FrontController extends Controller
         if ($type == 'journal') {
             $journal = Journal::getSearch($keywoard)->paginate(20);
             $theses = null;
+            $lecturer = null;
             $results = Journal::getSearch($keywoard)->count();
         } else if ($type == 'theses') {
             $journal = null;
             $theses = Theses::getSearch($keywoard)->paginate(20);
             $results = Theses::getSearch($keywoard)->count();
+            $lecturer = null;
         } else if ($type == 'lecturer') {
             $journal = null;
             $theses = null;
+            $lecturer = Lecturer::getSearch($keywoard)->paginate(20);
             $results = Lecturer::getSearch($keywoard)->count();
         }
         // dd($search);
@@ -59,6 +62,7 @@ class FrontController extends Controller
             'journal' => $journal,
             'theses' => $theses,
             'results' => $results,
+            'lecturer' => $lecturer,
 
         ];
         session()->flashInput($request->input());

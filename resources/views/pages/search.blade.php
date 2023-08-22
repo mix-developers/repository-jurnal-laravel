@@ -18,5 +18,6 @@
     <!-- / Sections:End -->
     @include('pages.component._modals_theses')
     @include('pages.component._modals_journal')
+    @include('pages.component._modals_lecturer')
     {{-- @include('pages.component._footer') --}}
 @endsection
