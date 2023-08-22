@@ -7,8 +7,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <embed id="myFrame" type="application/pdf" src="{{ url(Storage::url($item->file)) }}"
-                        width="100%" height="500"></embed>
+                    @guest
+                        <embed id="myFrame" type="application/pdf" src="{{ url(Storage::url($item->file)) }}"
+                            width="100%" height="500"></embed>
+                    @else
+                        <embed id="myFrame" type="application/pdf" src="{{ url(Storage::url($item->file2)) }}"
+                            width="100%" height="500"></embed>
+                    @endguest
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
