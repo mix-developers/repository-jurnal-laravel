@@ -80,14 +80,15 @@ class ThesesController extends Controller
         foreach (FileCategory::all() as $item) {
             $additional_file = new AdditionalFile();
 
-            if ($request->hasFile('file' . $item->id)) {
-                $filename = 'File-' . Str::slug($item->category) . '-' . Str::random(32) . '.' . $request->file('file' . $item->id)->getClientOriginalExtension();
-                $file_path  = $request->file('file')->storeAs('public/files', $filename);
+            if ($request->hasFile('add_file' . $item->id)) {
+                $filename = 'File-' . Str::slug($item->category) . '-' . Str::random(32) . '.' . $request->file('add_file' . $item->id)->getClientOriginalExtension();
+                $file_path  = $request->file('add_file' . $item->id)->storeAs('public/files', $filename);
+
+                $additional_file->id_user = Auth::user()->id;
+                $additional_file->id_file_category = $item->id;
+                $additional_file->file = isset($file_path) ? $file_path : '';
+                $additional_file->save();
             }
-            $additional_file->id_user = Auth::user()->id;
-            $additional_file->id_file_category = $item->id;
-            $additional_file->file = isset($file_path) ? $file_path : '';
-            $additional_file->save();
         }
         if ($files->save()) {
             return redirect()->back()->with('success', 'Berhasil menambahkan data');

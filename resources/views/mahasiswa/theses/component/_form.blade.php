@@ -45,7 +45,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td><strong>{{ $file->category }}</strong></td>
                                     <td>
-                                        <input type="file" class="form-control" name="file{{ $file->id }}"
+                                        <input type="file" class="form-control" name="add_file{{ $file->id }}"
                                             {{ $file->is_required == 1 ? 'required' : '' }}>
                                         <small>File harus berbentuk PDF
                                             {!! $file->is_required == 1 ? '<span class="text-danger">(wajib diisi)</span>' : '(tidak wajib)' !!}</small>
