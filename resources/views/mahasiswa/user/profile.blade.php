@@ -62,6 +62,7 @@
                             </div>
                         </div>
 
+
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="phone">Nomor HP</label>
                             <input type="text" name="phone" class="form-control modal-edit-tax-id"
@@ -77,6 +78,19 @@
                                 @endforeach
                             </select>
 
+                        </div>
+                        <hr>
+                        <div class="col-md-6 ">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" name="password" class="form-control modal-edit-tax-id"
+                                placeholder="******************">
+                            <small class="text-muted">Pastikan kosong jika tidak ingin mengganti password</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="password">Konfirmasi Password</label>
+                            <input type="password" name="password_confirmation" id="password-confirm"
+                                class="form-control modal-edit-tax-id" placeholder="******************"
+                                autocomplete="new-password">
                         </div>
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan Perubahan</button>

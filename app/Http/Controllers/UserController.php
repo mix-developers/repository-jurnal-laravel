@@ -15,7 +15,7 @@ class UserController extends Controller
     public function profile()
     {
         $identity = Auth::user()->identity;
-        $student = Student::where('identity', $identity)->first();
+        $student = User::where('identity', $identity)->first();
         $data = [
             'title' => 'My Profile',
             'student' => $student,
@@ -34,7 +34,7 @@ class UserController extends Controller
     public function profileAdmin()
     {
         $identity = Auth::user()->identity;
-        $student = Student::where('identity', $identity)->first();
+        $student = User::where('identity', $identity)->first();
         $data = [
             'title' => 'My Profile',
             'student' => $student,
@@ -120,7 +120,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:191'],
             'identity' => ['required', 'string', 'max:191'],
             'email' => ['required', 'email'],
-            'phone' => ['required', 'string', 'max:191']
+            'phone' => ['required', 'string', 'max:191'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
         $user = User::findOrFail($id);
 
