@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-12 col-md-6 fv-plugins-icon-container">
                             <label class="form-label"
-                                for="identity">{{ Auth::user()->role == 'mahasiswa' ? 'NIM' : 'NIP/NIDN' }}</label>
+                                for="identity">{{ Auth::user()->role == 'mahasiswa' ? 'NIM' : 'NIP/NIDN/USERNAME' }}</label>
                             <input type="text" name="identity" class="form-control" placeholder="000000000"
                                 value="{{ Auth::user()->identity }}">
                             <div

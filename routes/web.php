@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/journal/accept', [JournalController::class, 'accept'])->name('journal.accept');
         Route::post('/journal/reject', [JournalController::class, 'reject'])->name('journal.reject');
         // users
+        Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/lecturers', [UserController::class, 'lecturers'])->name('users.lecturers');
         Route::get('/users/admin', [UserController::class, 'admin'])->name('users.admin');
         Route::get('/users/students', [UserController::class, 'students'])->name('users.students');
@@ -90,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/mentor/update/{id}', [MentorController::class, 'update'])->name('mentor.update');
         Route::delete('/mentor/destroy/{id}', [MentorController::class, 'destroy'])->name('mentor.destroy');
         // akun
+
         Route::get('/profile', [UserController::class, 'profile'])->name('profile');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('updateProfile');
         Route::put('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('updatePassword');

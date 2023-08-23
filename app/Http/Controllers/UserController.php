@@ -113,6 +113,51 @@ class UserController extends Controller
             ],
         );
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+            'name' => ['required', 'string', 'max:191'],
+            'identity' => ['required', 'string', 'max:191'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', 'string', 'max:191'],
+        ]);
+        $user = new User;
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar != '') {
+                Storage::delete($user->avatar);
+            }
+
+            $filename = Str::random(32) . '.' . $request->file('avatar')->getClientOriginalExtension();
+            $file_path = $request->file('avatar')->storeAs('public/uploads', $filename);
+        }
+
+        if (isset($request->identity)) {
+            $user->identity = $request->identity;
+        }
+
+
+        if (isset($request->name)) {
+            $user->name = $request->name;
+        }
+        if (isset($request->email)) {
+            $user->email = $request->email;
+        }
+        if (isset($request->phone)) {
+            $user->phone = $request->phone;
+        }
+        $user->avatar = isset($file_path) ? $file_path : '';
+        $user->role = $request->role;
+        $user->password = 'admin';
+        $user->save();
+
+        return redirect()->back()->with(
+            [
+                'success' => 'Berhasil menambah admin',
+            ],
+        );
+    }
     public function updateProfile(Request $request, $id)
     {
         $request->validate([
