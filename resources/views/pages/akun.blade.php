@@ -50,7 +50,9 @@
                 </div>
             </div>
         @else
-            @include('pages.component._akun')
+            <div class="container">
+                @include('pages.component._akun')
+            </div>
         @endif
     </div>
 @endsection
