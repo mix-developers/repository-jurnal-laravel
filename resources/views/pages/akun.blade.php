@@ -38,17 +38,20 @@
                 @endforeach
             </div>
         @endif
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    @include('pages.component._menu_akun')
-                </div>
-                <div class="col-md-10">
-                    @include('pages.component._akun')
+        @if (Auth::user()->role != 'mahasiswa')
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        @include('pages.component._menu_akun')
+                    </div>
+                    <div class="col-md-10">
+                        @include('pages.component._akun')
+                    </div>
                 </div>
             </div>
-
-        </div>
+        @else
+            @include('pages.component._akun')
+        @endif
     </div>
 @endsection
 @push('js')
