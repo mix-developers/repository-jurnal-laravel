@@ -38,7 +38,17 @@
                 @endforeach
             </div>
         @endif
-        @if (Auth::user()->role != 'mahasiswa')
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    @include('pages.component._menu_akun')
+                </div>
+                <div class="col-md-10">
+                    @include('pages.component._akun')
+                </div>
+            </div>
+        </div>
+        {{-- @if (Auth::user()->role != 'mahasiswa')
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
@@ -53,7 +63,7 @@
             <div class="container">
                 @include('pages.component._akun')
             </div>
-        @endif
+        @endif --}}
     </div>
 @endsection
 @push('js')
