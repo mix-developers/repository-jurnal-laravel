@@ -28,7 +28,11 @@ class MentorController extends Controller
         $mentor = new Mentor();
         $mentor->id_lecturer = $request->id_lecturer;
         $mentor->type = $request->type;
-        $mentor->id_user = Auth::user()->id;
+        if (Auth::user()->role == 'mahasiswa') {
+            $mentor->id_user = Auth::user()->id;
+        } else {
+            $mentor->id_user = $request->id_user;
+        }
         $mentor->save();
 
         return redirect()->back()->with(

@@ -96,6 +96,48 @@ class ThesesController extends Controller
             return redirect()->back()->with('danger', 'Gagal menambahkan data');
         }
     }
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'file' => ['required', 'file', 'mimes:pdf'],
+            'file2' => ['required', 'file', 'mimes:pdf'],
+            'title' => ['required', 'string'],
+            'year' => ['required', 'string'],
+            'id_user' => ['required'],
+            'id_major' => ['required'],
+        ]);
+
+        $files = new Theses();
+        if ($request->hasFile('file')) {
+            if ($files->file != '') {
+                Storage::delete($files->file);
+            }
+
+            $filename = Str::random(32) . '.' . $request->file('file')->getClientOriginalExtension();
+            $file_path = $request->file('file')->storeAs('public/files', $filename);
+        }
+        if ($request->hasFile('file2')) {
+            if ($files->file2 != '') {
+                Storage::delete($files->file2);
+            }
+
+            $filename2 = Str::random(32) . '.' . $request->file('file2')->getClientOriginalExtension();
+            $file_path2 = $request->file('file2')->storeAs('public/files', $filename2);
+        }
+
+
+        $files->title  = $request->title;
+        $files->year  = $request->year;
+        $files->id_user  = $request->id_user;
+        $files->id_major  = $request->id_major;
+        $files->file = isset($file_path) ? $file_path : '';
+        $files->file2 = isset($file_path2) ? $file_path2 : '';
+        if ($files->save()) {
+            return redirect()->back()->with('success', 'Berhasil upload data skripsi');
+        } else {
+            return redirect()->back()->with('danger', 'Gagal upload data skripsi');
+        }
+    }
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -152,7 +194,11 @@ class ThesesController extends Controller
             $filename = 'File-' . Str::slug($file_category->category) . '-' . Str::random(32) . '.' . $request->file('file' . $file_category->id)->getClientOriginalExtension();
             $file_path  = $request->file('file' . $file_category->id)->storeAs('public/files', $filename);
         }
-        $additional_file->id_user = Auth::user()->id;
+        if (Auth::user()->role == 'admin') {
+            $additional_file->id_user = $request->id_user;
+        } else {
+            $additional_file->id_user = Auth::user()->id;
+        }
         $additional_file->id_file_category = $file_category->id;
         $additional_file->file = isset($file_path) ? $file_path : '';
         $additional_file->save();

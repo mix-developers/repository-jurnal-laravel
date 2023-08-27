@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @if (App\Models\JournalStatus::where('id_journal', $journal->id)->latest()->first()->id_status < 3)
+            @if (App\Models\JournalStatus::where('id_journal', $journal->id)->orderBy('id', 'desc')->first()->id_status < 3)
                 <div class="d-flex justify-content-end mx-2 mb-4">
                     <button class="btn btn-success mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#accept">

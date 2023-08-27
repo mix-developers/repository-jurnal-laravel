@@ -38,6 +38,8 @@ class StudentController extends Controller
             $journal_status = null;
         }
         $data = [
+            'pembimbing' => Mentor::where('id_user', $id)->where('type', 'pembimbing')->get(),
+            'penguji' => Mentor::where('id_user', $id)->where('type', 'penguji')->get(),
             'title' => 'Detail Mahasiswa ' . $student->name,
             'student' => $student,
             'mentor' => Mentor::getMentor($student->id),

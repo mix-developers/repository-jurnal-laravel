@@ -50,6 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
         // theses
         Route::get('/theses', [ThesesController::class, 'index'])->name('theses');
         Route::get('/theses/show/{id}', [ThesesController::class, 'show'])->name('theses.show');
+        Route::post('/theses/storeAdmin', [ThesesController::class, 'storeAdmin'])->name('theses.storeAdmin');
+        Route::post('/theses/storeAdditional', [ThesesController::class, 'storeAdditional'])->name('theses.storeAdditional');
+        Route::put('/theses/update/{id}', [ThesesController::class, 'update'])->name('theses.update');
+        Route::put('/theses/updateAdditional/{id}', [ThesesController::class, 'updateAdditional'])->name('theses.updateAdditional');
         // journal
         Route::get('journal', [JournalController::class, 'index'])->name('journal');
         Route::get('journal/show/{id}', [JournalController::class, 'show'])->name('journal.show');
@@ -57,6 +61,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/journal/publish/{id}', [JournalController::class, 'publish'])->name('journal.publish');
         Route::post('/journal/accept', [JournalController::class, 'accept'])->name('journal.accept');
         Route::post('/journal/reject', [JournalController::class, 'reject'])->name('journal.reject');
+        Route::post('/journal/storeAdmin', [JournalController::class, 'storeAdmin'])->name('journal.storeAdmin');
+        Route::put('/journal/updateAdmin/{id}', [JournalController::class, 'updateAdmin'])->name('journal.updateAdmin');
+        //mentor
+        Route::post('/mentor/store', [MentorController::class, 'store'])->name('mentor.store');
+        Route::put('/mentor/update/{id}', [MentorController::class, 'update'])->name('mentor.update');
+        Route::delete('/mentor/destroy/{id}', [MentorController::class, 'destroy'])->name('mentor.destroy');
         // users
         Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/lecturers', [UserController::class, 'lecturers'])->name('users.lecturers');

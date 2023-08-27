@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,7 @@ class StudentsController extends Controller
     public function index()
     {
         try {
-            $student = Student::all();
+            $student = User::all();
             return response()->json($student, Response::HTTP_OK);
         } catch (QueryException $e) {
             $error = [

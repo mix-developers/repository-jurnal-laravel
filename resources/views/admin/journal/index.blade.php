@@ -30,7 +30,7 @@
                             @foreach ($journal as $item)
                                 @php
                                     $status_journal = App\Models\JournalStatus::where('id_journal', $item->id)
-                                        ->latest()
+                                        ->orderBy('id', 'desc')
                                         ->first();
                                 @endphp
                                 <tr>
@@ -55,6 +55,7 @@
                                             class="badge @if ($status_journal->id_status <= 2) bg-label-warning @elseif($status_journal->id_status == 3) bg-label-danger @else bg-label-primary @endif">{{ $status_journal->statuses->status }}</span>
                                     </td>
                                     <td>
+
                                         @if (App\Models\JournalStatus::checkJournal($item->id) <= 0)
                                             <form action="{{ url('/admin/journal/check') }}" method="POST"
                                                 enctype="multipart/form-data">
