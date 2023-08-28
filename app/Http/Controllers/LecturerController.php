@@ -50,13 +50,22 @@ class LecturerController extends Controller
         $lecturer->place_birth = $request->place_birth;
         $lecturer->date_birth = $request->date_birth;
 
-        $lecturer->save();
+        $check = User::where('identity', $request->identity)->where('role', 'mahasiswa')->count();
+        if ($check == 0) {
 
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil menambahkan data',
-            ],
-        );
+            $lecturer->save();
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil menambahkan data',
+                ],
+            );
+        } else {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Gagal menambahkan data, harap check NIP/NIDN tidak boleh sama dengan NIM mahasiswa',
+                ],
+            );
+        }
     }
 
     public function update(Request $request, $id)
