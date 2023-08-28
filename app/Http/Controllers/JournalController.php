@@ -8,6 +8,7 @@ use App\Models\JournalStatus;
 use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\User;
+use App\Rules\NotUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -231,12 +232,26 @@ class JournalController extends Controller
         $status->save();
         return redirect()->to('admin/journal/show/' . $request->id_journal);
     }
-    public function publish($id)
+    public function publish(Request $request, $id)
     {
+        $request->validate([
+            'link_doi' => ['url'],
+        ]);
+
         $journal = Journal::find($id);
-        $journal->is_published  = 1;
-        $journal->save();
-        return redirect()->back()->with('success', 'Journal berhasil di publish');
+        if ($journal->is_published == 0 || $journal->link_doi == null || $journal->link_doi == "") {
+            $journal->link_doi  = $request->link_doi;
+            $journal->is_published  = 1;
+        } else {
+            $journal->link_doi  = "";
+            $journal->is_published  = 0;
+        }
+
+        if ($journal->save()) {
+            return redirect()->back()->with('success', 'Journal berhasil di publish');
+        } else {
+            return redirect()->back()->with('danger', 'Journal gagal di publish');
+        }
     }
     public function accept(Request $request)
     {

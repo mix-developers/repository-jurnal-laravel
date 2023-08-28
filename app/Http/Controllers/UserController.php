@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Journal;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -118,8 +119,8 @@ class UserController extends Controller
         $request->validate([
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
             'name' => ['required', 'string', 'max:191'],
-            'identity' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'email'],
+            'identity' => ['required', 'string', 'max:191', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
             'phone' => ['required', 'string', 'max:191'],
         ]);
         $user = new User;
@@ -149,14 +150,27 @@ class UserController extends Controller
         }
         $user->avatar = isset($file_path) ? $file_path : '';
         $user->role = $request->role;
-        $user->password = 'admin';
-        $user->save();
+        $user->id_major = $request->id_major;
+        $user->is_verified = 1;
+        if ($request->role == 'mahasiswa') {
+            $user->password = Hash::make('mahasiswa');
+        } else {
+            $user->password = Hash::make('admin');
+        }
+        if ($user->save()) {
 
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil menambah admin',
-            ],
-        );
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil menambah akun',
+                ],
+            );
+        } else {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'gagal menambah akun',
+                ],
+            );
+        }
     }
     public function updateProfile(Request $request, $id)
     {
@@ -269,6 +283,25 @@ class UserController extends Controller
                 [
                     'danger' => 'Gagal memperbaharui password',
                 ],
+            );
+        }
+    }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $journal = Journal::where('id_user', $id)->count();
+        if ($journal == null) {
+            $user->delete();
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil menghapus data',
+                ]
+            );
+        } else {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Gagal menghapus data, user memiliki data..',
+                ]
             );
         }
     }

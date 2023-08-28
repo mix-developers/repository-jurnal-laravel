@@ -23,6 +23,7 @@
                                 <th>Judul</th>
                                 <th>Dosen Pembimbing</th>
                                 <th>Status</th>
+                                <th>Publish</th>
                                 <th>Lihat</th>
                             </tr>
                         </thead>
@@ -53,6 +54,10 @@
                                     <td>
                                         <span
                                             class="badge @if ($status_journal->id_status <= 2) bg-label-warning @elseif($status_journal->id_status == 3) bg-label-danger @else bg-label-primary @endif">{{ $status_journal->statuses->status }}</span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="badge @if ($item->is_published == 0) bg-label-light  @else bg-label-primary @endif">{{ $item->is_published == 0 ? '-' : 'Published' }}</span>
                                     </td>
                                     <td>
 
@@ -95,6 +100,7 @@
                                 <th>Judul</th>
                                 <th>kontributor</th>
                                 <th>Status</th>
+                                <th>Publish</th>
                                 <th>Lihat</th>
                             </tr>
                         </tfoot>

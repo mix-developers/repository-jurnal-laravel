@@ -14,6 +14,13 @@
                         <div class="card-body text-center">
                             <small class="text-muted ">Jurnal | {{ $item->created_at->year }}</small><br>
                             <p><b>Kata Kunci :</b><br><em>{{ Str::limit($item->keywoards, 100) }}</em></p>
+                            @if ($item->is_published == 1)
+                                <div class="my-2">
+                                    <a href="{{ $item->link_doi }}"> <span class="badge bg-label-primary">Published <i
+                                                class="bx bx-xs bx-link"></i></span></a>
+                                    <br>
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
                                 data-bs-target="#journal-{{ $item->id }}">
                                 Buka

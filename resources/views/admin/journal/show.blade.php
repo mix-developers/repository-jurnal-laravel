@@ -2,6 +2,17 @@
 
 @section('content')
     <div class="row justify-content-center">
+        @if ($errors->any())
+            @foreach ($errors->all() as $item)
+                <div class="col-12">
+                    <div class="alert alert-danger alert-dismissible my-3" role="alert">
+                        {{ $item }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                </div>
+            @endforeach
+        @endif
         <div class="col-md-12">
             @if (App\Models\JournalStatus::where('id_journal', $journal->id)->orderBy('id', 'desc')->first()->id_status < 3)
                 <div class="d-flex justify-content-end mx-2 mb-4">
@@ -19,12 +30,10 @@
             @else
                 @if ($journal->is_published == 0)
                     <div class="d-flex justify-content-end mx-2 mb-4">
-                        <form action="{{ url('/admin/journal/publish', $journal->id) }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="btn btn-primary"><i class="bx bx-check me-1"></i>Publish</button>
-                        </form>
+                        <button class="btn btn-success mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#publish">
+                            Publish Jurnal
+                        </button>
                     </div>
                 @else
                     <div class="my-3">
@@ -33,6 +42,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                             </button>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-end mx-2 mb-4">
+                        <button class="btn btn-danger mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#publish">
+                            Reject Publish Jurnal
+                        </button>
                     </div>
                 @endif
             @endif

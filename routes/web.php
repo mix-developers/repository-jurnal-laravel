@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/users/verifications/{id}', [UserController::class, 'verifications'])->name('users.verifications');
         Route::put('/users/graduated/{id}', [UserController::class, 'graduated'])->name('users.graduated');
         Route::get('/users/show/{id}', [UserController::class, 'show'])->name('users.show');
+        Route::delete('/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
         // profile
         Route::get('/profile', [UserController::class, 'profileAdmin'])->name('profileAdmin');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfileAdmin'])->name('updateProfileAdmin');
