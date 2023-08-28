@@ -122,7 +122,8 @@
                     </div>
                     <div class="mb-3 form-password-toggle">
                         <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">Password</label>
+                            <label class="form-label" for="password">Password<br><small>*Minimal 8 atau lebih
+                                    karakter</small></label>
                         </div>
                         <div class="input-group input-group-merge">
                             <input type="password" id="password" class="form-control" name="password"
