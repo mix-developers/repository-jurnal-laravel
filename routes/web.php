@@ -80,6 +80,15 @@ Route::group(['middleware' => ['auth']], function () {
         // profile
         Route::get('/profile', [UserController::class, 'profileAdmin'])->name('profileAdmin');
         Route::put('/updateProfile/{id}', [UserController::class, 'updateProfileAdmin'])->name('updateProfileAdmin');
+        //laporan
+        Route::get('/report/mahasiswa', [ReportController::class, 'mahasiswa'])->name('report.mahasiswa');
+        Route::get('/report/exportMahasiswa', [ReportController::class, 'exportMahasiswa'])->name('report.exportMahasiswa');
+        Route::get('/report/journal', [ReportController::class, 'journal'])->name('report.journal');
+        Route::get('/report/exportJournal', [ReportController::class, 'exportJournal'])->name('report.exportJournal');
+        Route::get('/report/theses', [ReportController::class, 'theses'])->name('report.theses');
+        Route::get('/report/exportTheses', [ReportController::class, 'exportTheses'])->name('report.exportTheses');
+        Route::get('/report/dosen', [ReportController::class, 'dosen'])->name('report.dosen');
+        Route::get('/report/exportDosen', [ReportController::class, 'exportDosen'])->name('report.exportDosen');
     });
 
     Route::group(['prefix' => 'mahasiswa', 'as' => 'mahasiswa', 'middleware' => ['mahasiswa']], function () {

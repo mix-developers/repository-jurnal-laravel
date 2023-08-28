@@ -164,6 +164,33 @@
                     <div data-i18n="Analytics">Verifikasi Mahasiswa</div>
                 </a>
             </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Laporan</span>
+            </li>
+            <li class="menu-item " id="report_mahasiswa">
+                <a href="{{ url('/admin/report/mahasiswa') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Mahasiswa</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_journal">
+                <a href="{{ url('/admin/report/journal') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Jurnal</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_theses">
+                <a href="{{ url('/admin/report/theses') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Skripsi</div>
+                </a>
+            </li>
+            <li class="menu-item " id="report_dosen">
+                <a href="{{ url('/admin/report/dosen') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file-find"></i>
+                    <div data-i18n="Analytics">Laporan Dosen</div>
+                </a>
+            </li>
         @elseif(Auth::user()->role == 'mahasiswa')
             @if (App\Models\Mentor::checkMentorTest() >= 1 && App\Models\Mentor::checkMentorGuide() >= 1)
                 <li class="menu-header small text-uppercase">

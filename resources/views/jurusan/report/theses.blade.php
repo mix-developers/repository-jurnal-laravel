@@ -13,12 +13,21 @@
                     </div>
                     <div class="dt-action-buttons text-end pt-3 pt-md-0">
                         <div class="dt-buttons btn-group flex-wrap">
-                            <a href="{{ url('/jurusan/report/exportTheses') }}"class="btn btn-primary" target="__blank">
-                                <span>
-                                    <i class="bx bx-printer me-sm-1"> </i>
-                                    <span class="d-none d-sm-inline-block">Cetak Data</span>
-                                </span>
-                            </a>
+                            @if (Auth::user()->role == 'jurusan')
+                                <a href="{{ url('/jurusan/report/exportTheses') }}" class="btn btn-primary" target="__blank">
+                                    <span>
+                                        <i class="bx bx-printer me-sm-1"> </i>
+                                        <span class="d-none d-sm-inline-block">Cetak Data</span>
+                                    </span>
+                                </a>
+                            @else
+                                <a href="{{ url('/admin/report/exportTheses') }}" class="btn btn-primary" target="__blank">
+                                    <span>
+                                        <i class="bx bx-printer me-sm-1"> </i>
+                                        <span class="d-none d-sm-inline-block">Cetak Data</span>
+                                    </span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
