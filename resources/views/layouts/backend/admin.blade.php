@@ -169,7 +169,7 @@
         })
         $(document).ready(function() {
             $('#datatable').DataTable({
-                responsive: true,
+                // responsive: true,
                 "language": {
                     "lengthMenu": "Tampilkan _MENU_ ",
                     "zeroRecords": "Maaf belum ada data",
@@ -187,7 +187,7 @@
         });
         $(document).ready(function() {
             $('#datatable2').DataTable({
-                responsive: true,
+                // responsive: true,
                 "language": {
                     "lengthMenu": "Tampilkan _MENU_ ",
                     "zeroRecords": "Maaf belum ada data",
