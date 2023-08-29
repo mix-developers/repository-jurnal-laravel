@@ -13,19 +13,41 @@
                                 $journal = App\Models\Journal::with(['students', 'major'])
                                     ->where('id_user', $item->id_user)
                                     ->first();
-                                $journal_file = App\Models\JournalFile::getJournal($journal->id)->file;
                                 
-                                $theses = App\Models\Theses::with(['students', 'major'])
+                                $journal_file = null;
+                                $theses = null;
+                                
+                                if ($journal) {
+                                    $journal_file = App\Models\JournalFile::getJournal($journal->id)->file;
+                                }
+                                
+                                $latest_thesis = App\Models\Theses::with(['students', 'major'])
                                     ->where('id_user', $item->id_user)
                                     ->latest()
-                                    ->first()->file;
+                                    ->first();
+                                
+                                if ($latest_thesis) {
+                                    $theses = $latest_thesis->file;
+                                }
                             @endphp
                             <tr>
                                 <td>{{ $item->user->name }}</td>
-                                <td><a href="{{ url(Storage::url($journal_file)) }}" class="btn btn-primary "
-                                        target="__blank">Jurnal</a></td>
-                                <td><a href="{{ url(Storage::url($theses)) }}" class="btn btn-primary "
-                                        target="__blank">Skripsi</a></td>
+                                <td>
+                                    @if ($journal_file)
+                                        <a href="{{ url(Storage::url($journal_file)) }}" class="btn btn-primary"
+                                            target="__blank">Jurnal</a>
+                                    @else
+                                        <span class="text-muted">Tidak ada jurnal</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($theses)
+                                        <a href="{{ url(Storage::url($theses)) }}" class="btn btn-primary"
+                                            target="__blank">Skripsi</a>
+                                    @else
+                                        <span class="text-muted">Tidak ada skripsi</span>
+                                    @endif
+                                </td>
                             </tr>
                         @empty
                             <tr>

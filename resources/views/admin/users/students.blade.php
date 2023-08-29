@@ -44,7 +44,6 @@
                                     <td>
                                         <a class="btn btn-primary btn-sm"
                                             href="{{ url('/admin/users/show', $item->id) }}"><i class="bx bx-show"></i></a>
-
                                         <form method="POST" action="{{ url('admin/users/destroy', $item->id) }}"
                                             class="d-inline-block">
                                             @csrf
