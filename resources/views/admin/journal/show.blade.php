@@ -63,7 +63,7 @@
                         <div class="card-body ">
                             <table class="table table-bordered">
                                 <tr>
-                                    <td>File Halaman Pertama</td>
+                                    <td>Cover dan abstrak</td>
                                     <td><a href="{{ url(Storage::url($files->file)) }}" target="__blank"
                                             class="btn btn-primary">Lihat</a>
                                     </td>

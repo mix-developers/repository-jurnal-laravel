@@ -3,14 +3,14 @@
      <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
          <div class="modal-content">
              <div class="modal-header">
-                 <h5 class="modal-title" id="modalCenterTitle">Tambah Data Admin</h5>
+                 <h5 class="modal-title" id="modalCenterTitle">Tambah Data Dosen</h5>
                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
              <form method="POST" action="{{ url('admin/users/store') }}" enctype="multipart/form-data">
                  @csrf
                  <div class="modal-body">
                      <div class="alert alert-primary" role="alert">
-                         Password default : <b>admin</b>
+                         Password default : <b>dosen</b>
                      </div>
                      <input type="hidden" name="role" value="admin">
                      <input type="hidden" name="is_verified" value="1">

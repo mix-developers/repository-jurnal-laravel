@@ -41,7 +41,6 @@
                                 @endforelse
                             </ol>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>

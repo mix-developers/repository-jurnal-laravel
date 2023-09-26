@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RisetController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/theses', [FrontController::class, 'theses'])->name('theses');
@@ -39,6 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/file_categories/store', [FileCategoryController::class, 'store'])->name('file_categories.store');
         Route::put('/file_categories/update/{id}', [FileCategoryController::class, 'update'])->name('file_categories.update');
         Route::delete('/file_categories/destroy/{id}', [FileCategoryController::class, 'destroy'])->name('file_categories.destroy');
+        // riset
+        Route::get('/riset', [RisetController::class, 'index'])->name('riset');
+        Route::post('/riset/store', [RisetController::class, 'store'])->name('riset.store');
+        Route::put('/riset/update/{id}', [RisetController::class, 'update'])->name('riset.update');
+        Route::delete('/riset/destroy/{id}', [RisetController::class, 'destroy'])->name('riset.destroy');
         // student
         Route::get('/student', [StudentController::class, 'index'])->name('student');
         Route::get('/student/show/{id}', [StudentController::class, 'show'])->name('student.show');

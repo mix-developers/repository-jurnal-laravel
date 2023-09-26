@@ -94,6 +94,12 @@
                     <div data-i18n="Analytics">Jenis File</div>
                 </a>
             </li>
+            <li class="menu-item " id="bidang_riset">
+                <a href="{{ url('/admin/riset') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-file"></i>
+                    <div data-i18n="Analytics">Bidang RIset</div>
+                </a>
+            </li>
             <li class="menu-item " id="lecturer">
                 <a href="{{ url('/admin/lecturer') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-box"></i>
@@ -149,7 +155,7 @@
                     <div data-i18n="Analytics">Akun Mahasiswa</div>
                 </a>
             </li>
-            <li class="menu-header small text-uppercase">
+            {{-- <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Verifikasi Pengguna</span>
             </li>
             <li class="menu-item " id="users_lecturers_pending">
@@ -163,7 +169,7 @@
                     <i class="menu-icon tf-icons bx bx-user-check"></i>
                     <div data-i18n="Analytics">Verifikasi Mahasiswa</div>
                 </a>
-            </li>
+            </li> --}}
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Laporan</span>
             </li>

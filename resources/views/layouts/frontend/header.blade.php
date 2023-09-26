@@ -22,8 +22,7 @@
 
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('backend_theme/') }}/assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,29 +36,36 @@
 
 
     <!-- Core CSS -->
-    <link rel="stylesheet"
+    {{-- <link rel="stylesheet"
         href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/rtl/core.css"
+        class="template-customizer-core-css" /> --}}
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/core.css"
         class="template-customizer-core-css" />
-    <link rel="stylesheet"
+    {{-- <link rel="stylesheet"
         href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/rtl/theme-default.css"
+        class="template-customizer-theme-css" /> --}}
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/rtl/theme-semi-dark.css"
         class="template-customizer-theme-css" />
-    <link rel="stylesheet"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/css/demo.css" />
-    <link rel="stylesheet"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/pages/front-page.css" />
+    {{-- <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/css/demo.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/css/demo.css" />
+    {{-- <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/pages/front-page.css" /> --}}
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/pages/front-page.css" />
     <!-- Vendors CSS -->
 
-    <link rel="stylesheet"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/nouislider/nouislider.css" />
-    <link rel="stylesheet"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/swiper/swiper.css" />
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/libs/nouislider/nouislider.css" />
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/libs/swiper/swiper.css" />
+    {{-- <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/nouislider/nouislider.css" /> --}}
+    {{-- <link rel="stylesheet" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/swiper/swiper.css" /> --}} <!-- Page CSS -->
 
-    <!-- Page CSS -->
-
-    <link rel="stylesheet"
-        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/pages/front-page-landing.css" />
+    <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/css/pages/front-page-landing.css" />
+    {{-- <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/css/pages/front-page-landing.css" /> --}}
 
     <!-- Helpers -->
+    {{-- <link rel="stylesheet" href="{{ asset('backend_theme/') }}/assets/vendor/js/helpers.js" /> --}}
     <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->

@@ -6,7 +6,7 @@
         @if (App\Models\JournalStatus::notifikasi()->id_status != 3)
             <table class="table table-bordered">
                 <tr>
-                    <td>File Halaman Pertama</td>
+                    <td>Cover dan abstrak</td>
                     <td><a href="{{ url(Storage::url($files->file)) }}" target="__blank" class="btn btn-primary">Lihat</a>
                     </td>
                 </tr>

@@ -14,7 +14,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('backend_theme/') }}/assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -138,7 +138,10 @@
 
     <!-- Page JS -->
     <script src="{{ asset('backend_theme/') }}/assets/js/dashboards-analytics.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.min.css"></script>
+    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.js"></script>
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

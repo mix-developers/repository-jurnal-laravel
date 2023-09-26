@@ -10,7 +10,7 @@
                 skripsi Universitas Musamus Merauke ,</a>
             <span class="footer-text"> Made with ❤️ .</span>
         </div>
-        <div>
+        {{-- <div>
             <a href="#!" class="footer-link me-3" target="_blank">
                 <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/front-pages/icons/github-light.png"
                     alt="github icon" data-app-light-img="front-pages/icons/github-light.png"
@@ -31,7 +31,7 @@
                     alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png"
                     data-app-dark-img="front-pages/icons/instagram-dark.png" />
             </a>
-        </div>
+        </div> --}}
     </div>
 </div>
 </footer>
@@ -41,13 +41,17 @@
 
 @stack('js')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+<script src="{{ asset('frontend_theme') }}/js/ajax/jquery.min.js"></script>
+<script src="{{ asset('backend_theme/') }}/assets/vendor/libs/jquery/jquery.js"></script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-<script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/popper/popper.js">
+{{-- <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/libs/popper/popper.js">
 </script>
 <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/vendor/js/bootstrap.js">
-</script>
+</script> --}}
+<script src="{{ asset('backend_theme/') }}/assets/vendor/libs/popper/popper.js"></script>
+<script src="{{ asset('backend_theme/') }}/assets/vendor/js/bootstrap.js"></script>
 
 <!-- endbuild -->
 

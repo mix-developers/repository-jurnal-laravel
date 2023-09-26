@@ -57,7 +57,6 @@
                                    </g>
                                </g>
                            </svg>
-
                        </span>
                        <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1 d-none d-md-block">Repository</span>
                    </a>
@@ -74,8 +73,8 @@
                        {{-- @csrf --}}
                        <div class="input-group input-group-merge">
                            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                           <input type="search" class="form-control" placeholder="Cari jurnal dan skripsi di sini...."
-                               aria-label="Cari jurnal dan skripsi di sini...." aria-describedby="basic-addon-search31"
+                           <input type="search" class="form-control" placeholder="masukan kata kunci pencarian.."
+                               aria-label="masukan kata kunci pencarian.." aria-describedby="basic-addon-search31"
                                name="keywoard" value="{{ old('keywoard') }}">
                            <select class=" input-group-text " name="type" style="width: 100px;">
                                <option value="journal" selected>Jurnal</option>

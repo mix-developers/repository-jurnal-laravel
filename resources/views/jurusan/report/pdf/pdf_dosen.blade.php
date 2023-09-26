@@ -38,7 +38,7 @@
                 <tr>
                     <td style="width: 100px;">Laporan</td>
                     <td>:</td>
-                    <td>Data Skripsi</td>
+                    <td>Data Dosen</td>
                 </tr>
                 <tr>
                     <td>Tanggal cetak</td>

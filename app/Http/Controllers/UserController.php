@@ -53,7 +53,7 @@ class UserController extends Controller
     public function admin()
     {
         $data = [
-            'title' => 'Akun Dosen',
+            'title' => 'Akun Admin',
             'users' => User::where('role', 'admin')->get(),
         ];
         return view('admin.users.admin', $data);
@@ -174,49 +174,53 @@ class UserController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
-        $request->validate([
-            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
-            'name' => ['required', 'string', 'max:191'],
-            'identity' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'string', 'max:191'],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-        ]);
-        $user = User::findOrFail($id);
+        try {
+            $request->validate([
+                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+                'name' => ['required', 'string', 'max:191'],
+                'identity' => ['required', 'string', 'max:191'],
+                'email' => ['required', 'email'],
+                'phone' => ['required', 'string', 'max:191'],
+                'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            ]);
+            $user = User::findOrFail($id);
 
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar != '') {
-                Storage::delete($user->avatar);
+            if ($request->hasFile('avatar')) {
+                if ($user->avatar != '') {
+                    Storage::delete($user->avatar);
+                }
+
+                $filename = Str::random(32) . '.' . $request->file('avatar')->getClientOriginalExtension();
+                $file_path = $request->file('avatar')->storeAs('public/uploads', $filename);
             }
 
-            $filename = Str::random(32) . '.' . $request->file('avatar')->getClientOriginalExtension();
-            $file_path = $request->file('avatar')->storeAs('public/uploads', $filename);
-        }
+            if (isset($request->identity)) {
+                $user->identity = $request->identity;
+            }
+            if (isset($request->password)) {
+                $user->password = $request->password;
+            }
 
-        if (isset($request->identity)) {
-            $user->identity = $request->identity;
-        }
-        if (isset($request->password)) {
-            $user->password = $request->password;
-        }
+            if (isset($request->name)) {
+                $user->name = $request->name;
+            }
+            if (isset($request->email)) {
+                $user->email = $request->email;
+            }
+            if (isset($request->phone)) {
+                $user->phone = $request->phone;
+            }
+            $user->avatar = isset($file_path) ? $file_path : $user->avatar;
+            $user->save();
 
-        if (isset($request->name)) {
-            $user->name = $request->name;
+            return redirect()->back()->with(
+                [
+                    'success' => 'Berhasil memperbaharui profile',
+                ],
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-        if (isset($request->email)) {
-            $user->email = $request->email;
-        }
-        if (isset($request->phone)) {
-            $user->phone = $request->phone;
-        }
-        $user->avatar = isset($file_path) ? $file_path : $user->avatar;
-        $user->save();
-
-        return redirect()->back()->with(
-            [
-                'success' => 'Berhasil memperbaharui profile',
-            ],
-        );
     }
     public function updateProfileAdmin(Request $request, $id)
     {

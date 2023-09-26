@@ -10,6 +10,14 @@
             font-family: 'times new roman';
             font-size: 12px;
         }
+
+        table.table_custom th,
+        table.table_custom td {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid;
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -38,7 +46,7 @@
                 <tr>
                     <td style="width: 100px;">Laporan</td>
                     <td>:</td>
-                    <td>Data Skripsi</td>
+                    <td>Laporan Periodik Skripsi Sistem Informasi</td>
                 </tr>
                 <tr>
                     <td>Tanggal cetak</td>
@@ -47,7 +55,7 @@
                 </tr>
             </table>
         </div>
-        <table class="table table-hover table-bordered" style="font-size: 12px;">
+        <table class="table_custom" style="font-size: 12px;">
             <thead>
                 <tr class="bg-primary text-white">
                     <th>#</th>

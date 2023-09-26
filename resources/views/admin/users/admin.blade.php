@@ -1,18 +1,8 @@
 @extends('layouts.backend.admin')
 
 @section('content')
+    @include('layouts.backend.alert')
     <div class="row justify-content-center">
-        <div class="col-12 my-2">
-            @if ($errors->any())
-                @foreach ($errors->all() as $item)
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        {{ $item }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                    </div>
-                @endforeach
-            @endif
-        </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header flex-column flex-md-row">
