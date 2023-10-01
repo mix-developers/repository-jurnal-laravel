@@ -97,7 +97,7 @@
             <li class="menu-item " id="bidang_riset">
                 <a href="{{ url('/admin/riset') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-file"></i>
-                    <div data-i18n="Analytics">Bidang RIset</div>
+                    <div data-i18n="Analytics">Bidang Riset</div>
                 </a>
             </li>
             <li class="menu-item " id="lecturer">

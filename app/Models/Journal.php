@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,8 +42,7 @@ class Journal extends Model
         return self::with(['students', 'major'])
             ->whereHas('journal_statuses', function ($query) {
                 $query->where('id_status', '=', 4);
-            })
-            ->get();
+            });
     }
     public static function getJournalStudent($id_student)
     {
@@ -63,12 +63,42 @@ class Journal extends Model
             ->where('is_published', 1)
             ->get();
     }
-    public static function getSearch($keywoard)
+    public static function getSearch($keywoard, $from_date, $to_date, $periode, $id_riset)
     {
-        return self::with(['students', 'major'])
+        $query = self::with(['students', 'major'])
             ->where('title', 'LIKE', '%' . $keywoard . '%')
             ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%');
+
+        if ($periode != null) {
+            $from_date = now()->subYears($periode);
+            $to_date = now(); // Set $to_date to current date
+
+            $query->where('created_at', '>=', $from_date)
+                ->where('created_at', '<=', $to_date);
+        } else {
+            if ($from_date && $to_date) {
+                $query->where('created_at', '>=', $from_date)
+                    ->where('created_at', '<=', $to_date);
+            }
+        }
+
+        if ($id_riset != null) {
+            $query->whereExists(function ($subquery) use ($id_riset) {
+                $subquery->from('mentors')
+                    ->whereRaw('mentors.id_user = journals.id_user')  // Pengecekan pertama
+                    ->whereExists(function ($subsubquery) use ($id_riset) {
+                        $subsubquery->from('lecturers')
+                            ->whereRaw('lecturers.id = mentors.id_lecturer')  // Pengecekan kedua
+                            ->where('lecturers.id_riset', $id_riset);  // Pengecekan ketiga
+                    });
+            });
+        }
+
+
+        // dd($query->get());
+        return $query;
     }
+
 
     public static function checkJournal()
     {

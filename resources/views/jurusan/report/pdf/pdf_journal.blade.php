@@ -49,9 +49,9 @@
                     <td>Laporan Periodik Jurnal Sistem Informasi</td>
                 </tr>
                 <tr>
-                    <td>Tanggal cetak</td>
+                    <td>Periode </td>
                     <td>:</td>
-                    <td>{{ date('d-m-Y') }}</td>
+                    <td>Tanggal {{ $from_date . ' sampai ' . $to_date }}</td>
                 </tr>
             </table>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Journal;
 use App\Models\Lecturer;
+use App\Models\Riset;
 use App\Models\Theses;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class FrontController extends Controller
     {
         $data = [
             'title' => 'Skripsi',
-            'theses' => Theses::getAll()
+            'theses' => Theses::getAll()->paginate(1),
         ];
         return view('pages.theses', $data);
     }
@@ -32,42 +33,62 @@ class FrontController extends Controller
     {
         $data = [
             'title' => 'Jurnal',
-            'journal' => Journal::getAll(),
+            'journal' => Journal::getAll()->paginate(1),
         ];
         return view('pages.journal', $data);
     }
     public function search(Request $request)
     {
-        $keywoard = $request->keywoard;
-        $type = $request->type;
-        if ($type == 'journal') {
-            $journal = Journal::getSearch($keywoard)->paginate(20);
-            $theses = null;
-            $lecturer = null;
-            $results = Journal::getSearch($keywoard)->count();
-        } else if ($type == 'theses') {
-            $journal = null;
-            $theses = Theses::getSearch($keywoard)->paginate(20);
-            $results = Theses::getSearch($keywoard)->count();
-            $lecturer = null;
-        } else if ($type == 'lecturer') {
-            $journal = null;
-            $theses = null;
-            $lecturer = Lecturer::getSearch($keywoard)->paginate(20);
-            $results = Lecturer::getSearch($keywoard)->count();
+        $keyword = $request->input('keywoard');
+        $type = $request->input('type');
+        $id_riset = $request->input('id_riset');
+        $periode = null;
+        if ($request->input('from_date') !== null && $request->input('to_date') !== null) {
+            $periode = $request->input('periode');
         }
-        // dd($search);
+
+        $from_date = $periode ? null : $request->input('from_date');
+        $to_date = $periode ? null : $request->input('to_date');
+
+        $journal = null;
+        $theses = null;
+        $lecturer = null;
+        $results = 0;
+        $subtitle = '';
+
+        if ($type == 'journal') {
+            $journal = Journal::getSearch($keyword, $from_date, $to_date, $periode, $id_riset)->paginate(20);
+            $results = $journal->total();
+        } elseif ($type == 'theses') {
+            $theses = Theses::getSearch($keyword, $from_date, $to_date, $periode, $id_riset)->paginate(20);
+            $results = $theses->total();
+        } elseif ($type == 'lecturer') {
+            $lecturer = Lecturer::getSearch($keyword)->paginate(20);
+            $results = $lecturer->total();
+        }
+
+        if ($periode !== null && $from_date === null && $to_date === null) {
+            $subtitle = 'Periode ' . $periode . ' Tahun';
+        } elseif ($from_date !== null && $to_date !== null) {
+            $subtitle = 'Dari tanggal  ' . $from_date . ' Sampai ' . $to_date;
+        }
+
+        $bidang_riset = Riset::find($id_riset);
+
         $data = [
-            'title' => 'Search : ' . $keywoard,
+            'title' => 'Search : ' . $keyword,
+            'sub_title' =>   $bidang_riset ? $subtitle . '<br> Bidang Riset ' . $bidang_riset->riset : $subtitle,
             'journal' => $journal,
             'theses' => $theses,
             'results' => $results,
             'lecturer' => $lecturer,
-
         ];
+
         session()->flashInput($request->input());
+
         return view('pages.search', $data);
     }
+
     public function akun()
     {
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Theses extends Model
 {
@@ -29,8 +30,7 @@ class Theses extends Model
     }
     public static function getAll()
     {
-        return self::with(['students', 'major'])
-            ->get();
+        return self::with(['students', 'major']);
     }
     public static function getThesesStudent($id_student)
     {
@@ -44,12 +44,41 @@ class Theses extends Model
             ->where('id_major', $id_major)
             ->get();
     }
-    public static function getSearch($keywoard)
+    public static function getSearch($keywoard, $from_date, $to_date, $periode, $id_riset)
     {
-        return self::with(['students'])
+        $query = self::with(['students'])
             ->where('title', 'LIKE', '%' . $keywoard . '%')
             ->orWhere('year', 'LIKE', '%' . $keywoard . '%');
+
+        if ($periode != null) {
+            $from_date = now()->subYears($periode);
+            $to_date = now(); // Set $to_date to current date
+
+            $query->where('created_at', '>=', $from_date)
+                ->where('created_at', '<=', $to_date);
+        } else {
+            if ($from_date && $to_date) {
+                $query->where('created_at', '>=', $from_date)
+                    ->where('created_at', '<=', $to_date);
+            }
+        }
+
+        if ($id_riset != null) {
+            $query->whereExists(function ($subquery) use ($id_riset) {
+                $subquery->from('mentors')
+                    ->whereRaw('mentors.id_user = theses.id_user')  // Pengecekan pertama
+                    ->whereExists(function ($subsubquery) use ($id_riset) {
+                        $subsubquery->from('lecturers')
+                            ->whereRaw('lecturers.id = mentors.id_lecturer')  // Pengecekan kedua
+                            ->where('lecturers.id_riset', $id_riset);  // Pengecekan ketiga
+                    });
+            });
+        }
+
+
+        return $query;
     }
+
     public static function checkTheses()
     {
         return self::where('id_user', Auth::user()->id)

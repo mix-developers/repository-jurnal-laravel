@@ -49,13 +49,13 @@
                     <td>Laporan Periodik Skripsi Sistem Informasi</td>
                 </tr>
                 <tr>
-                    <td>Tanggal cetak</td>
+                    <td>Periode </td>
                     <td>:</td>
-                    <td>{{ date('d-m-Y') }}</td>
+                    <td>Tanggal {{ $from_date . ' sampai ' . $to_date }}</td>
                 </tr>
             </table>
         </div>
-        <table class="table_custom" style="font-size: 12px;">
+        <table class="table_custom" style="font-size: 12px; width:100%;">
             <thead>
                 <tr class="bg-primary text-white">
                     <th>#</th>

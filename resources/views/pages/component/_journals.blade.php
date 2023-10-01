@@ -5,7 +5,7 @@
         </div>
 
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
-            @forelse ($journal->take(4) as $item)
+            @forelse ($journal as $item)
                 <div class="col-lg-3 col-md-6">
                     <div class="card bg-light border border-primary">
                         <div class="card-header text-center">
@@ -35,6 +35,9 @@
                     </div>
                 </div>
             @endforelse
+            <div class="mt-3 ">
+                {{ $journal->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
     </div>
 </section>

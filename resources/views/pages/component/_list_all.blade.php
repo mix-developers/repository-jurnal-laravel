@@ -94,10 +94,10 @@
 </div>
 <div class="text-center mt-3">
     @if ($journal == null && $theses == null)
-        {{ $lecturer->links() }}
+        {{ $lecturer->links('vendor.pagination.bootstrap-4') }}
     @elseif ($journal == null)
-        {{ $theses->links() }}
+        {{ $theses->links('vendor.pagination.bootstrap-4') }}
     @else
-        {{ $journal->links() }}
+        {{ $journal->links('vendor.pagination.bootstrap-4') }}
     @endif
 </div>

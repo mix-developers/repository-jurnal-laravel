@@ -21,7 +21,7 @@
                     <div class="head-label ">
                         <h5 class="card-title mb-0">Data Dosen</h5>
                     </div>
-                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                    {{-- <div class="dt-action-buttons text-end pt-3 pt-md-0">
                         <div class="dt-buttons btn-group flex-wrap">
                             <button class="btn btn-secondary create-new btn-primary" type="button" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#create">
@@ -31,7 +31,7 @@
                                 </span>
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="card-datatable table-responsive">

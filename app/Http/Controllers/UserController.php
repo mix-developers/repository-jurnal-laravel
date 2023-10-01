@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal;
+use App\Models\Lecturer;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -116,58 +117,82 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
-            'name' => ['required', 'string', 'max:191'],
-            'identity' => ['required', 'string', 'max:191', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            'phone' => ['required', 'string', 'max:191'],
-        ]);
-        $user = new User;
+        try {
+            $request->validate([
+                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+                'name' => ['nullable', 'string', 'max:191'],
+                'identity' => ['required', 'string', 'max:191', 'unique:users'],
+                'email' => ['required', 'email', 'unique:users'],
+                'phone' => ['required', 'string', 'max:191'],
+                'password' => ['nullable', 'string'],
+            ]);
+            $user = new User;
 
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar != '') {
-                Storage::delete($user->avatar);
+            if ($request->hasFile('avatar')) {
+                if ($user->avatar != '') {
+                    Storage::delete($user->avatar);
+                }
+
+                $filename = Str::random(32) . '.' . $request->file('avatar')->getClientOriginalExtension();
+                $file_path = $request->file('avatar')->storeAs('public/uploads', $filename);
             }
 
-            $filename = Str::random(32) . '.' . $request->file('avatar')->getClientOriginalExtension();
-            $file_path = $request->file('avatar')->storeAs('public/uploads', $filename);
-        }
+            if (isset($request->identity)) {
+                $user->identity = $request->identity;
+            }
+            if (isset($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
 
-        if (isset($request->identity)) {
-            $user->identity = $request->identity;
-        }
+            if (isset($request->name)) {
+                $user->name = $request->name;
+            }
+            if (isset($request->email)) {
+                $user->email = $request->email;
+            }
+            if (isset($request->phone)) {
+                $user->phone = $request->phone;
+            }
+            $user->avatar = isset($file_path) ? $file_path : '';
+            $user->role = $request->role;
+            $user->id_major = $request->id_major;
+            $user->is_verified = 1;
 
+            if ($request->role == 'dosen') {
+                $lecturer = new Lecturer();
+                $lecturer->identity = $request->identity;
+                $lecturer->id_major = $request->id_major;
+                $lecturer->full_name = $request->full_name;
+                $lecturer->title_first = $request->title_first;
+                $lecturer->title_end = $request->title_end;
+                $lecturer->phone = $request->phone;
+                $lecturer->address = $request->address;
+                $lecturer->place_birth = $request->place_birth;
+                $lecturer->date_birth = $request->date_birth;
+                $lecturer->id_riset = $request->id_riset;
+                $lecturer->save();
 
-        if (isset($request->name)) {
-            $user->name = $request->name;
-        }
-        if (isset($request->email)) {
-            $user->email = $request->email;
-        }
-        if (isset($request->phone)) {
-            $user->phone = $request->phone;
-        }
-        $user->avatar = isset($file_path) ? $file_path : '';
-        $user->role = $request->role;
-        $user->id_major = $request->id_major;
-        $user->is_verified = 1;
-        if ($request->role == 'mahasiswa') {
-            $user->password = Hash::make('mahasiswa');
-        } else {
-            $user->password = Hash::make('admin');
-        }
-        if ($user->save()) {
+                $user->name = $request->title_first . ' ' . $request->full_name . ' ' . $request->title_end;
+                // dd($request->title_first . ' ' . $request->full_name . ' ' . $request->title_end);
+            }
 
+            if ($user->save()) {
+                return redirect()->back()->with(
+                    [
+                        'success' => 'Berhasil menambah akun',
+                    ],
+                );
+            } else {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'gagal menambah akun',
+                    ],
+                );
+            }
+        } catch (\Exception $e) {
             return redirect()->back()->with(
                 [
-                    'success' => 'Berhasil menambah akun',
-                ],
-            );
-        } else {
-            return redirect()->back()->with(
-                [
-                    'danger' => 'gagal menambah akun',
+                    'danger' => 'terjadi kesalahan : ' . $e->getMessage(),
                 ],
             );
         }
@@ -198,7 +223,7 @@ class UserController extends Controller
                 $user->identity = $request->identity;
             }
             if (isset($request->password)) {
-                $user->password = $request->password;
+                $user->password = Hash::make($request->password);
             }
 
             if (isset($request->name)) {
@@ -246,7 +271,7 @@ class UserController extends Controller
             $user->identity = $request->identity;
         }
         if (isset($request->password)) {
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
         }
 
         if (isset($request->name)) {
@@ -269,44 +294,52 @@ class UserController extends Controller
     }
     public function updatePassword(Request $request, $id)
     {
-        $request->validate([
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        $user = User::findOrFail($id);
-        if (isset($request->password)) {
-            $user->password = $request->password;
-        }
-        if ($user->save()) {
-            return redirect()->back()->with(
-                [
-                    'success' => 'Berhasil memperbaharui password',
-                ],
-            );
-        } else {
-            return redirect()->back()->with(
-                [
-                    'danger' => 'Gagal memperbaharui password',
-                ],
-            );
+        try {
+            $request->validate([
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            $user = User::findOrFail($id);
+            if (isset($request->password)) {
+                $user->password = Hash::make($request->password);
+            }
+            if ($user->save()) {
+                return redirect()->back()->with(
+                    [
+                        'success' => 'Berhasil memperbaharui password',
+                    ],
+                );
+            } else {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Gagal memperbaharui password',
+                    ],
+                );
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
     public function destroy($id)
     {
-        $user = User::find($id);
-        $journal = Journal::where('id_user', $id)->count();
-        if ($journal == null) {
-            $user->delete();
-            return redirect()->back()->with(
-                [
-                    'success' => 'Berhasil menghapus data',
-                ]
-            );
-        } else {
-            return redirect()->back()->with(
-                [
-                    'danger' => 'Gagal menghapus data, user memiliki data..',
-                ]
-            );
+        try {
+            $user = User::find($id);
+            $journal = Journal::where('id_user', $id)->count();
+            if ($journal == null) {
+                $user->delete();
+                return redirect()->back()->with(
+                    [
+                        'success' => 'Berhasil menghapus data',
+                    ]
+                );
+            } else {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Gagal menghapus data, user memiliki data..',
+                    ]
+                );
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 }
