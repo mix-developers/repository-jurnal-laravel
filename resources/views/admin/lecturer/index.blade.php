@@ -5,6 +5,19 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-12 my-2">
+        @if (Session::has('success'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ Session::get('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+@elseif (Session::has('danger'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ Session::get('danger') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+    </div>
+@endif
             @if ($errors->any())
                 @foreach ($errors->all() as $item)
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -21,7 +34,7 @@
                     <div class="head-label ">
                         <h5 class="card-title mb-0">Data Dosen</h5>
                     </div>
-                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                    {{-- <div class="dt-action-buttons text-end pt-3 pt-md-0">
                         <div class="dt-buttons btn-group flex-wrap">
                             <button class="btn btn-secondary create-new btn-primary" type="button" class="btn btn-primary"
                                 data-bs-toggle="modal" data-bs-target="#create">
@@ -31,7 +44,7 @@
                                 </span>
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="card-datatable table-responsive">
@@ -57,7 +70,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->identity }}</td>
-                                    <td>{{ $item->title_first }} {{ $item->full_name }},{{ $item->title_end }}</td>
+                                    <td>{{ $item->title_first }} {{ $item->full_name }}, {{ $item->title_end }}</td>
                                     <td>{{ $item->major->name }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>
@@ -94,7 +107,7 @@
                                                 class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn delete-button"><i
+                                                <button type="submit" class="btn "><i
                                                         class="bx bx-trash me-1 text-danger"></i>
                                                 </button>
                                             </form>

@@ -7,7 +7,7 @@
                 <option selected="">Pilih...</option>
                 @foreach ($lecturer as $item)
                     <option value="{{ $item->id }}">{{ $item->title_first }}
-                        {{ $item->full_name }}{{ $item->title_end }}</option>
+                        {{ $item->full_name }} {{ $item->title_end }}</option>
                 @endforeach
             </select>
 
@@ -39,7 +39,7 @@
                             class="d-inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn delete-button"><i
+                            <button type="submit" class="btn "><i
                                     class="bx bx-trash me-1 text-danger"></i>
                             </button>
                         </form>

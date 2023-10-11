@@ -49,9 +49,9 @@
                     <td>Laporan Periodik Jurnal Sistem Informasi</td>
                 </tr>
                 <tr>
-                    <td>Tanggal cetak</td>
+                    <td>Periode </td>
                     <td>:</td>
-                    <td>{{ date('d-m-Y') }}</td>
+                    <td>Tanggal {{ $from_date . ' sampai ' . $to_date }}</td>
                 </tr>
             </table>
         </div>
@@ -78,7 +78,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td><strong>{{ $item->students->name }}</strong><br>{{ $item->students->identity }}</td>
                         <td>
-                            <strong>{{ Str::limit($item->title, 50) }}</strong><br>
+                            <strong>{{ Str::limit($item->title) }}</strong><br>
                             <small>Kata Kunci : {{ Str::limit($item->keywoards, 100) }}</small>
                         </td>
                         <td>

@@ -12,6 +12,7 @@
                      <div class="alert alert-primary" role="alert">
                          Password default : <b>mahasiswa</b>
                      </div>
+                     <input type="hidden" name="password" value="mahasiswa">
                      <input type="hidden" name="role" value="mahasiswa">
                      <input type="hidden" name="is_verified" value="1">
                      <div class="mb-3">

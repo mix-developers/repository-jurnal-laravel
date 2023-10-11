@@ -1,6 +1,7 @@
 @extends('layouts.backend.admin')
 
 @section('content')
+@include('layouts.backend.alert')
     <div class="row mb-3">
         <div class="col-lg-6">
             <div class="card">

@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <title>{{ $title }} | Journal</title>
+    <title>{{ $title }} | {{ env('APP_NAME') }}</title>
 
     <meta name="description" content="" />
 
@@ -217,7 +217,7 @@
     <script>
         flatpickr("input[type=date]");
     </script>
-    @if (Session::has('danger'))
+    {{-- @if (Session::has('danger'))
         <script>
             Swal.fire({
                 title: 'Error!',
@@ -245,7 +245,7 @@
                 buttonsStyling: false
             })
         </script>
-    @endif
+    @endif --}}
 </body>
 
 </html>

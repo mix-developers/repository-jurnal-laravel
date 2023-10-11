@@ -3,16 +3,17 @@
      <div id="landingHero" class="section-py landing-hero position-relative" style="height: 400px;">
          <div class="container">
              <div class="hero-text-box text-center">
-                 <h1 class="text-primary hero-title display-4 fw-bold">{{ $title }}</h1>
+                 <h1 class="text-primary hero-title display-4 fw-bold">{!! $title !!}</h1>
+                 <h6 class="ero-sub-title fw-bold text-primary">{!! $sub_title ?? '' !!}</h6>
                  <h2 class="hero-sub-title h6 mb-4 pb-1">
                      Jurusan Sistem Informasi<br class="d-none d-lg-block" />
                      Universitas Musamus Merauke
                  </h2>
                  <div class="landing-hero-btn d-inline-block position-relative">
-                     @guest
+                     {{-- @guest
                          <a href="{{ route('register') }}" class="btn btn-primary">Daftarkan akun</a>
 
-                     @endguest
+                     @endguest --}}
                  </div>
              </div>
              <div id="heroDashboardAnimation" class="hero-animation-img text-center mt-4">

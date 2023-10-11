@@ -27,6 +27,7 @@ class LecturerController extends Controller
             'mentor' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'pembimbing')->get(),
             'mentor_test' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'penguji')->get(),
             'lecturer' => $lecturer,
+            
         ];
         return view('admin.lecturer.show', $data);
     }
@@ -99,6 +100,7 @@ class LecturerController extends Controller
 
     public function destroy($id)
     {
+        try {
         $lecturer = Lecturer::find($id);
         $mentor = Mentor::where('id_lecturer', $id)->get();
         foreach ($mentor as $item) {
@@ -121,5 +123,8 @@ class LecturerController extends Controller
                 ]
             );
         }
+    } catch (\Exception $e) {
+        return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
     }
 }

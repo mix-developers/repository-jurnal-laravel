@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/report/exportTheses', [ReportController::class, 'exportTheses'])->name('report.exportTheses');
         Route::get('/report/dosen', [ReportController::class, 'dosen'])->name('report.dosen');
         Route::get('/report/exportDosen', [ReportController::class, 'exportDosen'])->name('report.exportDosen');
+        Route::put('/updatePassword/{id}', [UserController::class, 'updatePassword'])->name('updatePassword');
     });
 
     Route::group(['prefix' => 'mahasiswa', 'as' => 'mahasiswa', 'middleware' => ['mahasiswa']], function () {

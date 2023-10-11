@@ -69,6 +69,11 @@
 <!-- Page JS -->
 <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/js/front-page-landing.js">
 </script>
+<link rel="stylesheet"
+    href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/flatpickr/flatpickr.css" />
+<script>
+    flatpickr("input[type=date]");
+</script>
 
 </body>
 

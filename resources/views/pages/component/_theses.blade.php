@@ -1,17 +1,17 @@
 <section id="landingFeatures" class="section-py landing-features">
     <div class="container">
         <div class="text-center mb-3 pb-1">
-            <span class="badge bg-label-primary">Skripsi</span>
+            <span class="badge bg-label-primary"  style="--bs-badge-font-size: 20px;">Skripsi</span>
         </div>
 
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
-            @forelse ($theses->take(4) as $item)
+            @forelse ($theses as $item)
                 <div class="col-lg-3 col-md-6">
-                    <div class="card bg-light border border-primary">
+                    <div class="card bg-light border border-primary"  style="height:100%;">
 
                         <div class="card-body text-center">
-                            <h3>{{ Str::limit($item->title, 50) }}</h3>
-                            <span class="text-muted">Skripsi | {{ $item->created_at->year }}</span>
+                            <h5>{{ Str::limit($item->title, 50) }}</h5>
+                            <span class="text-muted">Skripsi | {{ $item->year }}</span>
                             <br>
                             <span class="text-primary">{{ $item->students->name }}</span>
                             <br>
@@ -30,6 +30,11 @@
                     </div>
                 </div>
             @endforelse
+            @if(request()->is('theses'))
+            <div class="mt-3">
+                {{$theses->links('vendor.pagination.bootstrap-4')}}
+            </div>
+            @endif
         </div>
     </div>
 </section>

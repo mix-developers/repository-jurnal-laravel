@@ -47,7 +47,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td class="text-center">Belum ada bimbingan</td>
+                                            <td class="text-center" colspan="3">Belum ada bimbingan</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

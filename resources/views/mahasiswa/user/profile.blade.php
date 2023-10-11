@@ -79,7 +79,7 @@
                             </select>
 
                         </div>
-                        <hr>
+                        <!-- <hr>
                         <div class="col-md-6 ">
                             <label class="form-label" for="password">Password</label>
                             <input type="password" name="password" class="form-control modal-edit-tax-id"
@@ -94,8 +94,33 @@
                         </div>
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan Perubahan</button>
-                        </div>
+                        </div> -->
                     </form>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                <form action="{{ url('/mahasiswa/updatePassword', Auth::user()->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <table class="table table-borderles table-hover">
+                        <tr>
+                            <td>Password Baru</td>
+                            <td><input type="password" class="form-control" name="password"
+                                    placeholder="Tulis password baru "></td>
+                        </tr>
+                        <tr>
+                            <td>Konfirmasi Password</td>
+                            <td><input type="password" id="password-confirm" class="form-control"
+                                    name="password_confirmation" placeholder="tulis ulang password " required
+                                    autocomplete="new-password">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="mt-3 text-center">
+                        <button type="submit" class="btn btn-primary">Simpan Password</button>
+                    </div>
                 </div>
             </div>
         </div>

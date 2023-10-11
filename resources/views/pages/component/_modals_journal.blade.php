@@ -1,4 +1,4 @@
-@foreach (App\Models\Journal::getAll() as $item)
+@foreach (App\Models\Journal::getAll()->get() as $item)
     <div class="modal fade" id="journal-{{ $item->id }}" tabindex="-1" aria-modal="true" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

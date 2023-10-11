@@ -6,7 +6,7 @@
         @if (App\Models\JournalStatus::notifikasi()->id_status != 3)
             <table class="table table-bordered">
                 <tr>
-                    <td>Cover dan abstrak</td>
+                    <td>Abstrak</td>
                     <td><a href="{{ url(Storage::url($files->file)) }}" target="__blank" class="btn btn-primary">Lihat</a>
                     </td>
                 </tr>
@@ -24,7 +24,7 @@
                     @method('PUT')
                     <input type="hidden" value="{{ $journal->id }}" name="id_journal">
                     <div class="mb-3">
-                        <label for="abstract" class="text-white">File jurnal halaman pertama <span
+                        <label for="abstract" class="text-white">File Abstrak <span
                                 class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="file">
                         <div id="defaultFormControlHelp" class="text-white">masukkan file jurnal halaman pertama

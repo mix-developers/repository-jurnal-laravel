@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>File Jurnal<br>
-                <small>File sebagian</small>
+                <small>File Abstrak</small>
             </td>
             <td><a href="{{ url(Storage::url($files->file)) }}" target="__blank" class="btn btn-primary">Lihat</a></td>
         </tr>

@@ -69,23 +69,29 @@
                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        <i class="tf-icons bx bx-x bx-sm"></i>
                    </button>
-                   <form action="{{ url('/search') }}" method="GET" class="input-group input-group-merge">
-                       {{-- @csrf --}}
-                       <div class="input-group input-group-merge">
-                           <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
-                           <input type="search" class="form-control" placeholder="masukan kata kunci pencarian.."
-                               aria-label="masukan kata kunci pencarian.." aria-describedby="basic-addon-search31"
-                               name="keywoard" value="{{ old('keywoard') }}">
-                           <select class=" input-group-text " name="type" style="width: 100px;">
-                               <option value="journal" selected>Jurnal</option>
-                               <option value="theses">Skripsi</option>
-                               <option value="lecturer">Dosen</option>
-                           </select>
+                   <div class="input-group input-group-merge text-center">
+                       <a href="" class="form-control" data-bs-toggle="modal" data-bs-target="#search"><i
+                               class="bx bx-search"></i> masukan kata kunci
+                           pencarian..</a>
+                   </div>
 
-                           <button class="btn btn-primary " type="submit" id="button-addon2"><i
-                                   class="bx bx-search"></i><span class="d-none d-md-block"> Cari</span></button>
-                       </div>
-                   </form>
+                   {{-- <form action="{{ url('/search') }}" method="GET" class="input-group input-group-merge">
+                       
+                   <div class="input-group input-group-merge">
+                       <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                       <input type="search" class="form-control" placeholder="masukan kata kunci pencarian.."
+                           aria-label="masukan kata kunci pencarian.." aria-describedby="basic-addon-search31"
+                           name="keywoard" value="{{ old('keywoard') }}">
+                       <select class=" input-group-text " name="type" style="width: 100px;">
+                           <option value="journal" selected>Jurnal</option>
+                           <option value="theses">Skripsi</option>
+                           <option value="lecturer">Dosen</option>
+                       </select>
+
+                       <button class="btn btn-primary " type="submit" id="button-addon2"><i
+                               class="bx bx-search"></i><span class="d-none d-md-block"> Cari</span></button>
+                   </div>
+                   </form> --}}
 
                </div>
                <div class="landing-menu-overlay d-lg-none"></div>
@@ -171,4 +177,5 @@
            </div>
        </div>
    </nav>
+   @include('layouts.frontend.modal_search')
    <!-- Navbar: End -->

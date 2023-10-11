@@ -77,7 +77,7 @@
                             </select>
 
                         </div>
-                        @if ($users->role == 'admin')
+                        @if (Auth::user()->role == 'admin')
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan Perubahan</button>
                             </div>

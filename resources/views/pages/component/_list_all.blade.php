@@ -8,7 +8,7 @@
                             data-bs-placement="top" data-bs-custom-class="tooltip-dark"
                             title="{{ $j->title }}"><strong>{{ Str::limit($j->title, 100) }}</strong></a>
                         <br>
-                        <small class="text-muted"><b>Kata kunci :</b> {{ Str::limit($j->keywords, 100) }}</small><br>
+                        <small class="text-muted"><b>Kata kunci :</b> {{ Str::limit($j->keywoards, 100) }}</small><br>
                         <small class="text-muted"><b>Penguji :</b>
                             @foreach (App\Models\Mentor::getMentorsGuide($j->id_user) as $item)
                                 {{ $item->lecturer->title_first }}
@@ -22,7 +22,9 @@
                             @endforeach
                         </small><br>
                         <small class="text-primary"><em>Jurnal</em> | {{ $j->students->name }} |
-                            {{ $j->created_at->year }}</small>
+                            {{ $j->created_at->year }} 
+                        {!!$j->is_published == 1 ? '| <a href="'.$j->link_doi.'" class="badge bg-label-primary">Published <i class="bx bx-xs bx-link"></i></a>' : ''!!}
+                        </small>
                     </td>
                     <td style="width: 100px;">
                         <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"

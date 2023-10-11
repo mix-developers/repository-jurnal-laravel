@@ -28,6 +28,7 @@
 
                 </div>
             @else
+            @if (App\Models\JournalStatus::where('id_journal', $journal->id)->orderBy('id', 'desc')->first()->id_status == 4)
                 @if ($journal->is_published == 0)
                     <div class="d-flex justify-content-end mx-2 mb-4">
                         <button class="btn btn-success mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -49,6 +50,7 @@
                             Reject Publish Jurnal
                         </button>
                     </div>
+                @endif
                 @endif
             @endif
 

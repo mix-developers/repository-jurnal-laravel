@@ -216,11 +216,11 @@
                         </p>
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="abstract" class="form-label">File jurnal halaman pertama <span
+                                <label for="abstract" class="form-label">File Jurnal Cover dan Abstrak <span
                                         class="text-danger">*</span></label>
                                 <input type="file" class="form-control" name="file">
-                                <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal halaman
-                                    pertama
+                                <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal Cover dan
+                                    Abstrak
                                 </div>
                             </div>
                         </div>
@@ -298,11 +298,11 @@
                             </p>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="abstract" class="form-label">File jurnal halaman pertama <span
+                                    <label for="abstract" class="form-label">File jurnal Cover dan Abstrak <span
                                             class="text-danger">*</span></label>
                                     <input type="file" class="form-control" name="file">
-                                    <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal halaman
-                                        pertama
+                                    <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal Cover dan
+                                        Abstrak
                                     </div>
                                 </div>
                             </div>

@@ -3,18 +3,37 @@
 @extends('layouts.backend.admin')
 
 @section('content')
+    @include('layouts.backend.alert')
     <div class="row justify-content-center">
-
+        <form action="{{ url('/' . Auth::user()->role . '/report/exportJournal') }}" method="GET">
+            <div class="row my-3">
+                <div class="col-md-6">
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text" id="basic-addon-search31">Dari tanggal</span>
+                        <input type="date" class="form-control" placeholder="Dari" name="from_date"
+                            value="{{ date('Y-m-d', strtotime('-1 month')) }}">
+                        <span class="input-group-text" id="basic-addon-search31">Sampai</span>
+                        <input type="date" class="form-control" placeholder="Sampai" name="to_date"
+                            value="{{ date('Y-m-d') }}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary"><i class="bx bx-printer me-sm-1"> </i>
+                        <span class="d-none d-sm-inline-block">Cetak Data</span></button>
+                </div>
+            </div>
+        </form>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header flex-column flex-md-row">
                     <div class="head-label ">
                         <h5 class="card-title mb-0">{{ $title }}</h5>
                     </div>
-                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                    {{-- <div class="dt-action-buttons text-end pt-3 pt-md-0">
                         <div class="dt-buttons btn-group flex-wrap">
                             @if (Auth::user()->role == 'jurusan')
-                                <a href="{{ url('/jurusan/report/exportJournal') }}" class="btn btn-primary" target="__blank">
+                                <a href="{{ url('/jurusan/report/exportJournal') }}" class="btn btn-primary"
+                                    target="__blank">
                                     <span>
                                         <i class="bx bx-printer me-sm-1"> </i>
                                         <span class="d-none d-sm-inline-block">Cetak Data</span>
@@ -29,7 +48,7 @@
                                 </a>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="card-datatable table-responsive">
@@ -56,7 +75,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td><strong>{{ $item->students->name }}</strong><br>{{ $item->students->identity }}</td>
                                     <td>
-                                        <strong>{{ Str::limit($item->title, 50) }}</strong><br>
+                                        <strong>{{ Str::limit($item->title) }}</strong><br>
                                         <small>Kata Kunci : {{ Str::limit($item->keywoards, 100) }}</small>
                                     </td>
                                     <td>

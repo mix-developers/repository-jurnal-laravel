@@ -30,10 +30,31 @@ class MentorController extends Controller
         $mentor->type = $request->type;
         if (Auth::user()->role == 'mahasiswa') {
             $mentor->id_user = Auth::user()->id;
+            $check_penguji = Mentor::where('id_user',Auth::user()->id)->where('type','penguji')->count();
+            $check_pembimbing = Mentor::where('id_user',Auth::user()->id)->where('type','pembimbing')->count();
         } else {
+            $check_penguji = Mentor::where('id_user',$request->id_user)->where('type','penguji')->count();
+            $check_pembimbing = Mentor::where('id_user',$request->id_user)->where('type','pembimbing')->count();
             $mentor->id_user = $request->id_user;
         }
-        $mentor->save();
+        if($request->type =='pembimbing' && $check_pembimbing >=2){
+         
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Pembimbing tidak bisa lebih dari 2',
+                    ],
+                );
+        }
+        elseif($request->type=='penguji' && $check_penguji >=3){
+         
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Penguji tidak bisa lebih dari 3',
+                    ],
+                );
+        }else{
+            $mentor->save();
+        }
 
         return redirect()->back()->with(
             [

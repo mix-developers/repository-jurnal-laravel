@@ -1,15 +1,15 @@
 <section id="landingFeatures" class="section-py landing-features" style="border-radius: 50px 50px 0px 0px;">
     <div class="container">
         <div class="text-center mb-3 pb-1">
-            <span class="badge bg-label-primary">Jurnal</span>
+            <h1 class="badge bg-label-primary " style="--bs-badge-font-size: 20px;">Jurnal</span>
         </div>
 
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
-            @forelse ($journal->take(4) as $item)
-                <div class="col-lg-3 col-md-6">
-                    <div class="card bg-light border border-primary">
+            @forelse ($journal as $item)
+                <div class="col-lg-3 col-md-6 ">
+                    <div class="card bg-light border border-primary " style="height:100%;">
                         <div class="card-header text-center">
-                            <h4 class="text-primary m-0">{{ $item->title }}</h4>
+                            <h5 class="text-primary m-0">{{ $item->title }}</h5>
                         </div>
                         <div class="card-body text-center">
                             <small class="text-muted ">Jurnal | {{ $item->created_at->year }}</small><br>
@@ -21,7 +21,7 @@
                                     <br>
                                 </div>
                             @endif
-                            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary mt-2 float-bottom" data-bs-toggle="modal"
                                 data-bs-target="#journal-{{ $item->id }}">
                                 Buka
                             </button>
@@ -35,6 +35,11 @@
                     </div>
                 </div>
             @endforelse
+            @if(request()->is('journal'))
+            <div class="mt-3">
+                {{$journal->links('vendor.pagination.bootstrap-4')}}
+            </div>
+            @endif
         </div>
     </div>
 </section>

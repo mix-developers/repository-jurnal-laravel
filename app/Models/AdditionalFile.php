@@ -50,7 +50,9 @@ class AdditionalFile extends Model
     public static function cekAdditionalFileJurusan($id_student)
     {
         return self::with(['user', 'file_category'])
+            ->selectRaw('MAX(id) as id, id_user, id_file_category')
             ->where('id_user', $id_student)
+            ->groupBy('id_user', 'id_file_category')
             ->get();
     }
     public static function cekAdditionalFileUser()
