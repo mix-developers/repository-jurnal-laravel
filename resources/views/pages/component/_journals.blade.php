@@ -6,8 +6,13 @@
 
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
             @forelse ($journal as $item)
+<<<<<<< HEAD
                 <div class="col-lg-3 col-md-6 ">
                     <div class="card bg-light border border-primary " style="height:100%;">
+=======
+                <div class="col-lg-3 col-md-6">
+                    <div class="card bg-light border border-primary">
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
                         <div class="card-header text-center">
                             <h5 class="text-primary m-0">{{ $item->title }}</h5>
                         </div>
@@ -35,11 +40,17 @@
                     </div>
                 </div>
             @endforelse
+<<<<<<< HEAD
             @if(request()->is('journal'))
             <div class="mt-3">
                 {{$journal->links('vendor.pagination.bootstrap-4')}}
             </div>
             @endif
+=======
+            <div class="mt-3 ">
+                {{ $journal->links('vendor.pagination.bootstrap-4') }}
+            </div>
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
         </div>
     </div>
 </section>

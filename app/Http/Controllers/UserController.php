@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal;
+<<<<<<< HEAD
 use App\Models\Theses;
+=======
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
 use App\Models\Lecturer;
 use App\Models\Student;
 use App\Models\User;
@@ -158,6 +161,7 @@ class UserController extends Controller
             $user->role = $request->role;
             $user->id_major = $request->id_major;
             $user->is_verified = 1;
+<<<<<<< HEAD
             if ($request->role == 'dosen') {
                 if(lecturer::where('identity',$request->identity)==null){
                     
@@ -180,6 +184,27 @@ class UserController extends Controller
                 $user->name = $request->title_first . ' ' . $request->full_name . ' ' . $request->title_end;
             }
 
+=======
+
+            if ($request->role == 'dosen') {
+                $lecturer = new Lecturer();
+                $lecturer->identity = $request->identity;
+                $lecturer->id_major = $request->id_major;
+                $lecturer->full_name = $request->full_name;
+                $lecturer->title_first = $request->title_first;
+                $lecturer->title_end = $request->title_end;
+                $lecturer->phone = $request->phone;
+                $lecturer->address = $request->address;
+                $lecturer->place_birth = $request->place_birth;
+                $lecturer->date_birth = $request->date_birth;
+                $lecturer->id_riset = $request->id_riset;
+                $lecturer->save();
+
+                $user->name = $request->title_first . ' ' . $request->full_name . ' ' . $request->title_end;
+                // dd($request->title_first . ' ' . $request->full_name . ' ' . $request->title_end);
+            }
+
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
             if ($user->save()) {
                 return redirect()->back()->with(
                     [
@@ -327,6 +352,7 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
+<<<<<<< HEAD
             if($user->role=='mahasiswa'){
                 //destroy journal
                 $journal = Journal::where('id_user', $id);
@@ -342,11 +368,26 @@ class UserController extends Controller
                 $lecturer->delete();
             }
             $user->delete();
+=======
+            $journal = Journal::where('id_user', $id)->count();
+            if ($journal == null) {
+                $user->delete();
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
                 return redirect()->back()->with(
                     [
                         'success' => 'Berhasil menghapus data',
                     ]
                 );
+<<<<<<< HEAD
+=======
+            } else {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Gagal menghapus data, user memiliki data..',
+                    ]
+                );
+            }
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
         } catch (\Exception $e) {
             return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
         }

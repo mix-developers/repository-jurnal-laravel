@@ -30,11 +30,17 @@
                     </div>
                 </div>
             @endforelse
+<<<<<<< HEAD
             @if(request()->is('theses'))
             <div class="mt-3">
                 {{$theses->links('vendor.pagination.bootstrap-4')}}
             </div>
             @endif
+=======
+            <div class="mt-3">
+                {{ $theses->links('vendor.pagination.bootstrap-4') }}
+            </div>
+>>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
         </div>
     </div>
 </section>
