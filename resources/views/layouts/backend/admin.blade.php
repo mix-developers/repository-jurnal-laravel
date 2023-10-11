@@ -138,10 +138,10 @@
 
     <!-- Page JS -->
     <script src="{{ asset('backend_theme/') }}/assets/js/dashboards-analytics.js"></script>
-    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.min.js"></script>
+    {{-- <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.min.js"></script>
     <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.min.css"></script>
-    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.js"></script>
-    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
+    <script src="{{ asset('backend_theme/') }}/assets/sweet-alert/sweetalert2.all.js"></script> --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -217,7 +217,7 @@
     <script>
         flatpickr("input[type=date]");
     </script>
-    {{-- @if (Session::has('danger'))
+    @if (Session::has('danger'))
         <script>
             Swal.fire({
                 title: 'Error!',
@@ -245,7 +245,7 @@
                 buttonsStyling: false
             })
         </script>
-    @endif --}}
+    @endif
 </body>
 
 </html>

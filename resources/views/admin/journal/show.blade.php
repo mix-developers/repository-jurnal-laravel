@@ -28,29 +28,29 @@
 
                 </div>
             @else
-            @if (App\Models\JournalStatus::where('id_journal', $journal->id)->orderBy('id', 'desc')->first()->id_status == 4)
-                @if ($journal->is_published == 0)
-                    <div class="d-flex justify-content-end mx-2 mb-4">
-                        <button class="btn btn-success mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#publish">
-                            Publish Jurnal
-                        </button>
-                    </div>
-                @else
-                    <div class="my-3">
-                        <div class="alert alert-primary alert-dismissible" role="alert">
-                            Joural ini telah publish
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                @if (App\Models\JournalStatus::where('id_journal', $journal->id)->orderBy('id', 'desc')->first()->id_status == 4)
+                    @if ($journal->is_published == 0)
+                        <div class="d-flex justify-content-end mx-2 mb-4">
+                            <button class="btn btn-success mx-2" type="button" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#publish">
+                                Publish Jurnal
                             </button>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-end mx-2 mb-4">
-                        <button class="btn btn-danger mx-2" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#publish">
-                            Reject Publish Jurnal
-                        </button>
-                    </div>
-                @endif
+                    @else
+                        <div class="my-3">
+                            <div class="alert alert-primary alert-dismissible" role="alert">
+                                Joural ini telah publish
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mx-2 mb-4">
+                            <button class="btn btn-danger mx-2" type="button" class="btn btn-primary"
+                                data-bs-toggle="modal" data-bs-target="#publish">
+                                Reject Publish Jurnal
+                            </button>
+                        </div>
+                    @endif
                 @endif
             @endif
 
@@ -65,7 +65,7 @@
                         <div class="card-body ">
                             <table class="table table-bordered">
                                 <tr>
-                                    <td>Cover dan abstrak</td>
+                                    <td>Abstrak</td>
                                     <td><a href="{{ url(Storage::url($files->file)) }}" target="__blank"
                                             class="btn btn-primary">Lihat</a>
                                     </td>

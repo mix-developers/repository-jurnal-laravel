@@ -42,12 +42,8 @@ class Journal extends Model
         return self::with(['students', 'major'])
             ->whereHas('journal_statuses', function ($query) {
                 $query->where('id_status', '=', 4);
-<<<<<<< HEAD
             })
             ->latest();
-=======
-            });
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
     }
     public static function getJournalStudent($id_student)
     {
@@ -101,11 +97,7 @@ class Journal extends Model
 
 
         // dd($query->get());
-<<<<<<< HEAD
-        return $query->latest();
-=======
         return $query;
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
     }
 
 

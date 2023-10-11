@@ -76,11 +76,7 @@ class Theses extends Model
         }
 
 
-<<<<<<< HEAD
-        return $query->latest();
-=======
         return $query;
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
     }
 
     public static function checkTheses()

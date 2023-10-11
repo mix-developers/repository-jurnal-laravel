@@ -5,19 +5,19 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-12 my-2">
-        @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        {{ Session::get('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-    </div>
-@elseif (Session::has('danger'))
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        {{ Session::get('danger') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-    </div>
-@endif
+            @if (Session::has('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ Session::get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            @elseif (Session::has('danger'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ Session::get('danger') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            @endif
             @if ($errors->any())
                 @foreach ($errors->all() as $item)
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -107,7 +107,7 @@
                                                 class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn "><i
+                                                <button type="submit" class="btn delete-button"><i
                                                         class="bx bx-trash me-1 text-danger"></i>
                                                 </button>
                                             </form>

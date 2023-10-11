@@ -25,11 +25,7 @@ class FrontController extends Controller
     {
         $data = [
             'title' => 'Skripsi',
-<<<<<<< HEAD
-            'theses' => Theses::getAll()->paginate(20)
-=======
-            'theses' => Theses::getAll()->paginate(1),
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
+            'theses' => Theses::getAll()->paginate(20),
         ];
         return view('pages.theses', $data);
     }
@@ -37,11 +33,7 @@ class FrontController extends Controller
     {
         $data = [
             'title' => 'Jurnal',
-<<<<<<< HEAD
             'journal' => Journal::getAll()->paginate(20),
-=======
-            'journal' => Journal::getAll()->paginate(1),
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
         ];
         return view('pages.journal', $data);
     }
