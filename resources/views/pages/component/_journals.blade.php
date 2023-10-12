@@ -7,7 +7,7 @@
         <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5 justify-content-center">
             @forelse ($journal as $item)
                 <div class="col-lg-3 col-md-6">
-                    <div class="card bg-light border border-primary">
+                    <div class="card bg-light border border-primary" style="height: 100%;">
                         <div class="card-header text-center">
                             <h5 class="text-primary m-0">{{ $item->title }}</h5>
                         </div>
@@ -16,7 +16,7 @@
                             <p><b>Kata Kunci :</b><br><em>{{ Str::limit($item->keywoards, 100) }}</em></p>
                             @if ($item->is_published == 1)
                                 <div class="my-2">
-                                    <a href="{{ $item->link_doi }}"> <span class="badge bg-label-primary">Published <i
+                                    <a href="{{ $item->link_doi }}"> <span class="badge bg-label-warning">Published <i
                                                 class="bx bx-xs bx-link"></i></span></a>
                                     <br>
                                 </div>

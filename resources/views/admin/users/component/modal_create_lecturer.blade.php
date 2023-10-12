@@ -79,11 +79,7 @@
                          <div class="col mb-3">
                              <label for="address" class="form-label">Alamat</label>
                              <input type="text" id="address" name="address" class="form-control"
-<<<<<<< HEAD
-                                 placeholder="Alamat"  />
-=======
-                                 placeholder="Alamat" required />
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
+                                 placeholder="Alamat" />
                          </div>
 
                      </div>
@@ -91,20 +87,12 @@
                          <div class="col mb-3">
                              <label for="place_birth" class="form-label">Tempat Lahir</label>
                              <input type="text" id="place_birth" name="place_birth" class="form-control"
-<<<<<<< HEAD
-                                 placeholder="Tempat Lahir"  />
-=======
-                                 placeholder="Tempat Lahir" required />
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
+                                 placeholder="Tempat Lahir" />
                          </div>
                          <div class="col mb-3">
                              <label for="date_birth" class="form-label">Tanggal Lahir</label>
                              <input type="date" id="date_birth" name="date_birth" class="form-control"
-<<<<<<< HEAD
-                                 placeholder="Tanggal Lahir"  />
-=======
-                                 placeholder="Tanggal Lahir" required />
->>>>>>> f60236363c04d3f394cf47530bd6d62e44799449
+                                 placeholder="Tanggal Lahir" />
                          </div>
 
                      </div>
