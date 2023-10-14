@@ -32,8 +32,10 @@ class LoginController extends Controller
     {
         if (auth()->user()->role == 'admin' || auth()->user()->role == 'super_admin') {
             return '/admin';
-        } elseif (auth()->user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1) {
+        } elseif (auth()->user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1 && auth()->user()->is_alumni == 0) {
             return '/mahasiswa';
+        } elseif (auth()->user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1  && auth()->user()->is_alumni == 1) {
+            return '/';
         }
         return '/';
     }

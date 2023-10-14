@@ -127,11 +127,11 @@
     @stack('js')
     <!-- Vendors JS -->
     <script src="{{ asset('backend_theme/') }}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <!-- Main JS -->
+    <script src="{{ asset('backend_theme/') }}/assets/js/main.js"></script>
     {{-- //datatable --}}
     <script src="{{ asset('backend_theme/') }}/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('backend_theme/') }}/assets/js/main.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>

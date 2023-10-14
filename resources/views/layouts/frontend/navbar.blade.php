@@ -140,7 +140,7 @@
                                        class="tf-icons bx bx-user me-md-1"></span><span
                                        class="d-none d-md-block">Dashboard</span></a>
                            </li>
-                       @elseif(Auth::user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1)
+                       @elseif(Auth::user()->role == 'mahasiswa' && auth()->user()->is_graduate == 1 && auth()->user()->is_alumni == 0)
                            <li>
                                <a href="{{ url('/mahasiswa') }}" class="btn btn-primary"><span
                                        class="tf-icons bx bx-user me-md-1"></span><span
@@ -152,7 +152,7 @@
                                        class="tf-icons bx bx-user me-md-1"></span><span
                                        class="d-none d-md-block">Dashboard</span></a>
                            </li>
-                       @elseif(auth()->user()->is_graduate == 0)
+                       @elseif(auth()->user()->is_graduate == 0 || auth()->user()->is_alumni == 1)
                            <li>
                                <a href="{{ url('/akun') }}" class="btn btn-primary"><span
                                        class="tf-icons bx bx-user me-md-1"></span><span

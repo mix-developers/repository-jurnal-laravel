@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/download_theses/{id}', [ThesesController::class, 'download'])->name('download_theses');
     Route::get('/akun', [FrontController::class, 'akun'])->name('akun');
     Route::get('/data_mahasiswa', [FrontController::class, 'data_mahasiswa'])->name('data_mahasiswa');
+    // Route::get('/search_data_mahasiswa', [FrontController::class, 'search_data_mahasiswa'])->name('search_data_mahasiswa');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin', 'middleware' => ['admin']], function () {
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/users/students_pending', [UserController::class, 'students_pending'])->name('users.students_pending');
         Route::put('/users/verifications/{id}', [UserController::class, 'verifications'])->name('users.verifications');
         Route::put('/users/graduated/{id}', [UserController::class, 'graduated'])->name('users.graduated');
+        Route::put('/users/alumni/{id}', [UserController::class, 'alumni'])->name('users.alumni');
         Route::get('/users/show/{id}', [UserController::class, 'show'])->name('users.show');
         Route::delete('/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
         // profile

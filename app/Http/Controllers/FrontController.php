@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Journal;
 use App\Models\Lecturer;
+use App\Models\Mentor;
 use App\Models\Riset;
 use App\Models\Theses;
 use App\Models\User;
@@ -88,6 +89,7 @@ class FrontController extends Controller
 
         return view('pages.search', $data);
     }
+
 
     public function akun()
     {

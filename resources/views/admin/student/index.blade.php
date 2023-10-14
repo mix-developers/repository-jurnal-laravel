@@ -21,9 +21,7 @@
                     <div class="head-label ">
                         <h5 class="card-title mb-0">{{ $title }}</h5>
                     </div>
-
                 </div>
-
                 <div class="card-datatable table-responsive">
                     <table id="datatable" class="table table-hover table-bordered">
                         <thead>
@@ -34,6 +32,7 @@
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
                                 <th>Calon Wisuda</th>
+                                <th>Alumni</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -81,6 +80,18 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if ($item->is_alumni == 0)
+                                            <form action="{{ url('/admin/users/alumni', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-sm btn-primary"><i
+                                                        class="bx bx-check"></i></button>
+                                            </form>
+                                        @else
+                                            <i class="bx bx-check text-primary bx-lg"></i>
+                                        @endif
+                                    </td>
+                                    <td>
                                         <a href="{{ url('/admin/student/show', $item->id) }}"
                                             class="btn btn-sm text-primary">
                                             <i class="bx bx-show"></i>
@@ -90,13 +101,14 @@
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <tr>
+                            <tr class="bg-light">
                                 <th>#</th>
                                 <th>Nama Lengkap </th>
                                 <th>Jurusan</th>
                                 <th>Pembimbing</th>
                                 <th>Penguji</th>
                                 <th>Calon Wisuda</th>
+                                <th>Alumni</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

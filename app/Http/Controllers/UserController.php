@@ -117,6 +117,18 @@ class UserController extends Controller
             ],
         );
     }
+    public function alumni($id)
+    {
+        $user = User::find($id);
+        $user->is_alumni = 1;
+        $user->save();
+
+        return redirect()->back()->with(
+            [
+                'success' => 'Berhasil memperbaharui data',
+            ],
+        );
+    }
     public function store(Request $request)
     {
         try {

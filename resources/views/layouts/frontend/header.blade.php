@@ -13,7 +13,18 @@
 
     <title>{{ $title ?? config('APP_NAME') }} | Repository jurnal dan skripsi</title>
 
-
+    <!-- Vendor Styles -->
+    <link rel="stylesheet"
+        href="{{ asset('backend_theme/') }}/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
+    <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
+    <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
+    <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
+    <!-- Row Group CSS -->
+    <link rel="stylesheet"
+        href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css">
     <meta name="description"
         content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
