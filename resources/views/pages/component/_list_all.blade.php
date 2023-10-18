@@ -9,21 +9,23 @@
                             title="{{ $j->title }}"><strong>{{ Str::limit($j->title, 100) }}</strong></a>
                         <br>
                         <small class="text-muted"><b>Kata kunci :</b> {{ Str::limit($j->keywoards, 100) }}</small><br>
-                        <small class="text-muted"><b>Penguji :</b>
+                        <small class="text-muted"><b>Pembimbing :</b>
                             @foreach (App\Models\Mentor::getMentorsGuide($j->id_user) as $item)
                                 {{ $item->lecturer->title_first }}
                                 {{ $item->lecturer->full_name }}{{ $item->lecturer->title_end }},
                             @endforeach
                         </small><br>
-                        <small class="text-muted"><b>Pembimbing :</b>
+                        <small class="text-muted"><b>Penguji :</b>
                             @foreach (App\Models\Mentor::getMentorsTest($j->id_user) as $item)
                                 {{ $item->lecturer->title_first }}
                                 {{ $item->lecturer->full_name }}{{ $item->lecturer->title_end }},
                             @endforeach
                         </small><br>
                         <small class="text-primary"><em>Jurnal</em> | {{ $j->students->name }} |
-                            {{ $j->created_at->year }} 
-                        {!!$j->is_published == 1 ? '| <a href="'.$j->link_doi.'" class="badge bg-label-primary">Published <i class="bx bx-xs bx-link"></i></a>' : ''!!}
+                            {{ $j->created_at->year }}
+                            {!! $j->is_published == 1
+                                ? '| <a href="' . $j->link_doi . '" class="badge bg-label-primary">Published <i class="bx bx-xs bx-link"></i></a>'
+                                : '' !!}
                         </small>
                     </td>
                     <td style="width: 100px;">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -64,6 +65,7 @@ class Journal extends Model
             ->where('is_published', 1)
             ->get();
     }
+
     public static function getSearch($keywoard, $from_date, $to_date, $periode, $id_riset)
     {
         $query = self::with(['students', 'major'])
@@ -71,15 +73,16 @@ class Journal extends Model
             ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%');
 
         if ($periode != null) {
-            $from_date = now()->subYears($periode);
-            $to_date = now(); // Set $to_date to current date
+            $from_date = Carbon::parse($from_date)->subYears($periode)->toDateString(); // Mengubah ke format tanggal
+            $to_date = Carbon::parse($to_date)->toDateString(); // Mengubah ke format tanggal
 
-            $query->where('created_at', '>=', $from_date)
-                ->where('created_at', '<=', $to_date);
-        } else {
+            $query->whereBetween('created_at', [$from_date, $to_date]);
+        } elseif ($from_date != null && $to_date != null) {
+            $from_date = Carbon::parse($from_date)->toDateString(); // Mengubah ke format tanggal
+            $to_date = Carbon::parse($to_date)->toDateString(); // Mengubah ke format tanggal
+
             if ($from_date && $to_date) {
-                $query->where('created_at', '>=', $from_date)
-                    ->where('created_at', '<=', $to_date);
+                $query->whereBetween('created_at', [$from_date, $to_date]);
             }
         }
 
@@ -95,10 +98,9 @@ class Journal extends Model
             });
         }
 
-
-        // dd($query->get());
         return $query;
     }
+
 
 
     public static function checkJournal()

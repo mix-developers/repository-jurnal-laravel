@@ -30,29 +30,54 @@ class MentorController extends Controller
         $mentor->type = $request->type;
         if (Auth::user()->role == 'mahasiswa') {
             $mentor->id_user = Auth::user()->id;
-            $check_penguji = Mentor::where('id_user',Auth::user()->id)->where('type','penguji')->count();
-            $check_pembimbing = Mentor::where('id_user',Auth::user()->id)->where('type','pembimbing')->count();
+            $check_penguji = Mentor::where('id_user', Auth::user()->id)->where('type', 'penguji')->count();
+            $check_pembimbing = Mentor::where('id_user', Auth::user()->id)->where('type', 'pembimbing')->count();
+
+            $check_penguji_exist = Mentor::where('id_user', Auth::user()->id)->where('type', 'penguji')->where('id_lecturer', $request->id_lecturer)->count();
+            $check_pembimbing_exist = Mentor::where('id_user', Auth::user()->id)->where('type', 'pembimbing')->where('id_lecturer', $request->id_lecturer)->count();
         } else {
-            $check_penguji = Mentor::where('id_user',$request->id_user)->where('type','penguji')->count();
-            $check_pembimbing = Mentor::where('id_user',$request->id_user)->where('type','pembimbing')->count();
+            $check_penguji = Mentor::where('id_user', $request->id_user)->where('type', 'penguji')->count();
+            $check_pembimbing = Mentor::where('id_user', $request->id_user)->where('type', 'pembimbing')->count();
             $mentor->id_user = $request->id_user;
+
+            $check_penguji_exist = Mentor::where('id_user',  $request->id_user)->where('type', 'penguji')->where('id_lecturer', $request->id_lecturer)->count();
+            $check_pembimbing_exist = Mentor::where('id_user',  $request->id_user)->where('type', 'pembimbing')->where('id_lecturer', $request->id_lecturer)->count();
         }
-        if($request->type =='pembimbing' && $check_pembimbing >=2){
-         
+        if ($request->type == 'pembimbing' && $check_pembimbing >= 2) {
+            if ($check_penguji_exist != 0) {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Dosen merupakan penguji',
+                    ],
+                );
+            } else {
+
                 return redirect()->back()->with(
                     [
                         'danger' => 'Pembimbing tidak bisa lebih dari 2',
                     ],
                 );
-        }
-        elseif($request->type=='penguji' && $check_penguji >=3){
-         
-                return redirect()->back()->with(
-                    [
-                        'danger' => 'Penguji tidak bisa lebih dari 3',
-                    ],
-                );
-        }else{
+            }
+        } elseif ($request->type == 'penguji' && $check_penguji >= 3) {
+
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Penguji tidak bisa lebih dari 3',
+                ],
+            );
+        } else if ($check_pembimbing_exist != 0) {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Dosen merupakan Pembimbing',
+                ],
+            );
+        } else if ($check_penguji_exist != 0) {
+            return redirect()->back()->with(
+                [
+                    'danger' => 'Dosen merupakan penguji',
+                ],
+            );
+        } else {
             $mentor->save();
         }
 
