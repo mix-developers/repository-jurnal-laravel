@@ -172,7 +172,7 @@ class UserController extends Controller
             $user->id_major = $request->id_major;
             $user->is_verified = 1;
             if ($request->role == 'dosen') {
-                if (lecturer::where('identity', $request->identity) == null) {
+                if (lecturer::where('identity', $request->identity)->count() == 0) {
 
                     $lecturer = new Lecturer();
                     $lecturer->identity = $request->identity;
