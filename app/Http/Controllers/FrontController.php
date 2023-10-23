@@ -64,7 +64,7 @@ class FrontController extends Controller
             $theses = Theses::getSearch($keyword, $from_date, $to_date, $periode, $id_riset)->paginate(20);
             $results = $theses->total();
         } elseif ($type == 'lecturer') {
-            $lecturer = Lecturer::getSearch($keyword)->paginate(20);
+            $lecturer = Lecturer::getSearch($keyword, $id_riset)->paginate(20);
             $results = $lecturer->total();
         }
 

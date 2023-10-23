@@ -19,11 +19,15 @@ class Lecturer extends Model
     {
         return $this->hasOne(Mentor::class, 'id_lecturer', 'id');
     }
-    public static function getSearch($keywoard)
+    public static function getSearch($keywoard, $id_riset)
     {
         $query =  self::with(['major'])
-            ->where('full_name', 'LIKE', '%' . $keywoard . '%');
-
+            ->where(function ($query) use ($keywoard) {
+                $query->where('full_name', 'LIKE', '%' . $keywoard . '%');
+            });
+        if ($id_riset != null) {
+            $query->where('id_riset', $id_riset);
+        }
         return $query;
     }
 }
