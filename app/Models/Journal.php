@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class Journal extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     public function students(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user', 'id');
@@ -69,20 +71,22 @@ class Journal extends Model
     public static function getSearch($keywoard, $from_date, $to_date, $periode, $id_riset)
     {
         $query = self::with(['students', 'major'])
-            ->where('title', 'LIKE', '%' . $keywoard . '%')
-            ->orWhere('keywoards', 'LIKE', '%' . $keywoard . '%');
+            ->where(function ($query) use ($keywoard) {
+                $query->where('title', 'like', '%' . $keywoard . '%')
+                    ->orWhere('keywoards', 'like', '%' . $keywoard . '%');
+            });
 
         if ($periode != null) {
             $from_date = Carbon::parse($from_date)->subYears($periode)->toDateString(); // Mengubah ke format tanggal
             $to_date = Carbon::parse($to_date)->toDateString(); // Mengubah ke format tanggal
 
-            $query->whereBetween('created_at', [$from_date, $to_date]);
+            $query->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
         } elseif ($from_date != null && $to_date != null) {
             $from_date = Carbon::parse($from_date)->toDateString(); // Mengubah ke format tanggal
             $to_date = Carbon::parse($to_date)->toDateString(); // Mengubah ke format tanggal
 
             if ($from_date && $to_date) {
-                $query->whereBetween('created_at', [$from_date, $to_date]);
+                $query->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
             }
         }
 

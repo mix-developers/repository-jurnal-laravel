@@ -47,8 +47,10 @@ class Theses extends Model
     public static function getSearch($keywoard, $from_date, $to_date, $periode, $id_riset)
     {
         $query = self::with(['students'])
-            ->where('title', 'LIKE', '%' . $keywoard . '%')
-            ->orWhere('year', 'LIKE', '%' . $keywoard . '%');
+            ->where(function ($query) use ($keywoard) {
+                $query->where('title', 'like', '%' . $keywoard . '%')
+                    ->orWhere('year', 'like', '%' . $keywoard . '%');
+            });
 
         if ($periode != null) {
             $from_date = now()->subYears($periode);

@@ -44,9 +44,9 @@ class FrontController extends Controller
         $type = $request->input('type');
         $id_riset = $request->input('id_riset');
         $periode = null;
-        if ($request->input('from_date') !== null && $request->input('to_date') !== null) {
-            $periode = $request->input('periode');
-        }
+        // if ($request->input('from_date') !== null && $request->input('to_date') !== null) {
+        // }
+        $periode = $request->input('periode');
 
         $from_date = $periode ? null : $request->input('from_date');
         $to_date = $periode ? null : $request->input('to_date');
