@@ -15,6 +15,10 @@ class Lecturer extends Model
     {
         return $this->belongsTo(Major::class, 'id_major');
     }
+    public function risets(): BelongsTo
+    {
+        return $this->belongsTo(Riset::class, 'id_riset');
+    }
     public function mentor()
     {
         return $this->hasOne(Mentor::class, 'id_lecturer', 'id');

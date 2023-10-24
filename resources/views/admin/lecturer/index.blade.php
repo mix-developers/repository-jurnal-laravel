@@ -54,6 +54,7 @@
                                 <th>#</th>
                                 <th>NIP / NIDN</th>
                                 <th>Nama Lengkap </th>
+                                <th>Bidang Riset</th>
                                 <th>Jurusan</th>
                                 <th>No HP</th>
                                 <th>Bimbingan</th>
@@ -71,6 +72,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->identity }}</td>
                                     <td>{{ $item->title_first }} {{ $item->full_name }}, {{ $item->title_end }}</td>
+                                    <td>{{ $item->risets->riset }}</td>
                                     <td>{{ $item->major->name }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>
@@ -122,6 +124,7 @@
                                 <th>#</th>
                                 <th>NIP / NIDN</th>
                                 <th>Nama Lengkap </th>
+                                <th>Bidang Riset</th>
                                 <th>Jurusan</th>
                                 <th>No HP</th>
                                 <th>Bimbingan</th>
