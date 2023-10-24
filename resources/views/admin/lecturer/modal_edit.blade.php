@@ -26,6 +26,17 @@
                                  @endforeach
                              </select>
                          </div>
+                         <div class="col mb-3">
+                             <label for="id_riset" class="form-label">Bidang Riset</label>
+                             <select class="form-select" id="id_riset" name="id_riset" aria-label="Jurusan">
+                                 <option value="" selected>--pilih--</option>
+                                 @foreach (App\Models\Riset::all() as $list)
+                                     <option value="{{ $list->id }}"
+                                         @if ($list->id == $item->id_riset) selected @endif>{{ $list->riset }}
+                                     </option>
+                                 @endforeach
+                             </select>
+                         </div>
                      </div>
                      <div class="row g-2">
                          <div class="col-md-2 mb-3">

@@ -27,7 +27,7 @@ class LecturerController extends Controller
             'mentor' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'pembimbing')->get(),
             'mentor_test' => Mentor::where('id_lecturer', $lecturer->id)->where('type', 'penguji')->get(),
             'lecturer' => $lecturer,
-            
+
         ];
         return view('admin.lecturer.show', $data);
     }
@@ -89,6 +89,7 @@ class LecturerController extends Controller
         $lecturer->address = $request->address;
         $lecturer->place_birth = $request->place_birth;
         $lecturer->date_birth = $request->date_birth;
+        $lecturer->id_riset = $request->id_riset;
         $lecturer->save();
 
         return redirect()->back()->with(
@@ -101,30 +102,30 @@ class LecturerController extends Controller
     public function destroy($id)
     {
         try {
-        $lecturer = Lecturer::find($id);
-        $mentor = Mentor::where('id_lecturer', $id)->get();
-        foreach ($mentor as $item) {
-            $item->delete();
+            $lecturer = Lecturer::find($id);
+            $mentor = Mentor::where('id_lecturer', $id)->get();
+            foreach ($mentor as $item) {
+                $item->delete();
+            }
+            $user = User::where('identity', $lecturer->identity)->first();
+            if ($user != null) {
+                $user->delete();
+            }
+            if ($lecturer->delete()) {
+                return redirect()->back()->with(
+                    [
+                        'success' => 'Berhasil menghapus data',
+                    ]
+                );
+            } else {
+                return redirect()->back()->with(
+                    [
+                        'danger' => 'Gagal menghapus data',
+                    ]
+                );
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-        $user = User::where('identity', $lecturer->identity)->first();
-        if ($user != null) {
-            $user->delete();
-        }
-        if ($lecturer->delete()) {
-            return redirect()->back()->with(
-                [
-                    'success' => 'Berhasil menghapus data',
-                ]
-            );
-        } else {
-            return redirect()->back()->with(
-                [
-                    'danger' => 'Gagal menghapus data',
-                ]
-            );
-        }
-    } catch (\Exception $e) {
-        return redirect()->back()->with('danger', 'Terjadi kesalahan: ' . $e->getMessage());
-    }
     }
 }
