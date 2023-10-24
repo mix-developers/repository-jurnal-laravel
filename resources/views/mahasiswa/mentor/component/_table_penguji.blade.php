@@ -30,7 +30,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         <strong>{{ $item->lecturer->title_first }}
-                            {{ $item->lecturer->full_name }}{{ $item->lecturer->title_end }}</strong>
+                            {{ $item->lecturer->full_name }} {{ $item->lecturer->title_end }}</strong>
                         <br>
                         {{ $item->lecturer->identity }}
                     </td>
