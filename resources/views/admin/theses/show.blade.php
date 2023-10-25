@@ -80,6 +80,7 @@
 
         </div>
     </div>
+    @include('mahasiswa.theses.component._update')
 @endsection
 @push('js')
     <script type="text/javascript">
