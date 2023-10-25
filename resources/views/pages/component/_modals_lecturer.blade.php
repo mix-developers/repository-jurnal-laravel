@@ -4,7 +4,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel3">Data Bimbingan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="font-size:12px;"></button>
                 </div>
                 <div class="modal-body">
                     <table class="table table-hover">
@@ -13,19 +14,19 @@
                                 $journal = App\Models\Journal::with(['students', 'major'])
                                     ->where('id_user', $item->id_user)
                                     ->first();
-                                
+
                                 $journal_file = null;
                                 $theses = null;
-                                
+
                                 if ($journal) {
                                     $journal_file = App\Models\JournalFile::getJournal($journal->id)->file;
                                 }
-                                
+
                                 $latest_thesis = App\Models\Theses::with(['students', 'major'])
                                     ->where('id_user', $item->id_user)
                                     ->latest()
                                     ->first();
-                                
+
                                 if ($latest_thesis) {
                                     $theses = $latest_thesis->file;
                                 }

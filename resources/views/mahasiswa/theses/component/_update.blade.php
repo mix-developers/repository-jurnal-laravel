@@ -3,7 +3,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel3">Skripsi {{ $theses->students->name }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    style="font-size:12px;"></button>
             </div>
             <form action="{{ url('/mahasiswa/theses/update', $theses->id) }}" method="POST"
                 enctype="multipart/form-data">
@@ -18,17 +19,17 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="file">File (Sampai BAB 1)</label>
+                            <label for="file" class="form-label">File (Sampai BAB 1)</label>
                             <input type="file" class="form-control" name="file">
-                            <small>File harus berbentuk PDF</small>
+                            <small class="form-label">File harus berbentuk PDF</small>
                         </div>
                         <div class="col">
-                            <label for="file">File (keseluruhan)</label>
+                            <label for="file" class="form-label">File (keseluruhan)</label>
                             <input type="file" class="form-control" name="file2">
-                            <small>File harus berbentuk PDF</small>
+                            <small class="form-label">File harus berbentuk PDF</small>
                         </div>
                         <div class="col-3">
-                            <label for="year">Tahun</label>
+                            <label for="year" class="form-label">Tahun</label>
                             <select id="year" name="year" class="form-select">
                                 <option>--pilih--</option>
                                 @for ($i = 2019; $i <= date('Y'); $i++)
@@ -55,7 +56,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel3">File {{ $cat->category }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="font-size:12px;"></button>
                 </div>
                 <form action="{{ url('/mahasiswa/theses/storeAdditional') }}" method="POST"
                     enctype="multipart/form-data">
@@ -85,7 +87,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel3">File {{ $cat->category }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="font-size:12px;"></button>
                     </div>
                     <form
                         action="{{ url('/mahasiswa/theses/updateAdditional', App\Models\AdditionalFile::getAdditionalFile($cat->id)->id) }}"
