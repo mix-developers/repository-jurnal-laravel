@@ -52,8 +52,8 @@ class ThesesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
-            'file2' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['required', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['required', 'file', 'mimes:pdf', 'max:10000'],
             'title' => ['required', 'string'],
             'year' => ['required', 'string'],
             'id_user' => ['required'],
@@ -99,8 +99,8 @@ class ThesesController extends Controller
     public function storeAdmin(Request $request)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
-            'file2' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['required', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['required', 'file', 'mimes:pdf', 'max:10000'],
             'title' => ['required', 'string'],
             'year' => ['required', 'string'],
             'id_user' => ['required'],
@@ -141,8 +141,8 @@ class ThesesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'file' => ['nullable', 'file', 'mimes:pdf'],
-            'file2' => ['nullable', 'file', 'mimes:pdf'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
             'title' => ['required', 'string'],
             'year' => ['required', 'string'],
         ]);
@@ -183,7 +183,7 @@ class ThesesController extends Controller
     public function storeAdditional(Request $request)
     {
         $request->validate([
-            'file' => ['nullable', 'file', 'mimes:pdf'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
             'id_category' => ['required'],
         ]);
         $file_category = FileCategory::find($request->id_category);
@@ -208,7 +208,7 @@ class ThesesController extends Controller
     public function updateAdditional(Request $request, $id)
     {
         $request->validate([
-            'file' => ['nullable', 'file', 'mimes:pdf'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
         ]);
 
         $additional_file = AdditionalFile::findOrFail($id);

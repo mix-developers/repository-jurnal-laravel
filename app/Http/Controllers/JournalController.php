@@ -71,8 +71,8 @@ class JournalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
-            'file2' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['required', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['required', 'file', 'mimes:pdf', 'max:10000'],
             'title' => ['required', 'string'],
             'keywoards' => ['required', 'string'],
             'abstract' => ['required', 'string'],
@@ -119,8 +119,8 @@ class JournalController extends Controller
     public function storeAdmin(Request $request)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
-            'file2' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['required', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['required', 'file', 'mimes:pdf', 'max:10000'],
             'title' => ['required', 'string'],
             'keywoards' => ['required', 'string'],
             'abstract' => ['required', 'string'],
@@ -192,8 +192,8 @@ class JournalController extends Controller
             'title' => ['required', 'string'],
             'keywoards' => ['required', 'string'],
             'abstract' => ['required', 'string'],
-            'file' => ['nullable', 'file', 'mimes:pdf'],
-            'file2' => ['nullable', 'file', 'mimes:pdf'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['nullable', 'file', 'mimes:pdf', 'max:10000'],
         ]);
         $journal = Journal::find($id);
         $journal->title  = $request->title;
@@ -287,8 +287,8 @@ class JournalController extends Controller
     public function revisi(Request $request, $id)
     {
         $request->validate([
-            'file' => ['required', 'file', 'mimes:pdf'],
-            'file2' => ['required', 'file', 'mimes:pdf'],
+            'file' => ['required', 'file', 'mimes:pdf', 'max:10000'],
+            'file2' => ['required', 'file', 'mimes:pdf', 'max:10000'],
         ]);
 
         if ($request->hasFile('file')) {

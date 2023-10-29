@@ -133,7 +133,7 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,10000'],
                 'name' => ['nullable', 'string', 'max:191'],
                 'identity' => ['required', 'string', 'max:191', 'unique:users'],
                 'email' => ['required', 'email', 'unique:users'],
@@ -221,7 +221,7 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+                'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,10000'],
                 'name' => ['nullable', 'string', 'max:191'],
                 'identity' => ['nullable', 'string', 'max:191'],
                 'email' => ['nullable', 'email'],
@@ -273,7 +273,7 @@ class UserController extends Controller
     public function updateProfileAdmin(Request $request, $id)
     {
         $request->validate([
-            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
+            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,10000'],
             'name' => ['nullable', 'string', 'max:191'],
             'identity' => ['nullable', 'string', 'max:191'],
             'email' => ['nullable', 'email'],
