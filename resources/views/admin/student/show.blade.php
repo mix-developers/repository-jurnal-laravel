@@ -9,7 +9,6 @@
         @include('admin.student.component._information')
 
         <div class="row">
-
             <div class="col-md-6 mb-3">
                 <div class="card ">
                     <div class="card-header">
@@ -75,6 +74,17 @@
                         @include('admin.student.component._additional_file')
 
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card ">
+                    <div class="card-header">
+                        <strong>Bidang Riset</strong>
+                    </div>
+                    <div class="card-body">
+                        @include('admin.student.component._input_riset')
+                    </div>
+
                 </div>
             </div>
         </div>
