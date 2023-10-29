@@ -164,6 +164,9 @@ class UserController extends Controller
             if (isset($request->email)) {
                 $user->email = $request->email;
             }
+            if (isset($request->id_riset)) {
+                $user->id_riset = $request->id_riset;
+            }
             if (isset($request->phone)) {
                 $user->phone = $request->phone;
             }
@@ -219,10 +222,10 @@ class UserController extends Controller
         try {
             $request->validate([
                 'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png,bmp', 'between:0,2048'],
-                'name' => ['required', 'string', 'max:191'],
-                'identity' => ['required', 'string', 'max:191'],
-                'email' => ['required', 'email'],
-                'phone' => ['required', 'string', 'max:191'],
+                'name' => ['nullable', 'string', 'max:191'],
+                'identity' => ['nullable', 'string', 'max:191'],
+                'email' => ['nullable', 'email'],
+                'phone' => ['nullable', 'string', 'max:191'],
                 'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             ]);
             $user = User::findOrFail($id);
@@ -245,6 +248,9 @@ class UserController extends Controller
 
             if (isset($request->name)) {
                 $user->name = $request->name;
+            }
+            if (isset($request->id_riset)) {
+                $user->id_riset = $request->id_riset;
             }
             if (isset($request->email)) {
                 $user->email = $request->email;

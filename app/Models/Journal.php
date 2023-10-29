@@ -90,15 +90,22 @@ class Journal extends Model
             }
         }
 
+        // if ($id_riset != null) {
+        //     $query->whereExists(function ($subquery) use ($id_riset) {
+        //         $subquery->from('mentors')
+        //             ->whereRaw('mentors.id_user = journals.id_user')  // Pengecekan pertama
+        //             ->whereExists(function ($subsubquery) use ($id_riset) {
+        //                 $subsubquery->from('lecturers')
+        //                     ->whereRaw('lecturers.id = mentors.id_lecturer')  // Pengecekan kedua
+        //                     ->where('lecturers.id_riset', $id_riset);  // Pengecekan ketiga
+        //             });
+        //     });
+        // }
         if ($id_riset != null) {
             $query->whereExists(function ($subquery) use ($id_riset) {
-                $subquery->from('mentors')
-                    ->whereRaw('mentors.id_user = journals.id_user')  // Pengecekan pertama
-                    ->whereExists(function ($subsubquery) use ($id_riset) {
-                        $subsubquery->from('lecturers')
-                            ->whereRaw('lecturers.id = mentors.id_lecturer')  // Pengecekan kedua
-                            ->where('lecturers.id_riset', $id_riset);  // Pengecekan ketiga
-                    });
+                $subquery->from('users')
+                    ->whereRaw('users.id = journals.id_user')  // Pengecekan kedua
+                    ->where('users.id_riset', $id_riset);  // Pengecekan ketiga
             });
         }
 

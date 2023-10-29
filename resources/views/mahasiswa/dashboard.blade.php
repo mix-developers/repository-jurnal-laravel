@@ -2,6 +2,7 @@
 
 @section('content')
     @include('mahasiswa.dashboard_component._welcome')
+    @include('mahasiswa.dashboard_component._input_riset')
     @if (App\Models\Mentor::checkMentorGuide() < 1 && App\Models\Mentor::checkMentorTest() < 1)
         @include('mahasiswa.dashboard_component._input_mentors')
     @else
