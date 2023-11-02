@@ -18,6 +18,7 @@
                      <div class="mb-3">
                          <label for="avatar" class="form-label">Foto</label>
                          <input type="file" id="avatar" name="avatar" class="form-control" />
+                         <span class="text-danger">Ukuran file maksimal 10 mb</span>
                      </div>
                      <div class="row">
                          <div class="col-8 mb-3">

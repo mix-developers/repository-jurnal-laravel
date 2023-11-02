@@ -36,6 +36,7 @@
                         <div class="col-12 fv-plugins-icon-container">
                             <label class="form-label" for="avatar">Pas Foto</label>
                             <input type="file" class="form-control" name="avatar">
+                            <span class="text-danger">Ukuran file maksimal 10 mb</span>
                         </div>
                         <div class="col-12 col-md-6 fv-plugins-icon-container">
                             <label class="form-label" for="name">Nama Lengkap</label>
@@ -87,27 +88,27 @@
             </div>
             <div class="card mt-3">
                 <div class="card-body">
-                <form action="{{ url('/admin/updatePassword', Auth::user()->id) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <table class="table table-borderles table-hover">
-                        <tr>
-                            <td>Password Baru</td>
-                            <td><input type="password" class="form-control" name="password"
-                                    placeholder="Tulis password baru "></td>
-                        </tr>
-                        <tr>
-                            <td>Konfirmasi Password</td>
-                            <td><input type="password" id="password-confirm" class="form-control"
-                                    name="password_confirmation" placeholder="tulis ulang password " required
-                                    autocomplete="new-password">
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="mt-3 text-center">
-                        <button type="submit" class="btn btn-primary">Simpan Password</button>
-                    </div>
+                    <form action="{{ url('/admin/updatePassword', Auth::user()->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <table class="table table-borderles table-hover">
+                            <tr>
+                                <td>Password Baru</td>
+                                <td><input type="password" class="form-control" name="password"
+                                        placeholder="Tulis password baru "></td>
+                            </tr>
+                            <tr>
+                                <td>Konfirmasi Password</td>
+                                <td><input type="password" id="password-confirm" class="form-control"
+                                        name="password_confirmation" placeholder="tulis ulang password " required
+                                        autocomplete="new-password">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="mt-3 text-center">
+                            <button type="submit" class="btn btn-primary">Simpan Password</button>
+                        </div>
                 </div>
             </div>
         </div>

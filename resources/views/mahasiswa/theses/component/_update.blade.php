@@ -21,12 +21,16 @@
                         <div class="col">
                             <label for="file" class="form-label">File (Sampai BAB 1)</label>
                             <input type="file" class="form-control" name="file">
-                            <small class="form-label">File harus berbentuk PDF</small>
+                            <small class="form-label">File harus berbentuk PDF, <span class="text-danger">file maksimal
+                                    10
+                                    MB</span></small>
                         </div>
                         <div class="col">
                             <label for="file" class="form-label">File (keseluruhan)</label>
                             <input type="file" class="form-control" name="file2">
-                            <small class="form-label">File harus berbentuk PDF</small>
+                            <small class="form-label">File harus berbentuk PDF, <span class="text-danger">file maksimal
+                                    10
+                                    MB</span></small>
                         </div>
                         <div class="col-3">
                             <label for="year" class="form-label">Tahun</label>
@@ -67,7 +71,8 @@
                         <input type="hidden" name="category" value="{{ $cat->category }}">
                         <input type="file" class="form-control" name="file{{ $cat->id }}"
                             {{ $cat->is_required == 1 ? 'required' : '' }}>
-                        <small>File harus berbentuk PDF
+                        <small>File harus berbentuk PDF,<span class="text-danger">file maksimal 10
+                                MB</span></small>
 
                     </div>
                     <div class="modal-footer">
@@ -99,7 +104,8 @@
                             <input type="hidden" name="category" value="{{ $cat->category }}">
                             <input type="file" class="form-control" name="file"
                                 {{ $cat->is_required == 1 ? 'required' : '' }}>
-                            <small>File harus berbentuk PDF
+                            <small>File harus berbentuk PDF, <span class="text-danger">file maksimal 10
+                                    MB</span></small>
 
                         </div>
                         <div class="modal-footer">

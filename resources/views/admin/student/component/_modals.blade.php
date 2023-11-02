@@ -15,7 +15,8 @@
                         <input type="hidden" name="category" value="{{ $cat->category }}">
                         <input type="file" class="form-control" name="file{{ $cat->id }}"
                             {{ $cat->is_required == 1 ? 'required' : '' }}>
-                        <small>File harus berbentuk PDF
+                        <small>File harus berbentuk PDF,<span class="text-danger">file maksimal 10
+                                MB</span></small>
 
                     </div>
                     <div class="modal-footer">
@@ -46,7 +47,8 @@
                             <input type="hidden" name="category" value="{{ $cat->category }}">
                             <input type="file" class="form-control" name="file"
                                 {{ $cat->is_required == 1 ? 'required' : '' }}>
-                            <small>File harus berbentuk PDF
+                            <small>File harus berbentuk PDF, <span class="text-danger">file maksimal 10
+                                    MB</span></small>
 
                         </div>
                         <div class="modal-footer">
@@ -84,12 +86,14 @@
                             <div class="col">
                                 <label for="file">File (Sampai BAB 1)</label>
                                 <input type="file" class="form-control" name="file">
-                                <small>File harus berbentuk PDF</small>
+                                <small>File harus berbentuk PDF,<span class="text-danger">file maksimal 10
+                                        MB</span></small>
                             </div>
                             <div class="col">
                                 <label for="file">File (keseluruhan)</label>
                                 <input type="file" class="form-control" name="file2">
-                                <small>File harus berbentuk PDF</small>
+                                <small>File harus berbentuk PDF,<span class="text-danger">file maksimal 10
+                                        MB</span></small>
                             </div>
                             <div class="col-3">
                                 <label for="year">Tahun</label>
@@ -137,12 +141,14 @@
                         <div class="col">
                             <label for="file">File (Sampai BAB 1)</label>
                             <input type="file" class="form-control" name="file">
-                            <small>File harus berbentuk PDF</small>
+                            <small>File harus berbentuk PDF,<span class="text-danger">file maksimal 10
+                                    MB</span></small>
                         </div>
                         <div class="col">
                             <label for="file">File (keseluruhan)</label>
                             <input type="file" class="form-control" name="file2">
-                            <small>File harus berbentuk PDF</small>
+                            <small>File harus berbentuk PDF, <span class="text-danger">file maksimal 10
+                                    MB</span></small>
                         </div>
                         <div class="col-3">
                             <label for="year">Tahun</label>
@@ -220,7 +226,8 @@
                                         class="text-danger">*</span></label>
                                 <input type="file" class="form-control" name="file">
                                 <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal Cover dan
-                                    Abstrak
+                                    Abstrak,<span class="text-danger">file maksimal 10
+                                        MB</span>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +237,8 @@
                                         class="text-danger">*</span></label>
                                 <input type="file" class="form-control" name="file2">
                                 <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal keseluruhan
+                                    ,<span class="text-danger">file maksimal 10
+                                        MB</span>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +311,8 @@
                                             class="text-danger">*</span></label>
                                     <input type="file" class="form-control" name="file">
                                     <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal Cover dan
-                                        Abstrak
+                                        Abstrak, <span class="text-danger">file maksimal 10
+                                            MB</span>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +322,8 @@
                                             class="text-danger">*</span></label>
                                     <input type="file" class="form-control" name="file2">
                                     <div id="defaultFormControlHelp" class="form-text">masukkan file jurnal
-                                        keseluruhan
+                                        Abstrak,
+                                        keseluruhan,
                                     </div>
                                 </div>
                             </div>

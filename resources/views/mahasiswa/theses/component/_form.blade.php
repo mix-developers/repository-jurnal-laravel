@@ -18,12 +18,14 @@
                     <div class="col">
                         <label for="file">File Skripsi (sampai BAB 1)</label>
                         <input type="file" class="form-control" name="file">
-                        <small>File harus berbentuk PDF, sampai bab 1</small>
+                        <small>File harus berbentuk PDF, sampai bab 1 <span class="text-danger">file maksimal 10
+                                MB</span></small>
                     </div>
                     <div class="col">
                         <label for="file">File Skripsi (keseluruhan)</label>
                         <input type="file" class="form-control" name="file2">
-                        <small>File harus berbentuk PDF, keseluruhan </small>
+                        <small>File harus berbentuk PDF, keseluruhan <span class="text-danger">file maksimal 10
+                                MB</span></small>
                     </div>
                     <div class="col-3">
                         <label for="year">Tahun</label>
@@ -48,7 +50,11 @@
                                         <input type="file" class="form-control" name="add_file{{ $file->id }}"
                                             {{ $file->is_required == 1 ? 'required' : '' }}>
                                         <small>File harus berbentuk PDF
-                                            {!! $file->is_required == 1 ? '<span class="text-danger">(wajib diisi)</span>' : '(tidak wajib)' !!}</small>
+                                            {!! $file->is_required == 1
+                                                ? '<span class="text-danger">(wajib diisi) ,file maksimal 10
+                                                                                                                                                                                    MB</span>'
+                                                : '<span class="text-danger">file maksimal 10
+                                                                            MB</span>' !!}</small>
                                     </td>
                                 </tr>
                             @endforeach

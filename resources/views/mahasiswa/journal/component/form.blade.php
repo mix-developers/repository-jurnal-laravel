@@ -41,7 +41,9 @@
                     <div class="mb-3">
                         <label for="abstract" class="form-label">File Abstrak <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="file">
-                        <div id="defaultFormControlHelp" class="form-label">masukkan file jurnal halaman pertama</div>
+                        <div id="defaultFormControlHelp" class="form-label">masukkan file abstrak, <span
+                                class="text-danger">file maksimal 10
+                                MB</span></div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -49,7 +51,9 @@
                         <label for="abstract" class="form-label">File jurnal keseluruhan <span
                                 class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="file2">
-                        <div id="defaultFormControlHelp" class="form-label">masukkan file jurnal keseluruhan</div>
+                        <div id="defaultFormControlHelp" class="form-label">masukkan file jurnal keseluruhan, <span
+                                class="text-danger">file maksimal 10
+                                MB</span></div>
                     </div>
                 </div>
 

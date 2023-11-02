@@ -34,6 +34,7 @@
                         <div class="col-12 fv-plugins-icon-container">
                             <label class="form-label" for="avatar">Pas Foto</label>
                             <input type="file" class="form-control" name="avatar">
+                            <span class="text-danger">Ukuran file maksimal 10 mb</span>
                         </div>
                         <div class="col-12 col-md-6 fv-plugins-icon-container">
                             <label class="form-label" for="name">Nama Lengkap</label>

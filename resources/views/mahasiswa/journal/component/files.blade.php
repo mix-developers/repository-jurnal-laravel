@@ -26,8 +26,9 @@
                     <div class="mb-3">
                         <label for="abstract" class="text-white">File Abstrak <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="file">
-                        <div id="defaultFormControlHelp" class="text-white" class="form-label">masukkan file jurnal
-                            halaman pertama
+                        <div id="defaultFormControlHelp" class="text-white" class="form-label">masukkan file abstrak,
+                            <span class="text-danger">file maksimal 10
+                                MB</span>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -35,7 +36,8 @@
                                 class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="file2">
                         <div id="defaultFormControlHelp" class="text-white" class="form-label">masukkan file jurnal
-                            keseluruhan</div>
+                            keseluruhan, <span class="text-danger">file maksimal 10
+                                MB</span></div>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan Revisi</button>
                 </form>
